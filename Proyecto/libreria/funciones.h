@@ -3,6 +3,7 @@
 
 #include <ctime>
 #include <string>
+#include "archivos.h"
 
 /************Declaracion de structs:**********/
 

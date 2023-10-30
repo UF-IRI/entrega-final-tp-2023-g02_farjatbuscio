@@ -33,26 +33,24 @@ eArchivoDia Funcion_AsistenciaDia(ifstream *archivo_dia, Asistencia *Asistencia_
             resize(Asistencia_aux,&N);
 
     }
-    /**void Doble_IdCLiente(Asistencia* Asistencia_dia);
-void Doble_IdCurso(Asistencia* Asistencia_dia);
-time_t Horario_clase (unsigned int aux_idClase, Clases* ListaClases); //extra para Doble_Horario
-void Doble_Horario(Asistencia* Asistencia_dia, Clases* ListaClases);
-/*/
+
     Doble_IdCLiente(&Asistencia_aux,N);
     Doble_IdCurso(&Asistencia_aux,N);
     Doble_Horario(&Asistencia_aux, &ListaClases,N);
-    int aux=0;
-    for(int i=0;i<N;i++)
+
+    int aux=N;
+    int N2=1;
+    for(int i=0;i<N;i++) //recorro la lista entera (con nulos incluidos)
     {
-            if(Asistencia_aux[i]!=ClienteNulo)
+        if(Asistencia_aux[i]!=ClienteNulo) //si la linea no es nula
+        {
+            for(int k=0; k<N2; k++) //recorro la lista nueva y la copio
             {
-
-
-                    Asistencia_dia[i]=Asistencia_aux[i];
+                Asistencia_dia[i]=Asistencia_aux[i];
+                resize(Asistencia_dia,&N2);
             }
+        }
     }
-
-
 
     return ExitoArchivo;
 }
