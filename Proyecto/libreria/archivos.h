@@ -26,4 +26,5 @@ eArchivoDia Funcion_AsistenciaDia(ifstream *archivo_dia, Asistencia *Asistencia_
 
     return eCodArchivos::ExitoOperacion;
 }*/
+eArchivoDia Funcion_Clases(ifstream *archivo_clase,Clases *ListaClase);
 #endif // ARCHIVOS_H

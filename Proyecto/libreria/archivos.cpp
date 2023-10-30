@@ -54,3 +54,20 @@ eArchivoDia Funcion_AsistenciaDia(ifstream *archivo_dia, Asistencia *Asistencia_
 
     return ExitoArchivo;
 }
+eArchivoDia Funcion_Clases(ifstream *archivo_clase,Clases *ListaClase)
+{
+    if(!archivo_dia->is_open())
+        return ErrArchivo;
+    unsigned int aux_idClase;
+    string aux_NombreClase;
+    time_t aux_Horario;
+    int N=1;
+    Clases aux_ListaClases=new Clases[N];
+    //primero copio el encabezado
+    string encabezado;
+    getline(infile,encabezado);
+    while(infile.good())
+    {
+
+    }
+}
