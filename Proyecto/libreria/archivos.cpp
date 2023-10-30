@@ -1,6 +1,6 @@
 #include "archivos.h"
 
-eArchivoDia Funcion_AsistenciaDia(ifstream *archivo_dia, Asistencia *Asistencia_dia)
+eArchivoDia Funcion_AsistenciaDia(ifstream *archivo_dia, Asistencia *Asistencia_dia, Clases* ListaClases)
 {
     // Comprueba que el archivo se pudo abrir.
     if(!archivo_dia->is_open())
@@ -38,13 +38,30 @@ eArchivoDia Funcion_AsistenciaDia(ifstream *archivo_dia, Asistencia *Asistencia_
         //si no es el primero reviso las condiciones
         else
         {
-            //CHEQUEO CONDICIONES PILI
-            if()
+            //llamo a las funciones para chequear condiciones:
+            Doble_IdCLiente(&Asistencia_dia);
+            Doble_IdCurso(&Asistencia_dia);
+            Doble_Horario(&Asistencia_dia,&ListaClases);
+            for(i=0;i<N;i++)
             {
-                resize(Asistencia_dia,N);
-            }
+                //si es distinto de nulo, entonces lo copio
+                if(Asistencia_dia[i]!=ClienteNulo)
+                {
+                    Asistencia_dia[N].idCliente=aux_id;
+                    Asistencia_dia[N].CursosInscriptos=aux_cantInscriptos;
+                    for(int i=0;i<aux_cantInscriptos;i++)
+                    {
 
+                        Asistencia_dia[N].CursosInscriptos[i]->idCurso=aux_Inscripcion[N].idCurso;
+                        Asistencia_dia[N].CursosInscriptos[i].fechaInscripcion=aux_Inscripcion[N].fechaInscripcion;
+
+                    }
+                    //llamo a la funcion resize para ir agrandando el tamaño:
+                    resize(Asistencia_dia,N);
+                }
+
+            }
         }
     }
-
+    return ExitoArchivo;
 }
