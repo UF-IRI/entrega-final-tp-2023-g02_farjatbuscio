@@ -87,7 +87,7 @@ time_t Horario_clase (unsigned int aux_idClase, Clases* ListaClases)
 /* Chequea que por cliente, no se repita el mismo horario, es decir, que el mismo cliente
 no este inscripto en dos clases (distinta o igual clase) al mismo horario. Si fuera asi, deberia cargar en el
 struct dinamico la primera a la cual esta inscripto (con time_t fechaInscripcion) */
-Doble_Horario()
+Doble_Horario(Asistencia* Asistencia_dia, Clases* ListaClases)
 {
     unsigned int aux_idClase;
     unsigned int aux2_idClase;
