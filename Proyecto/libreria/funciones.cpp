@@ -19,7 +19,7 @@ void resize (string*& vector, int* N)
 
 /* Chequea cada id registrado en el struct dinamico Asistencia_dia (LO TENGO QUE DECLARAR
 COMO DINAMICO EN EL MAIN), si el id se repite, elimina uno */
-eId_Cliente Doble_IdCLiente(Asistencia* Asistencia_dia)
+void Doble_IdCLiente(Asistencia* Asistencia_dia)
 {
     unsigned int aux_idCliente;
     unsigned int Nfinal; //CAMBIAR ESTO, MORE LO TIENE
@@ -31,17 +31,16 @@ eId_Cliente Doble_IdCLiente(Asistencia* Asistencia_dia)
 
         for(unsigned k=0; k<Nfinal; k++) //recorro de nuevo Asistencia_dia
         {
-            if(!(Asistencia_dia[k].idCliente==aux_idCliente && i!=k)) //si NO se repite el cliente
+            if(Asistencia_dia[k].idCliente==aux_idCliente && i!=k) //si NO se repite el cliente
             {
-                //lo cargo en el struct dinamico
+                Asistencia_dia[k] = ClienteNulo; //lo borro 1 vez (lo tapo con todo 0)
             }
         }
     }
-    //si lo voy a cargar aca adentro, hago la funcion void, sino retorno extio/error
 }
 /* Chequeo que por cliente, no se repita el mismo id_curso (que no este inscripto
 dos veces en la misma clase)*/
-eId_Curso Doble_IdCurso(Asistencia* Asistencia_dia)
+void Doble_IdCurso(Asistencia* Asistencia_dia)
 {
     unsigned int aux_idClase;
     unsigned int Nfinal; //CAMBIAR ESTO, MORE LO TIENE
@@ -57,9 +56,11 @@ eId_Curso Doble_IdCurso(Asistencia* Asistencia_dia)
                 for(unsigned k=0; k<Asistencia_dia[i].cantInscriptos ; k++) //recorro de nuevo los cursos en los q este anotado
                 {
                     //si NO se repite el id_curso
-                    if(!(aux_idClase == Asistencia_dia[i].CursosInscriptos[k].idCurso && j!=k))
+                    if(aux_idClase == Asistencia_dia[i].CursosInscriptos[k].idCurso && j!=k)
                     {
-                        //lo cargo en el struct dinamico
+                        Asistencia_dia[i].CursosInscriptos[k].idCurso = 0; //igualo a 0 uno de los id_curso
+                        Asistencia_dia[i].CursosInscriptos[k].fechaInscripcion = 0; //le igualo a 0 el horario de inscripcion (ver si se hace asi)
+                        Asistencia_dia[i].cantInscriptos=Asistencia_dia[i].cantInscriptos-1; //le resto 1 clase a cant clases
                     }
                 }
 
@@ -86,7 +87,7 @@ time_t Horario_clase (unsigned int aux_idClase, Clases* ListaClases)
 /* Chequea que por cliente, no se repita el mismo horario, es decir, que el mismo cliente
 no este inscripto en dos clases (distinta o igual clase) al mismo horario. Si fuera asi, deberia cargar en el
 struct dinamico la primera a la cual esta inscripto (con time_t fechaInscripcion) */
-eHorario Doble_Horario(Asistencia* Asistencia_dia , Clases* ListaClases)
+void Doble_Horario(Asistencia* Asistencia_dia , Clases* ListaClases)
 {
     unsigned int aux_idClase;
     unsigned int aux2_idClase;
@@ -110,9 +111,13 @@ eHorario Doble_Horario(Asistencia* Asistencia_dia , Clases* ListaClases)
                     aux2_idClase = Asistencia_dia[i].CursosInscriptos[k].idCurso;
                     aux2_horario = Horario_clase(aux2_idClase, &ListaClases); //VER SI LA LLAME BIEN
 
-                    if(!(aux_horario==aux2_horario && j!=k))
+                    if(aux_horario==aux2_horario && j!=k)
                     {
-                        //lo cargo en el struct dinamico
+                        //deberia chequear a cual se inscribio ultimo y eliminarla
+                        Asistencia_dia[i].CursosInscriptos[k].idCurso=0;
+                        Asistencia_dia[i].CursosInscriptos[k].fechaInscripcion=0;
+                        Asistencia_dia[i].cantInscriptos=Asistencia_dia[i].cantInscriptos-1;
+                        //lo elimine de 1 clase, lo deje en la primera q se inscribio
                     }
                 }
             }

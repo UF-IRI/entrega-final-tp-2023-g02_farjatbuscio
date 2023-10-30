@@ -58,10 +58,10 @@ enum eHorario{ErrDobleHorario = -1, ExitoDobleHorario=1};
 /***********Declaracion de funciones:**********/
 void resize (string*& vector, int* N); //more
 //condiciones para chequear struct Asistencia_dia
-eId_Cliente Doble_IdCLiente(Asistencia* Asistencia_dia); //void
-eId_Curso Doble_IdCurso(Asistencia* Asistencia_dia); //void
+void Doble_IdCLiente(Asistencia* Asistencia_dia);
+void Doble_IdCurso(Asistencia* Asistencia_dia);
 time_t Horario_clase (unsigned int aux_idClase, Clases* ListaClases); //extra para Doble_Horario
-eHorario Doble_Horario(Asistencia* Asistencia_dia, Clases* ListaClases); //void
+void Doble_Horario(Asistencia* Asistencia_dia, Clases* ListaClases);
 
 
 #endif // FUNCIONES_H
