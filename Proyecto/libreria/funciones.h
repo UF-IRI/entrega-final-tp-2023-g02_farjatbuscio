@@ -46,18 +46,22 @@ struct cupoclases {
 }
 typedef CupoClases;
 
-/************Enum para errores:**********/
-enum eId_Cliente{ ErrIdCliente = -1, ExitoIdCLiente=1};
+//Cliente Nulo (VER TIME_T = 0??)
+Asistencia ClienteNulo = {0, 0, {0, 0}};
+
+/************Enum para errores:**********
+enum eId_Cliente{ErrIdCliente = -1, ExitoIdCLiente=1};
 enum eId_Curso{ErrIdCurso = -1, ExitoIdCurso=1};
 enum eHorario{ErrDobleHorario = -1, ExitoDobleHorario=1};
+*/
 
 /***********Declaracion de funciones:**********/
 void resize (string*& vector, int* N); //more
 //condiciones para chequear struct Asistencia_dia
-eId_Cliente Doble_IdCLiente(Asistencia* Asistencia_dia);
-eId_Curso Doble_IdCurso(Asistencia* Asistencia_dia);
+eId_Cliente Doble_IdCLiente(Asistencia* Asistencia_dia); //void
+eId_Curso Doble_IdCurso(Asistencia* Asistencia_dia); //void
 time_t Horario_clase (unsigned int aux_idClase, Clases* ListaClases); //extra para Doble_Horario
-eHorario Doble_Horario(Asistencia* Asistencia_dia, Clases* ListaClases);
+eHorario Doble_Horario(Asistencia* Asistencia_dia, Clases* ListaClases); //void
 
 
 #endif // FUNCIONES_H

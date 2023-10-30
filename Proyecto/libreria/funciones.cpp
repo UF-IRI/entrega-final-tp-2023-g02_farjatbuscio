@@ -15,13 +15,15 @@ void resize (string*& vector, int* N)
     vector=aux; //le asigno la nueva memoria
 }
 
-//condiciones para chequear struct Asistencia_dia
+/********* CONDICIONES PARA CHEQUEAR STRUCT Asistencia_dia (PILI)*********/
+
 /* Chequea cada id registrado en el struct dinamico Asistencia_dia (LO TENGO QUE DECLARAR
 COMO DINAMICO EN EL MAIN), si el id se repite, elimina uno */
 eId_Cliente Doble_IdCLiente(Asistencia* Asistencia_dia)
 {
     unsigned int aux_idCliente;
     unsigned int Nfinal; //CAMBIAR ESTO, MORE LO TIENE
+    int cont=0;
 
     for(unsigned i=0; i<Nfinal ; i++) //recorro Asistencia_dia
     {
@@ -101,12 +103,12 @@ eHorario Doble_Horario(Asistencia* Asistencia_dia , Clases* ListaClases)
                 aux_idClase = Asistencia_dia[i].CursosInscriptos[j].idCurso; //me guardo el 1er id_curso
 
                 //con el id_curso accedo al horario de curso y me lo guardo en un aux
-                aux_horario = Horario_clase(aux_idClase, Clases* ListaClases); //VER SI LA LLAME BIEN
+                aux_horario = Horario_clase(aux_idClase, &ListaClases); //VER SI LA LLAME BIEN
 
                 for(unsigned k=0; k<Asistencia_dia[i].cantInscriptos ; k++) //recorro de nuevo los cursos en los q este anotado
                 {
-                    aux2_idClase = Asistencia_dia[i].CursosInscriptos[k].idCurso
-                    aux2_horario = Horario_clase(aux2_idClase, Clases* ListaClases); //VER SI LA LLAME BIEN
+                    aux2_idClase = Asistencia_dia[i].CursosInscriptos[k].idCurso;
+                    aux2_horario = Horario_clase(aux2_idClase, &ListaClases); //VER SI LA LLAME BIEN
 
                     if(!(aux_horario==aux2_horario && j!=k))
                     {
@@ -117,3 +119,9 @@ eHorario Doble_Horario(Asistencia* Asistencia_dia , Clases* ListaClases)
         }
     }
 }
+
+/********* CONDICIONES PARA INSCRIBIR A UNA CLASE (PILI)*********/
+
+
+
+
