@@ -4,7 +4,7 @@
 #include <ctime>
 #include <string>
 
-/***********Declaracion de structs:**********/
+/************Declaracion de structs:**********/
 
 //estructura de cliente:
 struct cliente {
@@ -46,9 +46,18 @@ struct cupoclases {
 }
 typedef CupoClases;
 
-/***********Declaracion de funciones:**********/
-void resize (string*& vector, int* N);
+/************Enum para errores:**********/
+enum eId_Cliente{ ErrIdCliente = -1, ExitoIdCLiente=1};
+enum eId_Curso{ErrIdCurso = -1, ExitoIdCurso=1};
+enum eHorario{ErrDobleHorario = -1, ExitoDobleHorario=1};
 
+/***********Declaracion de funciones:**********/
+void resize (string*& vector, int* N); //more
+//condiciones para chequear struct Asistencia_dia
+eId_Cliente Doble_IdCLiente(Asistencia* Asistencia_dia);
+eId_Curso Doble_IdCurso(Asistencia* Asistencia_dia);
+time_t Horario_clase (unsigned int aux_idClase, Clases* ListaClases); //extra para Doble_Horario
+eHorario Doble_Horario(Asistencia* Asistencia_dia, Clases* ListaClases);
 
 
 #endif // FUNCIONES_H
