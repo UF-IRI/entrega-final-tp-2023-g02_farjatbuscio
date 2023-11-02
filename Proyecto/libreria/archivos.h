@@ -6,12 +6,12 @@
 #include "funciones.h"
 
 //enum para errores y exitos:
-enum eArchivoDia{ExitoArchivo=1;ErrArchivo=-1};
+enum eArchivoDia{ExitoArchivo=1,ErrArchivo=-1};
 
 /*Funcion que chequea el archivo del dia de Asistencias,
  *  si cumple con las condiciones, cargo la lista de hoy*/
 
-eArchivoDia Funcion_AsistenciaDia(ifstream *archivo_dia, Asistencia *Asistencia_dia, Clases* ListaClases);
+eArchivoDia Funcion_AsistenciaDia(std::ifstream *archivo_dia, Asistencia *Asistencia_dia, Clases* ListaClases);
 /*eCodArchivos leerArchivoAgenda(std::fstream	*archi, sAgenda *agenda){
     // Comprueba que el archivo se pudo abrir.
     if(!archi->is_open())
@@ -26,5 +26,5 @@ eArchivoDia Funcion_AsistenciaDia(ifstream *archivo_dia, Asistencia *Asistencia_
 
     return eCodArchivos::ExitoOperacion;
 }*/
-eArchivoDia Funcion_Clases(ifstream *archivo_clase,Clases *ListaClase);
+eArchivoDia Funcion_Clases(std::ifstream *archivo_clase,Clases *ListaClase);
 #endif // ARCHIVOS_H

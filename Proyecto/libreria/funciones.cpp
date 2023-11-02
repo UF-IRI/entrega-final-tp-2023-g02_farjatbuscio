@@ -2,7 +2,7 @@
 #include <string>
 
 //Funcion que modifica el tamaño de un vector con el N pasado como parametro:
-void resize (string*& vector, int* N)
+void nuevotamano(str*& vector, int* N)
 {
     *N=*(N)+1; //aumento en uno mi contador de tamaño
     string* aux= new string[*(n)]; //un aux con el nuevo tamaño
@@ -19,17 +19,17 @@ void resize (string*& vector, int* N)
 
 /* Chequea cada id registrado en el struct dinamico Asistencia_dia (LO TENGO QUE DECLARAR
 COMO DINAMICO EN EL MAIN), si el id se repite, elimina uno */
-void Doble_IdCLiente(Asistencia* Asistencia_dia)
+void Doble_IdCLiente(Asistencia* Asistencia_dia,int N)
 {
     unsigned int aux_idCliente;
     unsigned int Nfinal; //CAMBIAR ESTO, MORE LO TIENE
     int cont=0;
 
-    for(unsigned i=0; i<Nfinal ; i++) //recorro Asistencia_dia
+    for(unsigned i=0; i<N ; i++) //recorro Asistencia_dia
     {
         aux_idCliente=Asistencia_dia[i].idCliente; //me guardo el id del primer cliente
 
-        for(unsigned k=0; k<Nfinal; k++) //recorro de nuevo Asistencia_dia
+        for(unsigned k=0; k<N; k++) //recorro de nuevo Asistencia_dia
         {
             if(Asistencia_dia[k].idCliente==aux_idCliente && i!=k) //si NO se repite el cliente
             {
@@ -87,7 +87,7 @@ time_t Horario_clase (unsigned int aux_idClase, Clases* ListaClases)
 /* Chequea que por cliente, no se repita el mismo horario, es decir, que el mismo cliente
 no este inscripto en dos clases (distinta o igual clase) al mismo horario. Si fuera asi, deberia cargar en el
 struct dinamico la primera a la cual esta inscripto (con time_t fechaInscripcion) */
-Doble_Horario(Asistencia* Asistencia_dia, Clases* ListaClases)
+void Doble_Horario(Asistencia* Asistencia_dia, Clases* ListaClases)
 {
     unsigned int aux_idClase;
     unsigned int aux2_idClase;

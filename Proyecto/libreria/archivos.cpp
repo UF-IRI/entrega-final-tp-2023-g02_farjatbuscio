@@ -1,6 +1,6 @@
 #include "archivos.h"
 
-eArchivoDia Funcion_AsistenciaDia(ifstream *archivo_dia, Asistencia *Asistencia_dia, Clases* ListaClases)
+eArchivoDia Funcion_AsistenciaDia(std::ifstream *archivo_dia, Asistencia *Asistencia_dia, Clases* ListaClases)
 {
     // Comprueba que el archivo se pudo abrir.
     if(!archivo_dia->is_open())
@@ -8,7 +8,7 @@ eArchivoDia Funcion_AsistenciaDia(ifstream *archivo_dia, Asistencia *Asistencia_
 
     //Creo aux para poder ir copiando:
     unsigned int N=1;
-    unsigned int M=1;
+    unsigned int M=aux_cantInscriptos;
     unsigned int aux_id;
     unsigned int aux_cantInscriptos;
     Inscripcion aux_Inscripcion[M];
@@ -30,7 +30,7 @@ eArchivoDia Funcion_AsistenciaDia(ifstream *archivo_dia, Asistencia *Asistencia_
                 Asistencia_aux[N].CursosInscriptos[i].fechaInscripcion=aux_Inscripcion[N].fechaInscripcion;
 
             }
-            resize(Asistencia_aux,&N);
+            nuevotamano(Asistencia_aux,&N);
 
     }
 
@@ -47,13 +47,14 @@ eArchivoDia Funcion_AsistenciaDia(ifstream *archivo_dia, Asistencia *Asistencia_
             for(int k=0; k<N2; k++) //recorro la lista nueva y la copio
             {
                 Asistencia_dia[i]=Asistencia_aux[i];
-                resize(Asistencia_dia,&N2);
+                nuevotamano(Asistencia_dia,&N2);
             }
         }
     }
 
     return ExitoArchivo;
 }
+//Funcion que lee el arhivo binario de clases:
 eArchivoDia Funcion_Clases(ifstream *archivo_clase,Clases *ListaClase)
 {
     if(!archivo_dia->is_open())
