@@ -2,7 +2,7 @@
 #include <string>
 /************** DESARROLLO FUNCIONES **************/
 //funcion agrandar Clases (resize)
-void agrandartam(Clases*& vector, int& N)
+void agrandartamClases(Clases*& vector, int& N)
 {
     N=(N)+1; //aumento en uno mi contador de tamaño
     Clases* aux= new Clases[(N)]; //un aux con el nuevo tamaño
@@ -15,7 +15,7 @@ void agrandartam(Clases*& vector, int& N)
     vector=aux; //le asigno la nueva memoria
 }
 //funcion agrandar Cliente (resize)
-void agrandartam(Cliente*& vector, int& N)
+void agrandartamCliente(Cliente*& vector, int& N)
 {
     N=(N)+1; //aumento en uno mi contador de tamaño
     Cliente* aux= new Cliente[(N)]; //un aux con el nuevo tamaño
@@ -28,7 +28,7 @@ void agrandartam(Cliente*& vector, int& N)
     vector=aux; //le asigno la nueva memoria
 }
 //funcion agrandar Inscripcion (resize)
-void agrandartam(Inscripcion*& vector, int& N)
+void agrandartamInscrip(Inscripcion*& vector, int& N)
 {
     N=(N)+1; //aumento en uno mi contador de tamaño
     Inscripcion* aux= new Inscripcion[(N)]; //un aux con el nuevo tamaño
@@ -41,7 +41,7 @@ void agrandartam(Inscripcion*& vector, int& N)
     vector=aux; //le asigno la nueva memoria
 }
 //funcion achicar Inscripcion (resize)
-void achicartam(Inscripcion*& vector, int& N)
+void achicartamInscrip(Inscripcion*& vector, int& N)
 {
     N=(N)-1; //aumento en uno mi contador de tamaño
     Inscripcion* aux= new Inscripcion[(N)]; //un aux con el nuevo tamaño

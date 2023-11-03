@@ -8,7 +8,7 @@ TEST_CASE("AchicarTamTEST", "[fancy]")
 {
     int N=5;
     Inscripcion *vector = new Inscripcion[N];
-    achicartam(vector, N);
+    achicartamInscrip(vector, N);
     REQUIRE(N == 4);
     cout<<"N es: " << N <<endl;
     delete[] vector;
@@ -18,7 +18,7 @@ TEST_CASE("AgrandarTamTEST", "[fancy]")
 {
     int N=5;
     Inscripcion *vector = new Inscripcion[N];
-    agrandartam(vector, N);
+    agrandartamInscrip(vector, N);
     REQUIRE(N == 6);
     cout<<"N es: " << N <<endl;
     delete[] vector;

@@ -57,13 +57,13 @@ enum eDobleId_Cliente{ErrDobleIdCliente = -1, ExitoIdCLiente=1};
 
 /************** DECLARO FUNCIONES **************/
 //funcion agrandar Clases (resize)
-void agrandartam(Clases*& vector, int& N);
+void agrandartamClases(Clases*& vector, int& N);
 //funcion agrandar Cliente (resize)
-void agrandartam(Cliente*& vector, int& N);
+void agrandartamCliente(Cliente*& vector, int& N);
 //funcion agrandar Inscripcion (resize)
-void agrandartam(Inscripcion*& vector, int& N);
+void agrandartamInscrip(Inscripcion*& vector, int& N);
 //funcion achicar Inscripcion (resize)
-void achicartam(Inscripcion*& vector, int& N);
+void achicartamInscrip(Inscripcion*& vector, int& N);
 //funcion desplazar un elemento al final para desp eliminarla con el resize
 void moveralfinal(Inscripcion* cursosInscriptos, unsigned int CantInscriptos, unsigned int pos);
 //Chequea que el cliente del archivo Asitencia_dia que voy a leer, no esté ya anotado en Asistencia_dia
