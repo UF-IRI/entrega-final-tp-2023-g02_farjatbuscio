@@ -1,11 +1,12 @@
 #ifndef FUNCIONES_H
 #define FUNCIONES_H
 
+#include <fstream>
+#include <sstream>
+#include <iostream>
 #include <ctime>
-#include "archivos.h"
 #include <string>
-
-
+using namespace std;
 typedef std::string str;
 
 /************Declaracion de structs:**********/
@@ -50,22 +51,12 @@ struct cupoclases {
 }
 typedef CupoClases;
 
-//Cliente Nulo (VER TIME_T = 0??)
-Asistencia ClienteNulo={0,0,{0,0}};
-
-/************Enum para errores:**********
-enum eId_Cliente{ErrIdCliente = -1, ExitoIdCLiente=1};
-enum eId_Curso{ErrIdCurso = -1, ExitoIdCurso=1};
-enum eHorario{ErrDobleHorario = -1, ExitoDobleHorario=1};
-*/
-
-/***********Declaracion de funciones:**********/
-void nuevotamano(str*& vector, int* N); //more
-//condiciones para chequear struct Asistencia_dia
-void Doble_IdCLiente(Asistencia* Asistencia_dia, int N);
-void Doble_IdCurso(Asistencia* Asistencia_dia);
-time_t Horario_clase (unsigned int aux_idClase, Clases* ListaClases); //extra para Doble_Horario
-void Doble_Horario(Asistencia* Asistencia_dia, Clases* ListaClases);
-
+/************** DECLARO FUNCIONES **************/
+//funcion agrandar vector (resize)
+void agrandartam(str*& vector, int* N);
+//funcion achicar vector (resize)
+void achicartam(str*& vector, int* N);
+//funcion desplazar un elemento al final para desp eliminarla con el resize
+void moveralfinal(Inscripcion* cursosInscriptos, unsigned int CantInscriptos, unsigned int pos);
 
 #endif // FUNCIONES_H
