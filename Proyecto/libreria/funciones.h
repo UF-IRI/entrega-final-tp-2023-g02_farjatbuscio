@@ -67,7 +67,7 @@ void achicartamInscrip(Inscripcion*& vector, int& N);
 //funcion desplazar un elemento al final para desp eliminarla con el resize
 void moveralfinal(Inscripcion* cursosInscriptos, unsigned int CantInscriptos, unsigned int pos);
 //Chequea que el cliente del archivo Asitencia_dia que voy a leer, no esté ya anotado en Asistencia_dia
-int dobleid_cliente(Asistencia* aux_asistencia, Asistencia* Asistencia_dia, unsigned N);
+int dobleid_cliente(Asistencia aux_asistencia, Asistencia* Asistencia_dia, unsigned int N);
 
 
 #endif // FUNCIONES_H

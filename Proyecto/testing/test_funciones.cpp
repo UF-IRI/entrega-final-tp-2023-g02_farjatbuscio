@@ -96,7 +96,7 @@ TEST_CASE("NOdobleId_Cliente", "[fancy]")
 {
     int aux;
     unsigned int N=3;
-    Asistencia *asistencia_dia = new Asistencia[N];
+    Asistencia* asistencia_dia = new Asistencia[N];
     asistencia_dia[0].idCliente=1;
     asistencia_dia[0].cantInscriptos=1;
     asistencia_dia[0].CursosInscriptos->idCurso=2;
@@ -109,15 +109,14 @@ TEST_CASE("NOdobleId_Cliente", "[fancy]")
     asistencia_dia[2].cantInscriptos=1;
     asistencia_dia[2].CursosInscriptos->idCurso=2;
     asistencia_dia[2].CursosInscriptos->fechaInscripcion=time(0);
-    Asistencia *aux_asistencia= new Asistencia[1];
-    aux_asistencia->idCliente=2;
-    aux_asistencia->cantInscriptos=1;
-    aux_asistencia->CursosInscriptos->idCurso=2;
-    aux_asistencia->CursosInscriptos->fechaInscripcion=time(0);
+    Asistencia aux_asistencia;
+    aux_asistencia.idCliente=2;
+    aux_asistencia.cantInscriptos=1;
+    aux_asistencia.CursosInscriptos->idCurso=2;
+    aux_asistencia.CursosInscriptos->fechaInscripcion=time(0);
 
     aux = dobleid_cliente(aux_asistencia,asistencia_dia,N);
 
     REQUIRE(aux == -1);
     delete[] asistencia_dia;
-    delete[] aux_asistencia;
 }

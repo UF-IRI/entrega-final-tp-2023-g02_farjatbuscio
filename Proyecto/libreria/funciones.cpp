@@ -77,7 +77,7 @@ void moveralfinal(Inscripcion* cursosInscriptos, unsigned int CantInscriptos, un
 
 Si retorno Error -> NO lo cargo directamente NADA
 Si retorno Exito -> procedo a mirar si las siguientes condiciones se cumplen*/
-int dobleid_cliente(Asistencia* aux_asistencia, Asistencia* Asistencia_dia, unsigned N)
+int dobleid_cliente(Asistencia aux_asistencia, Asistencia* Asistencia_dia, unsigned int N)
 {
     if(N==0)
     {
@@ -88,7 +88,7 @@ int dobleid_cliente(Asistencia* aux_asistencia, Asistencia* Asistencia_dia, unsi
     for(unsigned int i=0; i<N; i++)
     {
         /*Reviso si el cliente q quiero cargar, ya existe en Asistencia_dia*/
-        if(aux_asistencia->idCliente==Asistencia_dia[i].idCliente)
+        if(aux_asistencia.idCliente==Asistencia_dia[i].idCliente)
         {
             //Si exite, retorno Error y no lo vuelvo a cargar
             return -1;
