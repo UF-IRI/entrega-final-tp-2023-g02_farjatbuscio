@@ -5,13 +5,13 @@
 TEST_CASE("leer archivo de clases", "[fancy]")
 {
     //abro archivo de clases
-    ifstream archivoClases;
+    std::ifstream archivoClases;
     archivoClases.open("../Proyecto/iriClasesGYM.csv");
 
     int N=1;
 
     Clases *ListaClases=new Clases[N];
-    eArchivo er = LeerClases(archivoClases,ListaClases,N);
+    (void)LeerClases(archivoClases, ListaClases, N);
 
     Clases aux[2];
     aux[0].idClase=1;
