@@ -34,11 +34,11 @@ TEST_CASE("leer archivo de clientes", "[fancy]")
     aux[1].idCliente=2;
     aux[0].Nombre="AgustÃ­n";
     aux[1].Nombre="Emilio";
-    aux[0].Horario=8;
-    aux[1].Horario=10;
-    LeerClases(&archivoClases,ListaClases,&N);
+    aux[0].Apellido="Guerra";
+    aux[1].Apellido="Romero";
+    LeerClientes(&archivoClientes,ListaClientes,&N);
     for(int i=0;i<2;i++)
     {
-      REQUIERE(ListaClases[i].idClase==aux[i].idClase && ListaClases[i].NombreClase==aux[i].NombreClase && ListaClases[i].Horario==aux[i].Horario);
+      REQUIERE(ListaClientes[i].idCliente==aux[i].idCliente && ListaClientes[i].Nombre==aux[i].Nombre && ListaClientes[i].Apellido==aux[i].Apellido);
     }
 }
