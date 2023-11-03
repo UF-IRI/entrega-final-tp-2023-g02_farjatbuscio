@@ -1,5 +1,4 @@
 #include "funciones.h"
-#include <string>
 /************** DESARROLLO FUNCIONES **************/
 //funcion agrandar Clases (resize)
 void agrandartamClases(Clases*& vector, int& N)

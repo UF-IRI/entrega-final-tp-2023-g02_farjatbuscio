@@ -1,18 +1,19 @@
 #ifndef FUNCIONES_H
 #define FUNCIONES_H
 
-#include <fstream>
 #include <sstream>
 #include <iostream>
 #include <ctime>
 #include <string>
+
 using namespace std;
+
 typedef std::string str;
 
 /************Declaracion de structs:**********/
 
 //estructura de cliente:
-struct cliente {
+typedef struct {
     int idCliente;
     str Nombre;
     str Apellido;
@@ -20,39 +21,34 @@ struct cliente {
     str Telefono;
     time_t fechaNacimiento;
     int estado;
-}
-typedef Cliente;
+} Cliente;
 
 //estructura de clases:
-struct clases{
+typedef struct {
     unsigned int idClase;
     str NombreClase;
     float Horario;
-}
-typedef Clases;
+} Clases;
 
 //estructura de asistencia y inscripcion:
-struct inscripcion {
+typedef struct {
     unsigned int idCurso;
     time_t fechaInscripcion;
-}
-typedef Inscripcion;
-struct asistencia {
+} Inscripcion;
+typedef struct {
     unsigned int idCliente, cantInscriptos;
     Inscripcion* CursosInscriptos;
-}
-typedef Asistencia;
+} Asistencia;
 
 //estructura de cupos
-struct cupoclases {
+typedef struct {
     unsigned int Nclases;
     unsigned int IdClase;
     unsigned int cupo;
-}
-typedef CupoClases;
+} CupoClases;
 
 /**************Enum para errores:**************/
-enum eDobleId_Cliente{ErrDobleIdCliente = -1, ExitoIdCLiente=1};
+typedef enum {ErrDobleIdCliente = -1, ExitoIdCLiente=1} eDobleId_Cliente;
 
 
 /************** DECLARO FUNCIONES **************/
