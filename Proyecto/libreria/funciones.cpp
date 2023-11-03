@@ -1,11 +1,11 @@
 #include "funciones.h"
 #include <string>
 /************** DESARROLLO FUNCIONES **************/
-//funcion agrandar vector (resize)
-void agrandartam(str*& vector, int& N)
+//funcion agrandar Clases (resize)
+void agrandartam(Clases*& vector, int& N)
 {
     N=(N)+1; //aumento en uno mi contador de tamaño
-    string* aux= new string[(N)]; //un aux con el nuevo tamaño
+    Clases* aux= new Clases[(N)]; //un aux con el nuevo tamaño
     for(int i=0; i<N-1;i++)
     {
         aux[i]=vector[i]; //copio las cosas en el auxiliar
@@ -14,11 +14,37 @@ void agrandartam(str*& vector, int& N)
     delete[] vector;
     vector=aux; //le asigno la nueva memoria
 }
-//funcion achicar vector (resize)
-void achicartam(str*& vector, int& N)
+//funcion agrandar Cliente (resize)
+void agrandartam(Cliente*& vector, int& N)
+{
+    N=(N)+1; //aumento en uno mi contador de tamaño
+    Cliente* aux= new Cliente[(N)]; //un aux con el nuevo tamaño
+    for(int i=0; i<N-1;i++)
+    {
+        aux[i]=vector[i]; //copio las cosas en el auxiliar
+    }
+    //libero memoria dinamica:
+    delete[] vector;
+    vector=aux; //le asigno la nueva memoria
+}
+//funcion agrandar Inscripcion (resize)
+void agrandartam(Inscripcion*& vector, int& N)
+{
+    N=(N)+1; //aumento en uno mi contador de tamaño
+    Inscripcion* aux= new Inscripcion[(N)]; //un aux con el nuevo tamaño
+    for(int i=0; i<N-1;i++)
+    {
+        aux[i]=vector[i]; //copio las cosas en el auxiliar
+    }
+    //libero memoria dinamica:
+    delete[] vector;
+    vector=aux; //le asigno la nueva memoria
+}
+//funcion achicar Inscripcion (resize)
+void achicartam(Inscripcion*& vector, int& N)
 {
     N=(N)-1; //aumento en uno mi contador de tamaño
-    string* aux= new string[(N)]; //un aux con el nuevo tamaño
+    Inscripcion* aux= new Inscripcion[(N)]; //un aux con el nuevo tamaño
     for(int i=0; i<N-1;i++)
     {
         aux[i]=vector[i]; //copio las cosas en el auxiliar
@@ -46,5 +72,28 @@ void moveralfinal(Inscripcion* cursosInscriptos, unsigned int CantInscriptos, un
     }
     cursosInscriptos[CantInscriptos-1].idCurso=ultimoIdCurso;
     cursosInscriptos[CantInscriptos-1].fechaInscripcion=ultimoFechaInscrip;
+}
+/*Chequea que el cliente del archivo Asitencia_dia que voy a leer, no esté ya anotado en Asistencia_dia
+
+Si retorno Error -> NO lo cargo directamente NADA
+Si retorno Exito -> procedo a mirar si las siguientes condiciones se cumplen*/
+int dobleid_cliente(Asistencia* aux_asistencia, Asistencia* Asistencia_dia, unsigned N)
+{
+    if(N==0)
+    {
+        return 1;
+    }
+    /*recorro los clientes (del archivo) que ya tengo cargados en mi struct dinamica
+    (Asistencia_dia)*/
+    for(unsigned int i=0; i<N; i++)
+    {
+        /*Reviso si el cliente q quiero cargar, ya existe en Asistencia_dia*/
+        if(aux_asistencia->idCliente==Asistencia_dia[i].idCliente)
+        {
+            //Si exite, retorno Error y no lo vuelvo a cargar
+            return -1;
+        }
+    }
+    return 1;
 }
 

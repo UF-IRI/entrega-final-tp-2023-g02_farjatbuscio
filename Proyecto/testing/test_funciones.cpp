@@ -3,21 +3,21 @@
 #include "archivos.cpp"
 #include <ctime>
 
-/**********test achicar tamano de un vector**********/
+/**********test achicar tamano de inscripcion**********/
 TEST_CASE("AchicarTamTEST", "[fancy]")
 {
     int N=5;
-    string *vector = new string[N];
+    Inscripcion *vector = new Inscripcion[N];
     achicartam(vector, N);
     REQUIRE(N == 4);
     cout<<"N es: " << N <<endl;
     delete[] vector;
 }
-/**********test agrandar tamano de un vector**********/
+/**********test agrandar tamano de Inscripcion**********/
 TEST_CASE("AgrandarTamTEST", "[fancy]")
 {
     int N=5;
-    string *vector = new string[N];
+    Inscripcion *vector = new Inscripcion[N];
     agrandartam(vector, N);
     REQUIRE(N == 6);
     cout<<"N es: " << N <<endl;
@@ -27,7 +27,7 @@ TEST_CASE("AgrandarTamTEST", "[fancy]")
 TEST_CASE("DesplazarAlFinalElemento1", "[fancy]")
 {
     unsigned int cantInscriptos=4;
-    inscripcion *cursosInscriptos = new inscripcion[cantInscriptos];
+    Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
     unsigned int pos=1;
     cursosInscriptos[0]={1, time(0)};
     cursosInscriptos[1]={2, time(0)};
@@ -41,7 +41,7 @@ TEST_CASE("DesplazarAlFinalElemento1", "[fancy]")
 TEST_CASE("DesplazarAlFinalElemento2", "[fancy]")
 {
     unsigned int cantInscriptos=4;
-    inscripcion *cursosInscriptos = new inscripcion[cantInscriptos];
+    Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
     unsigned int pos=1;
     cursosInscriptos[0]={1, time(0)};
     cursosInscriptos[1]={2, time(0)};
@@ -55,7 +55,7 @@ TEST_CASE("DesplazarAlFinalElemento2", "[fancy]")
 TEST_CASE("DesplazarAlFinalElemento3", "[fancy]")
 {
     unsigned int cantInscriptos=4;
-    inscripcion *cursosInscriptos = new inscripcion[cantInscriptos];
+    Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
     unsigned int pos=1;
     cursosInscriptos[0]={1, time(0)};
     cursosInscriptos[1]={2, time(0)};
@@ -68,7 +68,7 @@ TEST_CASE("DesplazarAlFinalElemento3", "[fancy]")
 TEST_CASE("DesplazarAlFinalElemento4", "[fancy]")
 {
     unsigned int cantInscriptos=4;
-    inscripcion *cursosInscriptos = new inscripcion[cantInscriptos];
+    Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
     unsigned int pos=1;
     cursosInscriptos[0]={1, time(0)};
     cursosInscriptos[1]={2, time(0)};
@@ -81,7 +81,7 @@ TEST_CASE("DesplazarAlFinalElemento4", "[fancy]")
 TEST_CASE("DesplazarAlFinalElemento5", "[fancy]")
 {
     unsigned int cantInscriptos=4;
-    inscripcion *cursosInscriptos = new inscripcion[cantInscriptos];
+    Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
     unsigned int pos=1;
     cursosInscriptos[0]={1, time(0)};
     cursosInscriptos[1]={2, time(0)};
@@ -90,4 +90,34 @@ TEST_CASE("DesplazarAlFinalElemento5", "[fancy]")
     moveralfinal(cursosInscriptos, cantInscriptos, pos);
     REQUIRE(cursosInscriptos[2].idCurso==4);
     delete[] cursosInscriptos;
+}
+/*****Chequea que el cliente del archivo Asitencia_dia que voy a leer, no esté ya anotado en Asistencia_dia*****/
+TEST_CASE("NOdobleId_Cliente", "[fancy]")
+{
+    int aux;
+    unsigned int N=3;
+    Asistencia *asistencia_dia = new Asistencia[N];
+    asistencia_dia[0].idCliente=1;
+    asistencia_dia[0].cantInscriptos=1;
+    asistencia_dia[0].CursosInscriptos->idCurso=2;
+    asistencia_dia[0].CursosInscriptos->fechaInscripcion=time(0);
+    asistencia_dia[1].idCliente=2;
+    asistencia_dia[1].cantInscriptos=1;
+    asistencia_dia[1].CursosInscriptos->idCurso=2;
+    asistencia_dia[1].CursosInscriptos->fechaInscripcion=time(0);
+    asistencia_dia[2].idCliente=3;
+    asistencia_dia[2].cantInscriptos=1;
+    asistencia_dia[2].CursosInscriptos->idCurso=2;
+    asistencia_dia[2].CursosInscriptos->fechaInscripcion=time(0);
+    Asistencia *aux_asistencia= new Asistencia[1];
+    aux_asistencia->idCliente=2;
+    aux_asistencia->cantInscriptos=1;
+    aux_asistencia->CursosInscriptos->idCurso=2;
+    aux_asistencia->CursosInscriptos->fechaInscripcion=time(0);
+
+    aux = dobleid_cliente(aux_asistencia,asistencia_dia,N);
+
+    REQUIRE(aux == -1);
+    delete[] asistencia_dia;
+    delete[] aux_asistencia;
 }

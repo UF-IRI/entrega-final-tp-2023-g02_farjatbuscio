@@ -13,7 +13,7 @@ typedef std::string str;
 
 //estructura de cliente:
 struct cliente {
-    unsigned int idCliente;
+    int idCliente;
     str Nombre;
     str Apellido;
     str Mail;
@@ -27,7 +27,7 @@ typedef Cliente;
 struct clases{
     unsigned int idClase;
     str NombreClase;
-    time_t Horario;
+    float Horario;
 }
 typedef Clases;
 
@@ -51,12 +51,23 @@ struct cupoclases {
 }
 typedef CupoClases;
 
+/**************Enum para errores:**************/
+enum eDobleId_Cliente{ErrDobleIdCliente = -1, ExitoIdCLiente=1};
+
+
 /************** DECLARO FUNCIONES **************/
-//funcion agrandar vector (resize)
-void agrandartam(str*& vector, int* N);
-//funcion achicar vector (resize)
-void achicartam(str*& vector, int* N);
+//funcion agrandar Clases (resize)
+void agrandartam(Clases*& vector, int& N);
+//funcion agrandar Cliente (resize)
+void agrandartam(Cliente*& vector, int& N);
+//funcion agrandar Inscripcion (resize)
+void agrandartam(Inscripcion*& vector, int& N);
+//funcion achicar Inscripcion (resize)
+void achicartam(Inscripcion*& vector, int& N);
 //funcion desplazar un elemento al final para desp eliminarla con el resize
 void moveralfinal(Inscripcion* cursosInscriptos, unsigned int CantInscriptos, unsigned int pos);
+//Chequea que el cliente del archivo Asitencia_dia que voy a leer, no esté ya anotado en Asistencia_dia
+int dobleid_cliente(Asistencia* aux_asistencia, Asistencia* Asistencia_dia, unsigned N);
+
 
 #endif // FUNCIONES_H
