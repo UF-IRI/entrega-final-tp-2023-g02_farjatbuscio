@@ -65,5 +65,4 @@ void moveralfinal(Inscripcion* cursosInscriptos, unsigned int CantInscriptos, un
 //Chequea que el cliente del archivo Asitencia_dia que voy a leer, no esté ya anotado en Asistencia_dia
 int dobleid_cliente(Asistencia aux_asistencia, Asistencia* Asistencia_dia, unsigned int N);
 
-
 #endif // FUNCIONES_H

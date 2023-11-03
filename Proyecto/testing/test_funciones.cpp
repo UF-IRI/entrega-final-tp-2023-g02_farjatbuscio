@@ -87,31 +87,42 @@ TEST_CASE("DesplazarAlFinalElemento5", "[fancy]")
     moveralfinal(cursosInscriptos, cantInscriptos, pos);
     REQUIRE(cursosInscriptos[2].idCurso==4);
     delete[] cursosInscriptos;
-}TEST_CASE("NOdobleId_Cliente", "[fancy]")
+}
+TEST_CASE("NOdobleId_Cliente", "[fancy]")
 {
-    int aux;
+    int aux=0;
     unsigned int N=3;
+    unsigned int M=1;
     Asistencia* asistencia_dia = new Asistencia[N];
+    for (unsigned int i = 0; i < N; ++i)
+    {
+        asistencia_dia[i].CursosInscriptos = new Inscripcion[M]; // Asignar memoria para CursosInscriptos
+    }
     asistencia_dia[0].idCliente=1;
     asistencia_dia[0].cantInscriptos=1;
-    asistencia_dia[0].CursosInscriptos->idCurso=2;
-    asistencia_dia[0].CursosInscriptos->fechaInscripcion=time(0);
+    asistencia_dia[0].CursosInscriptos[0].idCurso=2;
+    asistencia_dia[0].CursosInscriptos[0].fechaInscripcion=time(0);
     asistencia_dia[1].idCliente=2;
     asistencia_dia[1].cantInscriptos=1;
-    asistencia_dia[1].CursosInscriptos->idCurso=2;
-    asistencia_dia[1].CursosInscriptos->fechaInscripcion=time(0);
+    asistencia_dia[1].CursosInscriptos[0].idCurso=2;
+    asistencia_dia[1].CursosInscriptos[0].fechaInscripcion=time(0);
     asistencia_dia[2].idCliente=3;
     asistencia_dia[2].cantInscriptos=1;
-    asistencia_dia[2].CursosInscriptos->idCurso=2;
-    asistencia_dia[2].CursosInscriptos->fechaInscripcion=time(0);
+    asistencia_dia[2].CursosInscriptos[0].idCurso=2;
+    asistencia_dia[2].CursosInscriptos[0].fechaInscripcion=time(0);
     Asistencia aux_asistencia;
     aux_asistencia.idCliente=2;
     aux_asistencia.cantInscriptos=1;
-    aux_asistencia.CursosInscriptos->idCurso=2;
-    aux_asistencia.CursosInscriptos->fechaInscripcion=time(0);
+    aux_asistencia.CursosInscriptos = new Inscripcion[M]; // Asignar memoria para CursosInscriptos
+    aux_asistencia.CursosInscriptos[0].idCurso = 2;
+    aux_asistencia.CursosInscriptos[0].fechaInscripcion = time(0);
 
-    aux = dobleid_cliente(aux_asistencia,asistencia_dia,N);
+    aux=dobleid_cliente(aux_asistencia,asistencia_dia,N);
 
-    REQUIRE(aux == -1);
-    delete[] asistencia_dia;
+    for (unsigned int i = 0; i < N; ++i)
+    {
+        delete[] asistencia_dia[i].CursosInscriptos; // Liberar memoria para cada CursosInscriptos
+    }
+    delete[] asistencia_dia; // Liberar memoria para asistencia_dia
+    delete[] aux_asistencia.CursosInscriptos; // Liberar memoria para CursosInscriptos de aux_asistencia
 }

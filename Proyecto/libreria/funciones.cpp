@@ -42,7 +42,7 @@ void agrandartamInscrip(Inscripcion*& vector, int& N)
 //funcion achicar Inscripcion (resize)
 void achicartamInscrip(Inscripcion*& vector, int& N)
 {
-    N=(N)-1; //aumento en uno mi contador de tamaño
+    N=N-1; //disminuyo en uno mi contador de tamaño
     Inscripcion* aux= new Inscripcion[(N)]; //un aux con el nuevo tamaño
     for(int i=0; i<N-1;i++)
     {
