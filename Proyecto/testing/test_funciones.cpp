@@ -3,7 +3,6 @@
 #include "archivos.cpp"
 #include <ctime>
 
-/**********test achicar tamano de inscripcion**********/
 TEST_CASE("AchicarTamTEST", "[fancy]")
 {
     int N=5;
@@ -13,7 +12,6 @@ TEST_CASE("AchicarTamTEST", "[fancy]")
     cout<<"N es: " << N <<endl;
     delete[] vector;
 }
-/**********test agrandar tamano de Inscripcion**********/
 TEST_CASE("AgrandarTamTEST", "[fancy]")
 {
     int N=5;
@@ -23,7 +21,6 @@ TEST_CASE("AgrandarTamTEST", "[fancy]")
     cout<<"N es: " << N <<endl;
     delete[] vector;
 }
-/*******desplazar un elemento al final y mover los elementos restantes una posición hacia arriba*******/
 TEST_CASE("DesplazarAlFinalElemento1", "[fancy]")
 {
     unsigned int cantInscriptos=4;
@@ -90,9 +87,7 @@ TEST_CASE("DesplazarAlFinalElemento5", "[fancy]")
     moveralfinal(cursosInscriptos, cantInscriptos, pos);
     REQUIRE(cursosInscriptos[2].idCurso==4);
     delete[] cursosInscriptos;
-}
-/*****Chequea que el cliente del archivo Asitencia_dia que voy a leer, no esté ya anotado en Asistencia_dia*****/
-TEST_CASE("NOdobleId_Cliente", "[fancy]")
+}TEST_CASE("NOdobleId_Cliente", "[fancy]")
 {
     int aux;
     unsigned int N=3;

@@ -2,10 +2,10 @@
 
 /****funcion que lee el archivo de clases y retorna -1 si no se pudo leer y 1 si se pudo leer,
 y la lista de clases quedaria cargada:******/
-eArchivo LeerClases(ifstream* archivoClases, Clases* ListaClases,int &Nclases)
+eArchivo LeerClases(ifstream archivoClases, Clases* ListaClases,int &Nclases)
 {
     //si el archivo es distinto a open entonces retorno error
-    if(!archivoClases->is_open())
+    if(!archivoClases.is_open())
     {
         return ErrArchivo;
     }
@@ -39,16 +39,16 @@ eArchivo LeerClases(ifstream* archivoClases, Clases* ListaClases,int &Nclases)
         //stof: el horario debo castearlo a float
         ListaClases[Nclases-1].Horario==stof(auxHorario);
         //llamo a la funcion resize: para agrandar el tamaño
-        agrandartam(ListaClases,&Nclases);
+        agrandartamClases(ListaClases,Nclases);
     }
     return ExitoArchivo;
 }
 /****funcion que lee el archivo de clientes y retorna -1 si no se pudo leer y 1 si se pudo leer,
 y la lista de clientes quedaria cargada:******/
-eArchivo LeerClientes(ifstream* archivoClientes, Cliente* ListaClientes,int &Nclientes)
+eArchivo LeerClientes(ifstream archivoClientes, Cliente* ListaClientes,int &Nclientes)
 {
     //si el archivo es distinto a open entonces retorno error
-    if(!archivoClientes->is_open())
+    if(!archivoClientes.is_open())
     {
         return ErrArchivo;
     }
@@ -94,7 +94,7 @@ eArchivo LeerClientes(ifstream* archivoClientes, Cliente* ListaClientes,int &Ncl
         //casteo a int
         ListaClientes[Nclientes-1].estado==stoi(auxestado);
         //llamo a la funcion resize: para agrandar el tamaño
-        agrandartam(ListaClientes,&Nclientes);
+        agrandartamCliente(ListaClientes,Nclientes);
     }
     return ExitoArchivo;
 }
