@@ -9,5 +9,6 @@ enum eArchivo  { ErrArchivo = -1,  ExitoArchivo = 1 };
 /****funcion que lee el archivo de clases y retorna -1 si no se pudo leer y 1 si se pudo leer,
 y la lista de clases quedaria cargada:******/
 eArchivo LeerClases(ifstream* archivoClases, Clases* ListaClases,int &Nclases);
+eArchivo LeerClientes(ifstream* archivoClientes, Cliente* ListaClientes,int &Nclientes);
 
 #endif // ARCHIVOS_H
