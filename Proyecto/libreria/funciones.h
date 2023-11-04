@@ -19,7 +19,7 @@ typedef struct {
     str Apellido;
     str Mail;
     str Telefono;
-    time_t fechaNacimiento;
+    float fechaNacimiento;
     int estado;
 } Cliente;
 

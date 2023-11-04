@@ -11,7 +11,7 @@ TEST_CASE("leer archivo de clases", "[fancy]")
     int N=1;
 
     Clases *ListaClases=new Clases[N];
-    (void)LeerClases(archivoClases, ListaClases, N);
+    LeerClases(archivoClases, ListaClases, N);
 
     Clases aux[2];
     aux[0].idClase=1;

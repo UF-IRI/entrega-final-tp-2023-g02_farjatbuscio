@@ -90,7 +90,6 @@ TEST_CASE("DesplazarAlFinalElemento5", "[fancy]")
 }
 TEST_CASE("NOdobleId_Cliente", "[fancy]")
 {
-    int aux=0;
     unsigned int N=3;
     unsigned int M=1;
     Asistencia* asistencia_dia = new Asistencia[N];
@@ -117,8 +116,11 @@ TEST_CASE("NOdobleId_Cliente", "[fancy]")
     aux_asistencia.CursosInscriptos[0].idCurso = 2;
     aux_asistencia.CursosInscriptos[0].fechaInscripcion = time(0);
 
-    aux=dobleid_cliente(aux_asistencia,asistencia_dia,N);
+    int ret=0;
+    ret=dobleid_cliente(aux_asistencia,asistencia_dia,N);
 
+    REQUIRE(ret==-1);
+    //libero memoria:
     for (unsigned int i = 0; i < N; ++i)
     {
         delete[] asistencia_dia[i].CursosInscriptos; // Liberar memoria para cada CursosInscriptos
