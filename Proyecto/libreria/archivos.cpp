@@ -98,3 +98,45 @@ eArchivo LeerClientes(ifstream& archivoClientes, Cliente* &ListaClientes,int &Nc
     }
     return ExitoArchivo;
 }
+eArchivo LeerAsistencia(ifstream& archivo_dia, Asistencia*& AsistenciaDia,int &Ninscripciones)
+{
+    //si el archivo es distinto a open entonces retorno error
+    if(!archivo_dia.is_open())
+    {
+        return ErrArchivo;
+    }
+    int ret;
+    Ninscripciones=0;
+    //Creo aux para poder ir copiando:
+    Asistencia* aux=new Asistencia[1];
+    while(!archivo_dia.eof())
+    {
+        archivo_dia.read((char*)&aux->idCliente,sizeof(int));
+        archivo_dia.read((char*)&aux->cantInscriptos, sizeof(int));
+        Inscripcion* aux_inscripcion=new Inscripcion[aux->cantInscriptos];
+        for(int i=0;i<aux->cantInscriptos;i++)
+        {
+            archivo_dia.read((char*)aux_inscripcion,sizeof(Inscripcion));
+        }
+        ret=dobleid_cliente(aux,AsistenciaDia,Ninscripciones);
+        if(ret==1)
+        {
+            //llamar a la funcion 1 y 2
+            //agrando el vector de asistencia dia y cargo aux a asistencia dia:
+            agrandartamAsistencia(AsistenciaDia,Ninscripciones);
+            AsistenciaDia[Ninscripciones-1].idCliente=aux->idCliente;
+            AsistenciaDia[Ninscripciones-1].cantInscriptos=aux->cantInscriptos;
+            //agrando el vector de inscripcion
+            agrandartamInscrip(AsistenciaDia->CursosInscriptos,aux->cantInscriptos);
+            for(int k=0;k<aux->cantInscriptos;k++)
+            {
+                AsistenciaDia[Ninscripciones-1].CursosInscriptos->idCurso=aux_inscripcion->idCurso;
+                AsistenciaDia[Ninscripciones-1].CursosInscriptos->fechaInscripcion=aux_inscripcion->fechaInscripcion;
+            }
+            //DONDE LIBERO MEMORIA?
+        }
+    }
+
+    return ExitoArchivo;
+}
+

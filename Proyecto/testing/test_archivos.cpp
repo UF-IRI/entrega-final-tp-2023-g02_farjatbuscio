@@ -8,7 +8,7 @@ using namespace std;
 TEST_CASE("leer archivo de clases", "[fancy]")
 {
     //abro archivo de clases
-    std::ifstream archivoClase("../../iriClasesGYM.csv");
+    std::ifstream archivoClase("../../../iriClasesGYM.csv");
 
     int N=1;
 
@@ -30,7 +30,7 @@ TEST_CASE("leer archivo de clientes", "[fancy]")
 {
     //abro archivo de clientes
     ifstream archivoClientes;
-    archivoClientes.open("iriClientesGYM.csv");
+    archivoClientes.open("../../../iriClientesGYM.csv");
     int N=1;
     Cliente *ListaClientes=new Cliente[N];
     Cliente aux[2];
