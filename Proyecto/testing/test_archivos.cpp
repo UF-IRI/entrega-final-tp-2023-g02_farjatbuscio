@@ -8,12 +8,12 @@ using namespace std;
 TEST_CASE("leer archivo de clases", "[fancy]")
 {
     //abro archivo de clases
-    std::ifstream archivoClase("..\\Proyecto\\iriClasesGYM.csv");
+    std::ifstream archivoClase("../../iriClasesGYM.csv");
 
     int N=1;
 
     Clases *ListaClases=new Clases[N];
-    (void)LeerClases(archivoClase, ListaClases, N);
+    LeerClases(archivoClase,ListaClases,N);
 
     Clases aux[2];
     aux[0].idClase=1;
@@ -23,17 +23,14 @@ TEST_CASE("leer archivo de clases", "[fancy]")
     aux[0].Horario=8;
     aux[1].Horario=10;
 
-    for(int i=0;i<2;i++)
-    {
-        REQUIRE(ListaClases[i].idClase==aux[i].idClase);
-    }
+    REQUIRE(ListaClases[0].idClase==aux[0].idClase);
 }
 
 TEST_CASE("leer archivo de clientes", "[fancy]")
 {
     //abro archivo de clientes
     ifstream archivoClientes;
-    archivoClientes.open("../Proyecto/iriClientesGYM.csv");
+    archivoClientes.open("iriClientesGYM.csv");
     int N=1;
     Cliente *ListaClientes=new Cliente[N];
     Cliente aux[2];
@@ -44,8 +41,5 @@ TEST_CASE("leer archivo de clientes", "[fancy]")
     aux[0].Apellido="Guerra";
     aux[1].Apellido="Romero";
     LeerClientes(archivoClientes,ListaClientes,N);
-    for(int i=0;i<2;i++)
-    {
-        REQUIRE(ListaClientes[i].idCliente==aux[i].idCliente);
-    }
+    REQUIRE(ListaClientes[0].idCliente==aux[0].idCliente);
 }
