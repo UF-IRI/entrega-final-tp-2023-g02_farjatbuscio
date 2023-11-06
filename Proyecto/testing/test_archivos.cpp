@@ -8,7 +8,8 @@ using namespace std;
 TEST_CASE("leer archivo de clases", "[fancy]")
 {
     //abro archivo de clases
-    ifstream archivoClase("../../iriClasesGYM.csv");
+    ifstream archivoClase;
+    archivoClase.open("iriClasesGYM.csv");
 
     int N=1;
 
@@ -24,13 +25,15 @@ TEST_CASE("leer archivo de clases", "[fancy]")
     aux[1].Horario=10;
 
     REQUIRE(ListaClases[0].idClase==aux[0].idClase);
+    archivoClase.close();
+    delete[] ListaClases;
 }
 
 TEST_CASE("leer archivo de clientes", "[fancy]")
 {
     //abro archivo de clientes
     ifstream archivoClientes;
-    archivoClientes.open("../../iriClientesGYM.csv");
+    archivoClientes.open("iriClientesGYM.csv");
     int N=1;
 
     Cliente *ListaClientes=new Cliente[N];
@@ -43,6 +46,9 @@ TEST_CASE("leer archivo de clientes", "[fancy]")
     aux[1].Apellido="Romero";
     LeerClientes(archivoClientes,ListaClientes,N);
     REQUIRE(ListaClientes[0].idCliente==aux[0].idCliente);
+
+    archivoClientes.close();
+    delete[] ListaClientes;
 }
 TEST_CASE("leer archivo de inscripcion", "[fancy]")
 {
@@ -51,9 +57,12 @@ TEST_CASE("leer archivo de inscripcion", "[fancy]")
     //CUAL ES LA UBICACION?
     archivoInscripcion.open("asistencias_1697673600000.dat", ios::binary);
 
-    int N;
+    int N=1;
     Asistencia* AsistenciaDia=new Asistencia[N];
 
     int ret= LeerAsistencia_hoy(archivoInscripcion,AsistenciaDia,N);
     REQUIRE(ret==1);
+
+    archivoInscripcion.close();
+    delete[] AsistenciaDia;
 }

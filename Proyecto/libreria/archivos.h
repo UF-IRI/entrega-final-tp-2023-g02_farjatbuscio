@@ -2,6 +2,7 @@
 #define ARCHIVOS_H
 
 #include <fstream>
+#include <sstream>
 #include "funciones.h"
 
 typedef enum { ErrArchivo = -1,  ExitoArchivo = 1 } eArchivo;

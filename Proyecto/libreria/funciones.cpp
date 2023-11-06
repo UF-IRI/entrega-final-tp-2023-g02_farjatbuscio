@@ -127,4 +127,3 @@ void dobleid_curso(Asistencia*& aux_asistencia)
         }
     }
 }
-
