@@ -2,7 +2,7 @@
 
 /****funcion que lee el archivo de clases y retorna -1 si no se pudo leer y 1 si se pudo leer,
 y la lista de clases quedaria cargada:******/
-eArchivo LeerClases(ifstream archivoClases, Clases*& ListaClases,int &Nclases)
+eArchivo LeerClases(ifstream& archivoClases, Clases*& ListaClases,int &Nclases)
 {
     //si el archivo es distinto a open entonces retorno error
     if(!archivoClases.is_open())
@@ -45,7 +45,7 @@ eArchivo LeerClases(ifstream archivoClases, Clases*& ListaClases,int &Nclases)
 }
 /****funcion que lee el archivo de clientes y retorna -1 si no se pudo leer y 1 si se pudo leer,
 y la lista de clientes quedaria cargada:******/
-eArchivo LeerClientes(ifstream archivoClientes, Cliente*& ListaClientes,int &Nclientes)
+eArchivo LeerClientes(ifstream& archivoClientes, Cliente*& ListaClientes,int &Nclientes)
 {
     //si el archivo es distinto a open entonces retorno error
     if(!archivoClientes.is_open())
