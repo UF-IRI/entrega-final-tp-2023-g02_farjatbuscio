@@ -1,7 +1,7 @@
 #include "archivos.h"
 
-/****funcion que lee el archivo de clases y retorna -1 si no se pudo leer y 1 si se pudo leer,
-y la lista de clases quedaria cargada:******/
+//funcion que lee el archivo de clases y retorna -1 si no se pudo leer y 1 si se pudo leer,
+//y la lista de clases quedaria cargada:
 eArchivo LeerClases(ifstream& archivoClases, Clases* &ListaClases,int& Nclases)
 {
     //si el archivo es distinto a open entonces retorno error
@@ -43,8 +43,8 @@ eArchivo LeerClases(ifstream& archivoClases, Clases* &ListaClases,int& Nclases)
     }
     return ExitoArchivo;
 }
-/****funcion que lee el archivo de clientes y retorna -1 si no se pudo leer y 1 si se pudo leer,
-y la lista de clientes quedaria cargada:******/
+//funcion que lee el archivo de clientes y retorna -1 si no se pudo leer y 1 si se pudo leer,
+//y la lista de clientes quedaria cargada:
 eArchivo LeerClientes(ifstream& archivoClientes, Cliente* &ListaClientes,int &Nclientes)
 {
     //si el archivo es distinto a open entonces retorno error
@@ -98,7 +98,7 @@ eArchivo LeerClientes(ifstream& archivoClientes, Cliente* &ListaClientes,int &Nc
     }
     return ExitoArchivo;
 }
-eArchivo LeerAsistencia(ifstream& archivo_dia, Asistencia*& AsistenciaDia,int &Ninscripciones)
+eArchivo LeerAsistencia_hoy(ifstream& archivo_dia, Asistencia*& AsistenciaDia,int &Ninscripciones)
 {
     //si el archivo es distinto a open entonces retorno error
     if(!archivo_dia.is_open())
@@ -127,7 +127,10 @@ eArchivo LeerAsistencia(ifstream& archivo_dia, Asistencia*& AsistenciaDia,int &N
             AsistenciaDia[Ninscripciones-1].idCliente=aux->idCliente;
             AsistenciaDia[Ninscripciones-1].cantInscriptos=aux->cantInscriptos;
             //agrando el vector de inscripcion
-            agrandartamInscrip(AsistenciaDia->CursosInscriptos,aux->cantInscriptos);
+            for(int j=0; j<aux->cantInscriptos; j++)
+            {
+                agrandartamInscrip(AsistenciaDia->CursosInscriptos,j);
+            }
             for(int k=0;k<aux->cantInscriptos;k++)
             {
                 AsistenciaDia[Ninscripciones-1].CursosInscriptos->idCurso=aux_inscripcion->idCurso;

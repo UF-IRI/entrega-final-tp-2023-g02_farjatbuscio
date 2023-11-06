@@ -54,6 +54,6 @@ TEST_CASE("leer archivo de inscripcion", "[fancy]")
     int N;
     Asistencia* AsistenciaDia=new Asistencia[N];
 
-    int ret= LeerAsistencia(archivoInscripcion,AsistenciaDia,N);
+    int ret= LeerAsistencia_hoy(archivoInscripcion,AsistenciaDia,N);
     REQUIRE(ret==1);
 }

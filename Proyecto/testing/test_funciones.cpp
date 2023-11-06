@@ -3,6 +3,15 @@
 #include "archivos.cpp"
 #include <ctime>
 
+TEST_CASE("AgrandarTamTEST", "[fancy]")
+{
+    int N=5;
+    Inscripcion *vector = new Inscripcion[N];
+    agrandartamInscrip(vector, N);
+    REQUIRE(N == 6);
+    cout<<"N es: " << N <<endl;
+    delete[] vector;
+}
 TEST_CASE("AchicarTamTEST", "[fancy]")
 {
     int N=4;
@@ -25,16 +34,7 @@ TEST_CASE("AchicarTamTEST", "[fancy]")
     delete[] aux_asistencia->CursosInscriptos;
     delete[] aux_asistencia;
 }
-TEST_CASE("AgrandarTamTEST", "[fancy]")
-{
-    int N=5;
-    Inscripcion *vector = new Inscripcion[N];
-    agrandartamInscrip(vector, N);
-    REQUIRE(N == 6);
-    cout<<"N es: " << N <<endl;
-    delete[] vector;
-}
-TEST_CASE("DesplazarAlFinalElemento1", "[fancy]")
+TEST_CASE("DesplazarAlFinalElemento", "[fancy]")
 {
     int cantInscriptos=4;
     Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];

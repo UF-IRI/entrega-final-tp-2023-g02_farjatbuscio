@@ -3,11 +3,11 @@
 //funcion agrandar Clases (resize)
 void agrandartamClases(Clases*& vector, int& N)
 {
-    N=(N)+1; //aumento en uno mi contador de tamaño
-    Clases* aux= new Clases[(N)]; //un aux con el nuevo tamaño
+    N=N+1; //aumento en uno mi contador de tamaño
+    Clases* aux= new Clases[N]; //un aux con el nuevo tamaño
     for(int i=0; i<N-1;i++)
     {
-        aux[i]=vector[i]; //copio las cosas en el auxiliar
+        aux[i]=vector[i]; //copio las cosas en el auxiliar 
     }
     //libero memoria dinamica:
     delete[] vector;
@@ -16,8 +16,8 @@ void agrandartamClases(Clases*& vector, int& N)
 //funcion agrandar Cliente (resize)
 void agrandartamCliente(Cliente*& vector, int& N)
 {
-    N=(N)+1; //aumento en uno mi contador de tamaño
-    Cliente* aux= new Cliente[(N)]; //un aux con el nuevo tamaño
+    N=N+1; //aumento en uno mi contador de tamaño
+    Cliente* aux= new Cliente[N]; //un aux con el nuevo tamaño
     for(int i=0; i<N-1;i++)
     {
         aux[i]=vector[i]; //copio las cosas en el auxiliar
@@ -29,8 +29,8 @@ void agrandartamCliente(Cliente*& vector, int& N)
 //funcion agrandar Asistencia (resize)
 void agrandartamAsistencia(Asistencia*& vector, int& N)
 {
-    N=(N)+1; //aumento en uno mi contador de tamaño
-    Asistencia* aux= new Asistencia[(N)]; //un aux con el nuevo tamaño
+    N=N+1; //aumento en uno mi contador de tamaño
+    Asistencia* aux= new Asistencia[N]; //un aux con el nuevo tamaño
     for(int i=0; i<N-1;i++)
     {
         aux[i]=vector[i]; //copio las cosas en el auxiliar
@@ -42,8 +42,8 @@ void agrandartamAsistencia(Asistencia*& vector, int& N)
 //funcion agrandar Inscripcion (resize)
 void agrandartamInscrip(Inscripcion*& vector, int& N)
 {
-    N=(N)+1; //aumento en uno mi contador de tamaño
-    Inscripcion* aux= new Inscripcion[(N)]; //un aux con el nuevo tamaño
+    N=N+1; //aumento en uno mi contador de tamaño
+    Inscripcion* aux= new Inscripcion[N]; //un aux con el nuevo tamaño
     for(int i=0; i<N-1;i++)
     {
         aux[i]=vector[i]; //copio las cosas en el auxiliar
@@ -90,7 +90,7 @@ void moveralfinal(Inscripcion* cursosInscriptos, int CantInscriptos, int pos)
 //Si retorno Exito -> procedo a mirar si las siguientes condiciones se cumplen*/
 int dobleid_cliente(Asistencia* aux_asistencia, Asistencia* Asistencia_dia, int N)
 {
-    if(N==0)
+    if(N<=0)
     {
         return 1;
     }
@@ -113,15 +113,17 @@ int dobleid_cliente(Asistencia* aux_asistencia, Asistencia* Asistencia_dia, int 
 void dobleid_curso(Asistencia*& aux_asistencia)
 {
     int N=aux_asistencia->cantInscriptos;
-    for(int i=1; i<N; i++)
+    for(int i=0; i<N; i++)
     {
         //verifico si hay dos id_cursos iguales
         if(aux_asistencia->CursosInscriptos[i].idCurso==aux_asistencia->CursosInscriptos[i+1].idCurso)
         {
             //elimino uno
-            moveralfinal(aux_asistencia->CursosInscriptos, aux_asistencia->cantInscriptos, i);
+            moveralfinal(aux_asistencia->CursosInscriptos, aux_asistencia->cantInscriptos, i+1);
             achicartamInscrip(aux_asistencia->CursosInscriptos, aux_asistencia->cantInscriptos);
             aux_asistencia->cantInscriptos=(aux_asistencia->cantInscriptos-1);
+            N=N-1;
+            i=i-1;
         }
     }
 }
