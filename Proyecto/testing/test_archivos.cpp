@@ -66,3 +66,24 @@ TEST_CASE("leer archivo de inscripcion", "[fancy]")
     archivoInscripcion.close();
     delete[] AsistenciaDia;
 }
+/*
+TEST_CASE("Funcion Random", "[fancy]")
+{
+    //le paso algunos datos cargados de lista cliente y clases y me debe retornar algun valor random
+    //Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
+    int N=3;
+    Cliente ListaClientes[N];
+    int M=3;
+    Clases ListaClase[M];
+    ListaClientes[0].idCliente=12;
+    ListaClientes[1].idCliente=3;
+    ListaClientes[2].idCliente=19;
+    ListaClientes[3].idCliente=4;
+    ListaClase[0].idClase=2;
+    ListaClase[1].idClase=15;
+    ListaClase[2].idClase=7;
+    ListaClase[3].idClase=1;
+    Asistencia aux;
+    aux=RandCliente(ListaClientes,ListaClase);
+    REQUIRE(aux.idCliente==12);
+}*/

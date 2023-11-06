@@ -142,4 +142,78 @@ eArchivo LeerAsistencia_hoy(ifstream& archivo_dia, Asistencia*& AsistenciaDia,in
 
     return ExitoArchivo;
 }
+//lo comento porq me genera ERROR el nombre del archivo
+/*
+//Funcion que crea el archivo para mañana
+eArchivo CrearAsistencia_manana(string* Nombre_Archivo,Asistencia*& AsistenciaMan,int &Ninscripciones)
+{
+    //creo el archivo para modificacion:
+    ofstream archivo_man;
+    //Nombre_Archivo: contiene el nombre del archivo con time actual: "Asistencias"+ time()
+    //"asistencias_1697673600000.dat"
+    archivo_man(Nombre_Archivo,ios::binary);
+    if(!archivo_man.is_open())
+    {
+        return ErrArchivo;
+    }
+    if (archivo_man.is_open())
+    {
+        for (int i=0; i<Ninscripciones; i++)
+        {
+            archivo_man.write((char*)&AsistenciaMan[i].idCliente, sizeof(int));
+            archivo_man.write((char*)&AsistenciaMan[i].cantInscriptos, sizeof(int));
+            for(int j = 0; j < AsistenciaMan[i].cantInscriptos; j++)
+            {
+                archivo_man.write((char*)&AsistenciaMan[i].CursosInscriptos[j],sizeof(Inscripcion));
+            }
+        }
+    }
+    archivo_man.close();
+    return ExitoArchivo;
+}*/
 
+//Funcion que genera datos random:
+Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
+{
+    int num_cliente=rand()%(sizeof(ListaClientes));
+    Asistencia aux;
+    aux.idCliente=ListaClientes[num_cliente].idCliente;
+    aux.cantInscriptos=1;
+    int num_clase=rand()%(sizeof(ListaClase));
+    aux.CursosInscriptos->idCurso=ListaClase[num_clase].idClase;
+    aux.CursosInscriptos->fechaInscripcion=time(0);
+
+    return aux;
+}
+
+//Funcion generica que imprime los datos de los clientes inscriptos en esa id de clase
+void ImprimirDatos(Asistencia* AsistenciaMan, int id_clase, int Ninscripciones)
+{
+    int cont=0;
+    if(Ninscripciones==0)
+    {
+        cout<<"En este momento, no hay clientes inscriptos en su clases"<<endl;
+    }
+    if(Ninscripciones>0)
+    {
+        //recorro los clientes
+        for(int i=0;i<Ninscripciones;i++)
+        {
+            //recorro los cursos inscriptos de los clientes
+            for(int k=0; k<AsistenciaMan[i].cantInscriptos; k++)
+            //si coincide el id de curso imprimo los datos:
+            if(AsistenciaMan[i].CursosInscriptos[k].idCurso==id_clase)
+            {
+                cout<<"Datos de las inscripciones correspondiente a la clase con ID:"<<id_clase<<endl;
+                cout<<"Id del cliente:"<<AsistenciaMan[i].idCliente<<endl;
+                //un acumulador que cuente los clientes inscriptos
+                cont++;
+            }
+        }
+    }
+    //si el acumulador es mayor que cero, imprimo la cantidad de clientes inscriptos a esa clase
+    if(cont>0)
+    {
+        cout<<"Cantidad de inscriptos a su clase:"<<cont<<endl;
+    }
+}
