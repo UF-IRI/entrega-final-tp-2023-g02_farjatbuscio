@@ -10,7 +10,7 @@ using namespace std;
 
 typedef std::string str;
 
-/************Declaracion de structs:**********/
+//Declaracion de structs:
 
 //estructura de cliente:
 typedef struct {
@@ -25,44 +25,48 @@ typedef struct {
 
 //estructura de clases:
 typedef struct {
-    unsigned int idClase;
+    int idClase;
     str NombreClase;
     float Horario;
 } Clases;
 
 //estructura de asistencia y inscripcion:
 typedef struct {
-    unsigned int idCurso;
+    int idCurso;
     time_t fechaInscripcion;
 } Inscripcion;
 typedef struct {
-    unsigned int idCliente, cantInscriptos;
+    int idCliente, cantInscriptos;
     Inscripcion* CursosInscriptos;
 } Asistencia;
 
 //estructura de cupos
 typedef struct {
-    unsigned int Nclases;
-    unsigned int IdClase;
-    unsigned int cupo;
+    int Nclases;
+    int IdClase;
+    int cupo;
 } CupoClases;
 
-/**************Enum para errores:**************/
+//Enum para errores:
 typedef enum {ErrDobleIdCliente = -1, ExitoIdCLiente=1} eDobleId_Cliente;
 
 
-/************** DECLARO FUNCIONES **************/
+//DECLARO FUNCIONES
 //funcion agrandar Clases (resize)
 void agrandartamClases(Clases*& vector, int& N);
 //funcion agrandar Cliente (resize)
 void agrandartamCliente(Cliente*& vector, int& N);
 //funcion agrandar Inscripcion (resize)
 void agrandartamInscrip(Inscripcion*& vector, int& N);
+//funcion agrandar Asistencia (resize)
+void agrandartamAsistencia(Asistencia*& vector, int& N);
 //funcion achicar Inscripcion (resize)
 void achicartamInscrip(Inscripcion*& vector, int& N);
 //funcion desplazar un elemento al final para desp eliminarla con el resize
-void moveralfinal(Inscripcion* cursosInscriptos, unsigned int CantInscriptos, unsigned int pos);
-//Chequea que el cliente del archivo Asitencia_dia que voy a leer, no esté ya anotado en Asistencia_dia
-int dobleid_cliente(Asistencia aux_asistencia, Asistencia* Asistencia_dia, unsigned int N);
+void moveralfinal(Inscripcion* cursosInscriptos, int CantInscriptos, int pos);
+//Chequea que el cliente del archivo Asitencia_dia que voy a leer, no este ya anotado en Asistencia_dia
+int dobleid_cliente(Asistencia aux_asistencia, Asistencia* Asistencia_dia, int N);
+//Chequea que no se repita el mismo id_curso por cliente, no este anotado dos veces en la misma clase
+void dobleid_curso(Asistencia*& aux_asistencia);
 
 #endif // FUNCIONES_H

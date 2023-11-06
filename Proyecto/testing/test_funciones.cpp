@@ -23,9 +23,9 @@ TEST_CASE("AgrandarTamTEST", "[fancy]")
 }
 TEST_CASE("DesplazarAlFinalElemento1", "[fancy]")
 {
-    unsigned int cantInscriptos=4;
+    int cantInscriptos=4;
     Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
-    unsigned int pos=1;
+    int pos=1;
     cursosInscriptos[0]={1, time(0)};
     cursosInscriptos[1]={2, time(0)};
     cursosInscriptos[2]={3, time(0)};
@@ -37,9 +37,9 @@ TEST_CASE("DesplazarAlFinalElemento1", "[fancy]")
 }
 TEST_CASE("DesplazarAlFinalElemento2", "[fancy]")
 {
-    unsigned int cantInscriptos=4;
+    int cantInscriptos=4;
     Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
-    unsigned int pos=1;
+    int pos=1;
     cursosInscriptos[0]={1, time(0)};
     cursosInscriptos[1]={2, time(0)};
     cursosInscriptos[2]={3, time(0)};
@@ -51,9 +51,9 @@ TEST_CASE("DesplazarAlFinalElemento2", "[fancy]")
 }
 TEST_CASE("DesplazarAlFinalElemento3", "[fancy]")
 {
-    unsigned int cantInscriptos=4;
+    int cantInscriptos=4;
     Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
-    unsigned int pos=1;
+    int pos=1;
     cursosInscriptos[0]={1, time(0)};
     cursosInscriptos[1]={2, time(0)};
     cursosInscriptos[2]={3, time(0)};
@@ -64,9 +64,9 @@ TEST_CASE("DesplazarAlFinalElemento3", "[fancy]")
 }
 TEST_CASE("DesplazarAlFinalElemento4", "[fancy]")
 {
-    unsigned int cantInscriptos=4;
+    int cantInscriptos=4;
     Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
-    unsigned int pos=1;
+    int pos=1;
     cursosInscriptos[0]={1, time(0)};
     cursosInscriptos[1]={2, time(0)};
     cursosInscriptos[2]={3, time(0)};
@@ -77,9 +77,9 @@ TEST_CASE("DesplazarAlFinalElemento4", "[fancy]")
 }
 TEST_CASE("DesplazarAlFinalElemento5", "[fancy]")
 {
-    unsigned int cantInscriptos=4;
+    int cantInscriptos=4;
     Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
-    unsigned int pos=1;
+    int pos=1;
     cursosInscriptos[0]={1, time(0)};
     cursosInscriptos[1]={2, time(0)};
     cursosInscriptos[2]={3, time(0)};
@@ -90,10 +90,10 @@ TEST_CASE("DesplazarAlFinalElemento5", "[fancy]")
 }
 TEST_CASE("NOdobleId_Cliente", "[fancy]")
 {
-    unsigned int N=3;
-    unsigned int M=1;
+    int N=3;
+    int M=1;
     Asistencia* asistencia_dia = new Asistencia[N];
-    for (unsigned int i = 0; i < N; ++i)
+    for (int i = 0; i < N; ++i)
     {
         asistencia_dia[i].CursosInscriptos = new Inscripcion[M]; // Asignar memoria para CursosInscriptos
     }
@@ -121,10 +121,35 @@ TEST_CASE("NOdobleId_Cliente", "[fancy]")
 
     REQUIRE(ret==-1);
     //libero memoria:
-    for (unsigned int i = 0; i < N; ++i)
+    for (int i = 0; i < N; ++i)
     {
         delete[] asistencia_dia[i].CursosInscriptos; // Liberar memoria para cada CursosInscriptos
     }
     delete[] asistencia_dia; // Liberar memoria para asistencia_dia
     delete[] aux_asistencia.CursosInscriptos; // Liberar memoria para CursosInscriptos de aux_asistencia
+}
+TEST_CASE("NODobleIdCurso", "[fancy]")
+{
+    int N=4;
+    Asistencia* aux_asistencia = new Asistencia[1];
+    aux_asistencia->idCliente=1;
+    aux_asistencia->cantInscriptos=4;
+    aux_asistencia->CursosInscriptos = new Inscripcion[N]; // Asignar memoria para CursosInscriptos
+    aux_asistencia->CursosInscriptos[0].idCurso=2020;
+    aux_asistencia->CursosInscriptos[0].fechaInscripcion=time(0);
+    aux_asistencia->CursosInscriptos[1].idCurso=2020;
+    aux_asistencia->CursosInscriptos[1].fechaInscripcion=time(0);
+    aux_asistencia->CursosInscriptos[2].idCurso=2040;
+    aux_asistencia->CursosInscriptos[2].fechaInscripcion=time(0);
+    aux_asistencia->CursosInscriptos[3].idCurso=2050;
+    aux_asistencia->CursosInscriptos[3].fechaInscripcion=time(0);
+
+    dobleid_curso(aux_asistencia);
+    REQUIRE(aux_asistencia->cantInscriptos==3);
+    REQUIRE(aux_asistencia->CursosInscriptos[0].idCurso==2020);
+    REQUIRE(aux_asistencia->CursosInscriptos[1].idCurso==2040);
+    REQUIRE(aux_asistencia->CursosInscriptos[2].idCurso==2050);
+
+    delete[] aux_asistencia;
+    delete[] aux_asistencia->CursosInscriptos;
 }
