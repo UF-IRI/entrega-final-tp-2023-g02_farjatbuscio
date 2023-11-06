@@ -1,17 +1,19 @@
 #include <catch2/catch.hpp>
-#include <archivos.cpp>
+#include <archivos.h>
+
+using namespace std;
 
 /**********test leer archivo de clases**********/
+
 TEST_CASE("leer archivo de clases", "[fancy]")
 {
     //abro archivo de clases
-    std::ifstream archivoClases;
-    archivoClases.open("../Proyecto/iriClasesGYM.csv");
+    std::ifstream archivoClase("..\\Proyecto\\iriClasesGYM.csv");
 
     int N=1;
 
     Clases *ListaClases=new Clases[N];
-    LeerClases(archivoClases, ListaClases, N);
+    (void)LeerClases(archivoClase, ListaClases, N);
 
     Clases aux[2];
     aux[0].idClase=1;
@@ -23,9 +25,10 @@ TEST_CASE("leer archivo de clases", "[fancy]")
 
     for(int i=0;i<2;i++)
     {
-      REQUIRE(ListaClases[i].idClase==aux[i].idClase);
+        REQUIRE(ListaClases[i].idClase==aux[i].idClase);
     }
 }
+
 TEST_CASE("leer archivo de clientes", "[fancy]")
 {
     //abro archivo de clientes
@@ -43,7 +46,6 @@ TEST_CASE("leer archivo de clientes", "[fancy]")
     LeerClientes(archivoClientes,ListaClientes,N);
     for(int i=0;i<2;i++)
     {
-      REQUIRE(ListaClientes[i].idCliente==aux[i].idCliente);
+        REQUIRE(ListaClientes[i].idCliente==aux[i].idCliente);
     }
 }
-
