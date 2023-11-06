@@ -99,7 +99,7 @@ int dobleid_cliente(Asistencia* aux_asistencia, Asistencia* Asistencia_dia, int 
     for(int i=0; i<N; i++)
     {
         /*Reviso si el cliente q quiero cargar, ya existe en Asistencia_dia*/
-        if(aux_asistencia.idCliente==Asistencia_dia[i].idCliente)
+        if(aux_asistencia->idCliente==Asistencia_dia[i].idCliente)
         {
             //Si exite, retorno Error y no lo vuelvo a cargar
             return -1;
