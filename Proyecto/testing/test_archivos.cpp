@@ -3,12 +3,12 @@
 
 using namespace std;
 
-/**********test leer archivo de clases**********/
+//test para leer archivos
 
 TEST_CASE("leer archivo de clases", "[fancy]")
 {
     //abro archivo de clases
-    std::ifstream archivoClase("../../../iriClasesGYM.csv");
+    ifstream archivoClase("iriClasesGYM.csv");
 
     int N=1;
 
@@ -30,8 +30,9 @@ TEST_CASE("leer archivo de clientes", "[fancy]")
 {
     //abro archivo de clientes
     ifstream archivoClientes;
-    archivoClientes.open("../../../iriClientesGYM.csv");
+    archivoClientes.open("iriClientesGYM.csv");
     int N=1;
+
     Cliente *ListaClientes=new Cliente[N];
     Cliente aux[2];
     aux[0].idCliente=1;
@@ -42,4 +43,16 @@ TEST_CASE("leer archivo de clientes", "[fancy]")
     aux[1].Apellido="Romero";
     LeerClientes(archivoClientes,ListaClientes,N);
     REQUIRE(ListaClientes[0].idCliente==aux[0].idCliente);
+}
+TEST_CASE("leer archivo de inscripcion", "[fancy]")
+{
+    //abro archivo de inscripcion
+    ifstream archivoInscripcion;
+    archivoInscripcion.open("asistencias_1697673600000.dat", ios::binary);
+
+    int N;
+    Asistencia* AsistenciaDia=new Asistencia[N];
+
+    int ret= LeerAsistencia(archivoInscripcion,AsistenciaDia,N);
+    REQUIRE(ret=1);
 }
