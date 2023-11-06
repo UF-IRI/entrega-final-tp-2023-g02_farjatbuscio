@@ -88,7 +88,7 @@ void moveralfinal(Inscripcion* cursosInscriptos, int CantInscriptos, int pos)
 //Chequea que el cliente del archivo Asitencia_dia que voy a leer, no esté ya anotado en Asistencia_dia
 //Si retorno Error -> NO lo cargo directamente NADA
 //Si retorno Exito -> procedo a mirar si las siguientes condiciones se cumplen*/
-int dobleid_cliente(Asistencia aux_asistencia, Asistencia* Asistencia_dia, int N)
+int dobleid_cliente(Asistencia* aux_asistencia, Asistencia* Asistencia_dia, int N)
 {
     if(N==0)
     {
@@ -112,8 +112,8 @@ int dobleid_cliente(Asistencia aux_asistencia, Asistencia* Asistencia_dia, int N
 //sino no cambio nada
 void dobleid_curso(Asistencia*& aux_asistencia)
 {
-    int N=aux_asistencia->cantInscriptos-1;
-    for(int i=0; i<N; i++)
+    int N=aux_asistencia->cantInscriptos;
+    for(int i=1; i<N; i++)
     {
         //verifico si hay dos id_cursos iguales
         if(aux_asistencia->CursosInscriptos[i].idCurso==aux_asistencia->CursosInscriptos[i+1].idCurso)

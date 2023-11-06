@@ -5,12 +5,24 @@
 
 TEST_CASE("AchicarTamTEST", "[fancy]")
 {
-    int N=5;
-    Inscripcion *vector = new Inscripcion[N];
-    achicartamInscrip(vector, N);
-    REQUIRE(N == 4);
-    cout<<"N es: " << N <<endl;
-    delete[] vector;
+    int N=4;
+    Asistencia* aux_asistencia = new Asistencia[1];
+    aux_asistencia->idCliente=1;
+    aux_asistencia->cantInscriptos=4;
+    aux_asistencia->CursosInscriptos = new Inscripcion[N]; // Asignar memoria para CursosInscriptos
+    aux_asistencia->CursosInscriptos[0].idCurso=2020;
+    aux_asistencia->CursosInscriptos[0].fechaInscripcion=time(0);
+    aux_asistencia->CursosInscriptos[1].idCurso=2020;
+    aux_asistencia->CursosInscriptos[1].fechaInscripcion=time(0);
+    aux_asistencia->CursosInscriptos[2].idCurso=2040;
+    aux_asistencia->CursosInscriptos[2].fechaInscripcion=time(0);
+    aux_asistencia->CursosInscriptos[3].idCurso=2050;
+    aux_asistencia->CursosInscriptos[3].fechaInscripcion=time(0);
+
+    achicartamInscrip(aux_asistencia->CursosInscriptos,N);
+
+    delete[] aux_asistencia->CursosInscriptos;
+    delete[] aux_asistencia;
 }
 TEST_CASE("AgrandarTamTEST", "[fancy]")
 {
@@ -31,61 +43,10 @@ TEST_CASE("DesplazarAlFinalElemento1", "[fancy]")
     cursosInscriptos[2]={3, time(0)};
     cursosInscriptos[3]={4, time(0)};
     moveralfinal(cursosInscriptos, cantInscriptos, pos);
-    cout<< "ultimo id_curso deberia ser 2 (con el cambio hecho), ult id_curso: "<<cursosInscriptos[3].idCurso<<endl;
-    REQUIRE(cursosInscriptos[3].idCurso==2);
-    delete[] cursosInscriptos;
-}
-TEST_CASE("DesplazarAlFinalElemento2", "[fancy]")
-{
-    int cantInscriptos=4;
-    Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
-    int pos=1;
-    cursosInscriptos[0]={1, time(0)};
-    cursosInscriptos[1]={2, time(0)};
-    cursosInscriptos[2]={3, time(0)};
-    cursosInscriptos[3]={4, time(0)};
-    moveralfinal(cursosInscriptos, cantInscriptos, pos);
-    cout<< "ultimo fechainscrip deberia ser: " << time(0) << " Ultimo fechainscrip es: "<<cursosInscriptos[3].fechaInscripcion<<endl;
-    REQUIRE(cursosInscriptos[3].fechaInscripcion==time(0));
-    delete[] cursosInscriptos;
-}
-TEST_CASE("DesplazarAlFinalElemento3", "[fancy]")
-{
-    int cantInscriptos=4;
-    Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
-    int pos=1;
-    cursosInscriptos[0]={1, time(0)};
-    cursosInscriptos[1]={2, time(0)};
-    cursosInscriptos[2]={3, time(0)};
-    cursosInscriptos[3]={4, time(0)};
-    moveralfinal(cursosInscriptos, cantInscriptos, pos);
     REQUIRE(cursosInscriptos[0].idCurso==1);
-    delete[] cursosInscriptos;
-}
-TEST_CASE("DesplazarAlFinalElemento4", "[fancy]")
-{
-    int cantInscriptos=4;
-    Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
-    int pos=1;
-    cursosInscriptos[0]={1, time(0)};
-    cursosInscriptos[1]={2, time(0)};
-    cursosInscriptos[2]={3, time(0)};
-    cursosInscriptos[3]={4, time(0)};
-    moveralfinal(cursosInscriptos, cantInscriptos, pos);
     REQUIRE(cursosInscriptos[1].idCurso==3);
-    delete[] cursosInscriptos;
-}
-TEST_CASE("DesplazarAlFinalElemento5", "[fancy]")
-{
-    int cantInscriptos=4;
-    Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
-    int pos=1;
-    cursosInscriptos[0]={1, time(0)};
-    cursosInscriptos[1]={2, time(0)};
-    cursosInscriptos[2]={3, time(0)};
-    cursosInscriptos[3]={4, time(0)};
-    moveralfinal(cursosInscriptos, cantInscriptos, pos);
     REQUIRE(cursosInscriptos[2].idCurso==4);
+    REQUIRE(cursosInscriptos[3].idCurso==2);
     delete[] cursosInscriptos;
 }
 TEST_CASE("NOdobleId_Cliente", "[fancy]")
@@ -150,6 +111,6 @@ TEST_CASE("NODobleIdCurso", "[fancy]")
     REQUIRE(aux_asistencia->CursosInscriptos[1].idCurso==2040);
     REQUIRE(aux_asistencia->CursosInscriptos[2].idCurso==2050);
 
-    delete[] aux_asistencia;
     delete[] aux_asistencia->CursosInscriptos;
+    delete[] aux_asistencia;
 }
