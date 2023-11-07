@@ -143,7 +143,6 @@ eArchivo LeerAsistencia_hoy(ifstream& archivo_dia, Asistencia*& AsistenciaDia,in
     return ExitoArchivo;
 }
 //lo comento porq me genera ERROR el nombre del archivo
-/*
 //Funcion que crea el archivo para mañana
 eArchivo CrearAsistencia_manana(string* Nombre_Archivo,Asistencia*& AsistenciaMan,int &Ninscripciones)
 {
@@ -170,7 +169,7 @@ eArchivo CrearAsistencia_manana(string* Nombre_Archivo,Asistencia*& AsistenciaMa
     }
     archivo_man.close();
     return ExitoArchivo;
-}*/
+}
 
 //Funcion que genera datos random:
 Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
@@ -178,8 +177,8 @@ Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
     int num_cliente=rand()%(sizeof(ListaClientes));
     Asistencia aux;
     aux.idCliente=ListaClientes[num_cliente].idCliente;
-    aux.cantInscriptos=1;
-    int num_clase=rand()%(sizeof(ListaClase));
+    aux.cantInscriptos=1;//VER PILI!
+    int num_clase=rand()%(sizeof(ListaClase));//ESTA BIEN??
     aux.CursosInscriptos->idCurso=ListaClase[num_clase].idClase;
     aux.CursosInscriptos->fechaInscripcion=time(0);
 
