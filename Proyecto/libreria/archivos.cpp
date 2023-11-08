@@ -177,10 +177,26 @@ Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
     int num_cliente=rand()%(sizeof(ListaClientes));
     Asistencia aux;
     aux.idCliente=ListaClientes[num_cliente].idCliente;
+
+    /*OPCION 1: cada ciente random (clientes que se quieren inscribir a clases nuevas) solo
+    puede inscribirse a 1 clase por vez
     aux.cantInscriptos=1;//VER PILI!
     int num_clase=rand()%(sizeof(ListaClase));//ESTA BIEN??
     aux.CursosInscriptos->idCurso=ListaClase[num_clase].idClase;
-    aux.CursosInscriptos->fechaInscripcion=time(0);
+    aux.CursosInscriptos->fechaInscripcion=time(0);*/
+
+    /*OPNCION 2:
+    aux.cantInscriptos= (rand()%5)+1;
+    Inscripcion aux.CursosInscriptos= new Inscripcion [aux.cantInscriptos];
+    //no se si esta bien pedir la memoria? o como hago?
+    //si esta bien pedirla, donde la libero?
+    for(int i=0; i< aux.cantInscriptos; i++)
+    {
+        int num_clase=rand()%(sizeof(ListaClase));
+        aux.CursosInscriptos[i]->idCurso=ListaClase[num_clase].idClase;
+        aux.CursosInscriptos[i].fechaInscripcion=time(0);
+    }
+    */
 
     return aux;
 }
