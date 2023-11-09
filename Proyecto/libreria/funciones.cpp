@@ -128,7 +128,7 @@ void dobleid_curso(Asistencia*& aux_asistencia)
     }
 }
 
-void doblehorario(Asistencia*& aux_asistencia, Cliente* ListaClases)
+void doblehorario(Asistencia*& aux_asistencia, Clases* ListaClases)
 {
     int N = aux_asistencia->cantInscriptos;
     int aux_id1; //aca guardo el id
@@ -144,20 +144,20 @@ void doblehorario(Asistencia*& aux_asistencia, Cliente* ListaClases)
     {
         return;
     }
-    for(int i=0; int<N-1 ;i++)
+    for(int i=0; i<N-1 ;i++)
     {
         aux_id1 = aux_asistencia->CursosInscriptos[i].idCurso;
         aux_id2 = aux_asistencia->CursosInscriptos[i+1].idCurso;
 
-        aux_horario1 = Horario_clase(aux_id1,ListaClases); //lista clases lo pongo con & o *?
-        aux_horario2 = Horario_clase(aux_id2,ListaClases);
+        aux_horario1 = Horario_clase(aux_id1, ListaClases); //lista clases lo pongo con & o *?
+        aux_horario2 = Horario_clase(aux_id2, ListaClases);
 
         if(aux_horario1 == aux_horario2)
         {
             aux_fecha1 = aux_asistencia->CursosInscriptos[i].fechaInscripcion;
             aux_fecha2 = aux_asistencia->CursosInscriptos[i+1].fechaInscripcion;
             //borro el que tenga time_t mas reciente
-            ret = fechas(aux_fecha1,aux_fecha2);
+            ret = fechas(aux_fecha1,aux_fecha2); //ERROR invalid type argument of unary '*' (have 'time_t' {aka 'long long int'})
             if(ret == 1)
             {
                 //borro la clase de aux_id1
@@ -179,32 +179,29 @@ void doblehorario(Asistencia*& aux_asistencia, Cliente* ListaClases)
     }
     return;
 }
-int fechas(time_t* fecha1, time_t* fecha2)
+int fechas(time_t fecha1, time_t fecha2)
 {
-    if ((fecha1 != NULL && fecha2 != NULL) && fecha1->FechaCompleta() && fecha2->FechaCompleta())
+    if(fecha1 > fecha2)
     {
-        if(*fecha1 > *fecha2)
-        {
-            //la fecha1 es mas reciente que la fecha2
-            return 1;
-        }
-        else if(*fecha1 < *fecha2)
-        {
-            //la fecha2 es mas reciente que la fecha1
-            return 2;
-        }
-        else if( *fecha1 = *fecha2)
-        {
-            //son la misma fecha
-            return 3;
-        }
+        //la fecha1 es mas reciente que la fecha2
+        return 1;
+    }
+    else if(fecha1 < fecha2)
+    {
+        //la fecha2 es mas reciente que la fecha1
+        return 2;
+    }
+    else if(fecha1 == fecha2)
+    {
+        //son la misma fecha
+        return 3;
     }
     else return -1; //retorna -1 si las fechas estan incompletas o null
 }
 float Horario_clase (int aux_idClase, Clases* ListaClases)
 {
     int NcantClases = 60;
-    float horario;
+    float horario=0.0;
     for(int i=0; i<NcantClases; i++)
     {
         if(aux_idClase == ListaClases[i].idClase)
