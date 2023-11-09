@@ -98,7 +98,7 @@ eArchivo LeerClientes(ifstream& archivoClientes, Cliente* &ListaClientes,int &Nc
     }
     return ExitoArchivo;
 }
-eArchivo LeerAsistencia_hoy(ifstream& archivo_dia, Asistencia*& AsistenciaDia,int &Ninscripciones)
+/*eArchivo LeerAsistencia_hoy(ifstream& archivo_dia, Asistencia*& AsistenciaDia,int &Ninscripciones)
 {
     //si el archivo es distinto a open entonces retorno error
     if(!archivo_dia.is_open())
@@ -170,7 +170,6 @@ eArchivo CrearAsistencia_manana(string* Nombre_Archivo,Asistencia*& AsistenciaMa
     archivo_man.close();
     return ExitoArchivo;
 }
-
 //Funcion que genera datos random:
 Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
 {
@@ -178,14 +177,14 @@ Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
     Asistencia aux;
     aux.idCliente=ListaClientes[num_cliente].idCliente;
 
-    /*OPCION 1: cada ciente random (clientes que se quieren inscribir a clases nuevas) solo
+    OPCION 1: cada ciente random (clientes que se quieren inscribir a clases nuevas) solo
     puede inscribirse a 1 clase por vez
     aux.cantInscriptos=1;//VER PILI!
     int num_clase=rand()%(sizeof(ListaClase));//ESTA BIEN??
     aux.CursosInscriptos->idCurso=ListaClase[num_clase].idClase;
-    aux.CursosInscriptos->fechaInscripcion=time(0);*/
+    aux.CursosInscriptos->fechaInscripcion=time(0);
 
-    /*OPNCION 2:
+    OPNCION 2:
     aux.cantInscriptos= (rand()%5)+1;
     Inscripcion aux.CursosInscriptos= new Inscripcion [aux.cantInscriptos];
     //no se si esta bien pedir la memoria? o como hago?
@@ -196,10 +195,12 @@ Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
         aux.CursosInscriptos[i]->idCurso=ListaClase[num_clase].idClase;
         aux.CursosInscriptos[i].fechaInscripcion=time(0);
     }
-    */
+
+
 
     return aux;
 }
+*/
 
 //Funcion generica que imprime los datos de los clientes inscriptos en esa id de clase
 void ImprimirDatos(Asistencia* AsistenciaMan, int id_clase, int Ninscripciones)

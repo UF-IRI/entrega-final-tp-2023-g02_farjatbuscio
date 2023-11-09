@@ -88,7 +88,7 @@ void moveralfinal(Inscripcion* cursosInscriptos, int CantInscriptos, int pos)
 //Chequea que el cliente del archivo Asitencia_dia que voy a leer, no esté ya anotado en Asistencia_dia
 //Si retorno Error -> NO lo cargo directamente NADA
 //Si retorno Exito -> procedo a mirar si las siguientes condiciones se cumplen*/
-int dobleid_cliente(Asistencia* aux_asistencia, Asistencia* Asistencia_dia, int N)
+int dobleid_cliente(Asistencia aux_asistencia, Asistencia*& Asistencia_dia, int N)
 {
     if(N<=0)
     {
@@ -99,7 +99,7 @@ int dobleid_cliente(Asistencia* aux_asistencia, Asistencia* Asistencia_dia, int 
     for(int i=0; i<N; i++)
     {
         /*Reviso si el cliente q quiero cargar, ya existe en Asistencia_dia*/
-        if(aux_asistencia->idCliente==Asistencia_dia[i].idCliente)
+        if(aux_asistencia.idCliente==Asistencia_dia[i].idCliente)
         {
             //Si exite, retorno Error y no lo vuelvo a cargar
             return -1;
@@ -126,4 +126,91 @@ void dobleid_curso(Asistencia*& aux_asistencia)
             i=i-1;
         }
     }
+}
+
+void doblehorario(Asistencia*& aux_asistencia, Cliente* ListaClases)
+{
+    int N = aux_asistencia->cantInscriptos;
+    int aux_id1; //aca guardo el id
+    int aux_id2;
+
+    float aux_horario1;//guardo el horario de las clases
+    float aux_horario2;
+
+    time_t aux_fecha1;//guardo el horario en el q reservaron la clase
+    time_t aux_fecha2;
+    int ret=0;
+    if(aux_asistencia->cantInscriptos<=1)
+    {
+        return;
+    }
+    for(int i=0; int<N-1 ;i++)
+    {
+        aux_id1 = aux_asistencia->CursosInscriptos[i].idCurso;
+        aux_id2 = aux_asistencia->CursosInscriptos[i+1].idCurso;
+
+        aux_horario1 = Horario_clase(aux_id1,ListaClases); //lista clases lo pongo con & o *?
+        aux_horario2 = Horario_clase(aux_id2,ListaClases);
+
+        if(aux_horario1 == aux_horario2)
+        {
+            aux_fecha1 = aux_asistencia->CursosInscriptos[i].fechaInscripcion;
+            aux_fecha2 = aux_asistencia->CursosInscriptos[i+1].fechaInscripcion;
+            //borro el que tenga time_t mas reciente
+            ret = fechas(aux_fecha1,aux_fecha2);
+            if(ret == 1)
+            {
+                //borro la clase de aux_id1
+            }
+            else if(ret == 2)
+            {
+                //borro la clase de aux_id2
+            }
+            else if(ret == 3)
+            {
+                //borro cualquiera
+            }
+            else if (ret == -1)
+            {
+                return;
+            }
+
+        }
+    }
+    return;
+}
+int fechas(time_t* fecha1, time_t* fecha2)
+{
+    if ((fecha1 != NULL && fecha2 != NULL) && fecha1->FechaCompleta() && fecha2->FechaCompleta())
+    {
+        if(*fecha1 > *fecha2)
+        {
+            //la fecha1 es mas reciente que la fecha2
+            return 1;
+        }
+        else if(*fecha1 < *fecha2)
+        {
+            //la fecha2 es mas reciente que la fecha1
+            return 2;
+        }
+        else if( *fecha1 = *fecha2)
+        {
+            //son la misma fecha
+            return 3;
+        }
+    }
+    else return -1; //retorna -1 si las fechas estan incompletas o null
+}
+float Horario_clase (int aux_idClase, Clases* ListaClases)
+{
+    int NcantClases = 60;
+    float horario;
+    for(int i=0; i<NcantClases; i++)
+    {
+        if(aux_idClase == ListaClases[i].idClase)
+        {
+            horario=ListaClases[i].Horario;
+        }
+    }
+    return horario;
 }
