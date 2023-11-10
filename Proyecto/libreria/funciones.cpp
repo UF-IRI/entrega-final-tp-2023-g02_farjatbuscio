@@ -127,6 +127,38 @@ void dobleid_curso(Asistencia*& aux_asistencia)
         }
     }
 }
+int fechas(time_t fecha1, time_t fecha2)
+{
+    if(fecha1 > fecha2)
+    {
+        //la fecha1 es mas reciente que la fecha2
+        return 1;
+    }
+    else if(fecha1 < fecha2)
+    {
+        //la fecha2 es mas reciente que la fecha1
+        return 2;
+    }
+    else if(fecha1 == fecha2)
+    {
+        //son la misma fecha
+        return 3;
+    }
+    else return -1; //retorna -1 si las fechas estan incompletas o null
+}
+float horario_clase (int aux_idClase, Clases* ListaClases)
+{
+    int NcantClases = 60;
+    float horario=0.0;
+    for(int i=0; i<NcantClases; i++)
+    {
+        if(aux_idClase == ListaClases[i].idClase)
+        {
+            horario=ListaClases[i].Horario;
+        }
+    }
+    return horario;
+}
 
 void doblehorario(Asistencia*& aux_asistencia, Clases* ListaClases)
 {
@@ -149,65 +181,43 @@ void doblehorario(Asistencia*& aux_asistencia, Clases* ListaClases)
         aux_id1 = aux_asistencia->CursosInscriptos[i].idCurso;
         aux_id2 = aux_asistencia->CursosInscriptos[i+1].idCurso;
 
-        aux_horario1 = Horario_clase(aux_id1, ListaClases); //lista clases lo pongo con & o *?
-        aux_horario2 = Horario_clase(aux_id2, ListaClases);
+        aux_horario1 = horario_clase(aux_id1, ListaClases); //lista clases lo pongo con & o *?
+        aux_horario2 = horario_clase(aux_id2, ListaClases);
 
         if(aux_horario1 == aux_horario2)
         {
             aux_fecha1 = aux_asistencia->CursosInscriptos[i].fechaInscripcion;
             aux_fecha2 = aux_asistencia->CursosInscriptos[i+1].fechaInscripcion;
             //borro el que tenga time_t mas reciente
-            ret = fechas(aux_fecha1,aux_fecha2); //ERROR invalid type argument of unary '*' (have 'time_t' {aka 'long long int'})
+            ret = fechas(aux_fecha1,aux_fecha2);
             if(ret == 1)
             {
                 //borro la clase de aux_id1
+                moveralfinal(aux_asistencia->CursosInscriptos, N, i);//aux_asistencia->CursosInscriptos lo paso con puntero para que lo recorra???
+                achicartamInscrip(aux_asistencia->CursosInscriptos, N); //como paso la N si quiero que el valor quede cambiado?
+                aux_asistencia->cantInscriptos=aux_asistencia->cantInscriptos-1;
             }
             else if(ret == 2)
             {
                 //borro la clase de aux_id2
+                moveralfinal(aux_asistencia->CursosInscriptos, N, i+1);//aux_asistencia->CursosInscriptos lo paso con puntero para que lo recorra???
+                achicartamInscrip(aux_asistencia->CursosInscriptos, N); //como paso la N si quiero que el valor quede cambiado?
+                aux_asistencia->cantInscriptos=aux_asistencia->cantInscriptos-1;
             }
             else if(ret == 3)
             {
                 //borro cualquiera
+                moveralfinal(aux_asistencia->CursosInscriptos, N, i);//aux_asistencia->CursosInscriptos lo paso con puntero para que lo recorra???
+                achicartamInscrip(aux_asistencia->CursosInscriptos, N); //como paso la N si quiero que el valor quede cambiado?
+                aux_asistencia->cantInscriptos=aux_asistencia->cantInscriptos-1;
             }
             else if (ret == -1)
             {
                 return;
             }
-
+            N = aux_asistencia->cantInscriptos;
         }
     }
     return;
 }
-int fechas(time_t fecha1, time_t fecha2)
-{
-    if(fecha1 > fecha2)
-    {
-        //la fecha1 es mas reciente que la fecha2
-        return 1;
-    }
-    else if(fecha1 < fecha2)
-    {
-        //la fecha2 es mas reciente que la fecha1
-        return 2;
-    }
-    else if(fecha1 == fecha2)
-    {
-        //son la misma fecha
-        return 3;
-    }
-    else return -1; //retorna -1 si las fechas estan incompletas o null
-}
-float Horario_clase (int aux_idClase, Clases* ListaClases)
-{
-    int NcantClases = 60;
-    float horario=0.0;
-    for(int i=0; i<NcantClases; i++)
-    {
-        if(aux_idClase == ListaClases[i].idClase)
-        {
-            horario=ListaClases[i].Horario;
-        }
-    }
-    return horario;
-}
+

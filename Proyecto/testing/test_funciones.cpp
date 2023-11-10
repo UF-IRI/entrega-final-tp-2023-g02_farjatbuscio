@@ -53,6 +53,7 @@ TEST_CASE("DesplazarAlFinalElemento", "[fancy]")
     REQUIRE(cursosInscriptos[3].idCurso==2);
     delete[] cursosInscriptos;
 }
+
 TEST_CASE("NOdobleId_Cliente", "[fancy]")
 {
     int N=3;
@@ -116,5 +117,41 @@ TEST_CASE("NODobleIdCurso", "[fancy]")
 
     delete[] aux_asistencia->CursosInscriptos;
     delete[] aux_asistencia;
+}
+TEST_CASE("funcion fechas", "fancy")
+{
+    //deberia retornar un int dependiendo de cual fecha sea primera
+    time_t time1 = time(0); //primera
+    time_t time2 = time(0)-1; //segunda
+    time_t timerepitente = time(0);
+    int ret1;
+    ret1 = fechas(time1, time2);
+    REQUIRE(ret1 == 1);
+    int ret2;
+    ret2 = fechas(time1, timerepitente);
+    REQUIRE(ret2 == 3);
+}
+TEST_CASE("horarioClase", "fancy")
+{
+    //retorna el horario de la clases de la cual le pases el id_curso
+    float ret;
+    int aux_idclase=2;
+    Clases* ListaClases = new Clases [2];
+    ListaClases[0].Horario=9.5;
+    ListaClases[0].idClase=1;
+    ListaClases[0].NombreClase="Yoga";
+    ListaClases[1].Horario=5.5;
+    ListaClases[1].idClase=2;
+    ListaClases[1].NombreClase="Yoga";
+    ListaClases[2].Horario=10.0;
+    ListaClases[2].idClase=3;
+    ListaClases[2].NombreClase="Yoga";
+
+    ret = horario_clase(aux_idclase, ListaClases);
+    REQUIRE(ret == 5.5);
+}
+TEST_CASE("NODobleHorario", "fancy")
+{
+    //deberia eliminar de aux_asistencia la ultima clase a la que se inscribió si dos horarios se superponen
 }
 
