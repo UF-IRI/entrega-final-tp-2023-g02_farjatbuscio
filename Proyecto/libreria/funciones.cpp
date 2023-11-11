@@ -153,7 +153,7 @@ float horario_clase (int aux_idClase, Clases ListaClases, int NcantClases)
     {
         if(aux_idClase == ListaClases[i].idClase)
         {
-            horario=ListaClases[i].Horario;
+            horario = ListaClases[i].Horario;
         }
     }
     return horario;
@@ -180,8 +180,8 @@ void doblehorario(Asistencia*& aux_asistencia, Clases ListaClases, int NcantClas
         aux_id1 = aux_asistencia->CursosInscriptos[i].idCurso;
         aux_id2 = aux_asistencia->CursosInscriptos[i+1].idCurso;
 
-        aux_horario1 = horario_clase(aux_id1, ListaClases,NcantClases);
-        aux_horario2 = horario_clase(aux_id2, ListaClases,NcantClases);
+        aux_horario1 = horario_clase(aux_id1, ListaClases, NcantClases);
+        aux_horario2 = horario_clase(aux_id2, ListaClases, NcantClases);
 
         if(aux_horario1 == aux_horario2)
         {
