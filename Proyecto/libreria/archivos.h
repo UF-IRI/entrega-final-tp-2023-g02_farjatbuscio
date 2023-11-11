@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <string>
 #include "funciones.h"
 
 typedef enum { ErrArchivo = -1,  ExitoArchivo = 1 } eArchivo;

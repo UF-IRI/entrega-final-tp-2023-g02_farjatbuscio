@@ -9,7 +9,7 @@ TEST_CASE("leer archivo de clases", "[fancy]")
 {
     //abro archivo de clases
     ifstream archivoClase;
-    archivoClase.open("iriClasesGYM.csv");
+    archivoClase.open("/../iriClasesGYM.csv");
 
     int N=1;
 
@@ -54,7 +54,6 @@ TEST_CASE("leer archivo de inscripcion", "[fancy]")
 {
     //abro archivo de inscripcion
     ifstream archivoInscripcion;
-    //CUAL ES LA UBICACION?
     archivoInscripcion.open("asistencias_1697673600000.dat", ios::binary);
 
     int N=1;
@@ -65,8 +64,7 @@ TEST_CASE("leer archivo de inscripcion", "[fancy]")
 
     archivoInscripcion.close();
     delete[] AsistenciaDia;
-}
-/*
+}/*
 TEST_CASE("Funcion Random", "[fancy]")
 {
     //le paso algunos datos cargados de lista cliente y clases y me debe retornar algun valor random
@@ -86,4 +84,5 @@ TEST_CASE("Funcion Random", "[fancy]")
     Asistencia aux;
     aux=RandCliente(ListaClientes,ListaClase);
     REQUIRE(aux.idCliente==12);
-}*/
+}
+*/

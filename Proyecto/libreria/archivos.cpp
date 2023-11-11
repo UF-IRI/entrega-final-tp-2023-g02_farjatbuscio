@@ -5,11 +5,12 @@
 eArchivo LeerClases(ifstream& archivoClases, Clases* &ListaClases,int& Nclases)
 {
     //si el archivo es distinto a open entonces retorno error
-    if(!archivoClases.is_open())
+   /* if(!archivoClases.is_open())
     {
         return ErrArchivo;
     }
     //declaracion de variables:
+*/
 
     stringstream ss;
     string encabezado;
@@ -27,6 +28,7 @@ eArchivo LeerClases(ifstream& archivoClases, Clases* &ListaClases,int& Nclases)
     //mientras el archivo esté abierto
     while(archivoClases)
     {
+        ss.clear();
         getline(archivoClases,auxiliarlinea);//levanto toda la linea
         ss<<auxiliarlinea; //copio todo lo que tiene auxiliar en ss
         //delimitacion:
@@ -98,7 +100,7 @@ eArchivo LeerClientes(ifstream& archivoClientes, Cliente* &ListaClientes,int &Nc
     }
     return ExitoArchivo;
 }
-/*eArchivo LeerAsistencia_hoy(ifstream& archivo_dia, Asistencia*& AsistenciaDia,int &Ninscripciones)
+eArchivo LeerAsistencia_hoy(ifstream& archivo_dia, Asistencia*& AsistenciaDia,int &Ninscripciones)
 {
     //si el archivo es distinto a open entonces retorno error
     if(!archivo_dia.is_open())
@@ -108,13 +110,13 @@ eArchivo LeerClientes(ifstream& archivoClientes, Cliente* &ListaClientes,int &Nc
     int ret;
     Ninscripciones=0;
     //Creo aux para poder ir copiando:
-    Asistencia* aux=new Asistencia[1];
+    Asistencia aux;
     while(!archivo_dia.eof())
     {
-        archivo_dia.read((char*)&aux->idCliente,sizeof(int));
-        archivo_dia.read((char*)&aux->cantInscriptos, sizeof(int));
-        Inscripcion* aux_inscripcion=new Inscripcion[aux->cantInscriptos];
-        for(int i=0;i<aux->cantInscriptos;i++)
+        archivo_dia.read((char*)&aux.idCliente,sizeof(int));
+        archivo_dia.read((char*)&aux.cantInscriptos, sizeof(int));
+        Inscripcion* aux_inscripcion=new Inscripcion[aux.cantInscriptos];
+        for(int i=0;i<aux.cantInscriptos;i++)
         {
             archivo_dia.read((char*)aux_inscripcion,sizeof(Inscripcion));
         }
@@ -124,14 +126,14 @@ eArchivo LeerClientes(ifstream& archivoClientes, Cliente* &ListaClientes,int &Nc
             //llamar a la funcion 1 y 2
             //agrando el vector de asistencia dia y cargo aux a asistencia dia:
             agrandartamAsistencia(AsistenciaDia,Ninscripciones);
-            AsistenciaDia[Ninscripciones-1].idCliente=aux->idCliente;
-            AsistenciaDia[Ninscripciones-1].cantInscriptos=aux->cantInscriptos;
+            AsistenciaDia[Ninscripciones-1].idCliente=aux.idCliente;
+            AsistenciaDia[Ninscripciones-1].cantInscriptos=aux.cantInscriptos;
             //agrando el vector de inscripcion
-            for(int j=0; j<aux->cantInscriptos; j++)
+            for(int j=0; j<aux.cantInscriptos; j++)
             {
                 agrandartamInscrip(AsistenciaDia->CursosInscriptos,j);
             }
-            for(int k=0;k<aux->cantInscriptos;k++)
+            for(int k=0;k<aux.cantInscriptos;k++)
             {
                 AsistenciaDia[Ninscripciones-1].CursosInscriptos->idCurso=aux_inscripcion->idCurso;
                 AsistenciaDia[Ninscripciones-1].CursosInscriptos->fechaInscripcion=aux_inscripcion->fechaInscripcion;
@@ -144,13 +146,13 @@ eArchivo LeerClientes(ifstream& archivoClientes, Cliente* &ListaClientes,int &Nc
 }
 //lo comento porq me genera ERROR el nombre del archivo
 //Funcion que crea el archivo para mañana
-eArchivo CrearAsistencia_manana(string* Nombre_Archivo,Asistencia*& AsistenciaMan,int &Ninscripciones)
+eArchivo CrearAsistencia_manana(string& NombreArchivo,Asistencia*& AsistenciaMan,int &Ninscripciones)
 {
     //creo el archivo para modificacion:
     ofstream archivo_man;
     //Nombre_Archivo: contiene el nombre del archivo con time actual: "Asistencias"+ time()
     //"asistencias_1697673600000.dat"
-    archivo_man(Nombre_Archivo,ios::binary);
+    archivo_man.open(NombreArchivo,ios::binary);
     if(!archivo_man.is_open())
     {
         return ErrArchivo;
@@ -171,37 +173,25 @@ eArchivo CrearAsistencia_manana(string* Nombre_Archivo,Asistencia*& AsistenciaMa
     return ExitoArchivo;
 }
 //Funcion que genera datos random:
-Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
+/*Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
 {
     int num_cliente=rand()%(sizeof(ListaClientes));
     Asistencia aux;
     aux.idCliente=ListaClientes[num_cliente].idCliente;
 
-    OPCION 1: cada ciente random (clientes que se quieren inscribir a clases nuevas) solo
-    puede inscribirse a 1 clase por vez
-    aux.cantInscriptos=1;//VER PILI!
-    int num_clase=rand()%(sizeof(ListaClase));//ESTA BIEN??
-    aux.CursosInscriptos->idCurso=ListaClase[num_clase].idClase;
-    aux.CursosInscriptos->fechaInscripcion=time(0);
-
-    OPNCION 2:
     aux.cantInscriptos= (rand()%5)+1;
-    Inscripcion aux.CursosInscriptos= new Inscripcion [aux.cantInscriptos];
+    Inscripcion*  aux.CursosInscriptos= new Inscripcion [aux.cantInscriptos];
     //no se si esta bien pedir la memoria? o como hago?
     //si esta bien pedirla, donde la libero?
     for(int i=0; i< aux.cantInscriptos; i++)
     {
         int num_clase=rand()%(sizeof(ListaClase));
-        aux.CursosInscriptos[i]->idCurso=ListaClase[num_clase].idClase;
+        aux.CursosInscriptos[i].idCurso=ListaClase[num_clase].idClase;
         aux.CursosInscriptos[i].fechaInscripcion=time(0);
     }
-
-
-
     return aux;
 }
 */
-
 //Funcion generica que imprime los datos de los clientes inscriptos en esa id de clase
 void ImprimirDatos(Asistencia* AsistenciaMan, int id_clase, int Ninscripciones)
 {

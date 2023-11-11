@@ -69,7 +69,7 @@ int dobleid_cliente(Asistencia aux_asistencia, Asistencia*& Asistencia_dia, int 
 //Chequea que no se repita el mismo id_curso por cliente, no este anotado dos veces en la misma clase
 void dobleid_curso(Asistencia*& aux_asistencia);
 //le paso dos fechas y dependiendo cual es mas reciente, retorna un num distinto
-int fechas(time_t fecha1, time_t fecha2)
+int fechas(time_t fecha1, time_t fecha2);
 //Retorna el horario de la clase que le pases el id_curso
 float horario_clase (int aux_idClase, Clases* ListaClases);
 //Chequea que no se repita el mismo horario por cliente
