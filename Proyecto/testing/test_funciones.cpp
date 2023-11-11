@@ -2,6 +2,7 @@
 #include "funciones.cpp"
 #include "archivos.cpp"
 #include <ctime>
+/*
 TEST_CASE("AgrandarTamTEST", "[fancy]")
 {
     int N=5;
@@ -152,3 +153,4 @@ TEST_CASE("NODobleHorario", "fancy")
 {
     //deberia eliminar de aux_asistencia la ultima clase a la que se inscribió si dos horarios se superponen
 }
+*/

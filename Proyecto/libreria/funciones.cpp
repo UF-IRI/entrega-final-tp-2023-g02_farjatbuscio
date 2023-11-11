@@ -67,7 +67,7 @@ void achicartamInscrip(Inscripcion*& vector, int& N)
 }
 //desplazar un elemento al final y mover los elementos restantes una posición hacia arriba
 //para desp eliminarla con el resize
-void moveralfinal(Inscripcion* cursosInscriptos, int CantInscriptos, int pos)
+void moveralfinal(Inscripcion*& cursosInscriptos, int CantInscriptos, int pos)
 {
     if(pos>= CantInscriptos)
     {
@@ -146,9 +146,8 @@ int fechas(time_t fecha1, time_t fecha2)
     }
     else return -1; //retorna -1 si las fechas estan incompletas o null
 }
-float horario_clase (int aux_idClase, Clases* ListaClases)
+float horario_clase (int aux_idClase, Clases ListaClases, int NcantClases)
 {
-    int NcantClases = 60;
     float horario=0.0;
     for(int i=0; i<NcantClases; i++)
     {
@@ -160,7 +159,7 @@ float horario_clase (int aux_idClase, Clases* ListaClases)
     return horario;
 }
 
-void doblehorario(Asistencia*& aux_asistencia, Clases* ListaClases)
+void doblehorario(Asistencia*& aux_asistencia, Clases ListaClases, int NcantClases)
 {
     int N = aux_asistencia->cantInscriptos;
     int aux_id1; //aca guardo el id
@@ -181,8 +180,8 @@ void doblehorario(Asistencia*& aux_asistencia, Clases* ListaClases)
         aux_id1 = aux_asistencia->CursosInscriptos[i].idCurso;
         aux_id2 = aux_asistencia->CursosInscriptos[i+1].idCurso;
 
-        aux_horario1 = horario_clase(aux_id1, ListaClases); //lista clases lo pongo con & o *?
-        aux_horario2 = horario_clase(aux_id2, ListaClases);
+        aux_horario1 = horario_clase(aux_id1, ListaClases,NcantClases);
+        aux_horario2 = horario_clase(aux_id2, ListaClases,NcantClases);
 
         if(aux_horario1 == aux_horario2)
         {
