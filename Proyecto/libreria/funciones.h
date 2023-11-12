@@ -42,9 +42,8 @@ typedef struct {
 
 //estructura de cupos
 typedef struct {
-    int Nclases;
-    int IdClase;
-    int cupo;
+    string NombreClase;
+    int Ncupo;
 } CupoClases;
 
 //Enum para errores:
@@ -75,5 +74,6 @@ float horario_clase (int aux_idClase, Clases* ListaClases);
 //Chequea que no se repita el mismo horario por cliente
 void doblehorario(Asistencia*& aux_asistencia, Clases* ListaClases);
 
-
+//Funcion que cheque el cupo de la clase con su ID:
+int funcion_cupo(Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases,int Nclases, int id_clase, CupoClases* &ListaCupo, int Ncupos);
 #endif // FUNCIONES_H

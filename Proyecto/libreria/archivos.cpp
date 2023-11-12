@@ -5,12 +5,11 @@
 eArchivo LeerClases(ifstream& archivoClases, Clases* &ListaClases,int& Nclases)
 {
     //si el archivo es distinto a open entonces retorno error
-   /* if(!archivoClases.is_open())
+   if(!archivoClases.is_open())
     {
         return ErrArchivo;
     }
     //declaracion de variables:
-*/
 
     stringstream ss;
     string encabezado;
@@ -141,10 +140,11 @@ eArchivo LeerAsistencia_hoy(ifstream& archivo_dia, Asistencia*& AsistenciaDia,in
             //DONDE LIBERO MEMORIA?
         }
     }
+    delete[] aux_inscripcion;
 
     return ExitoArchivo;
 }
-//lo comento porq me genera ERROR el nombre del archivo
+
 //Funcion que crea el archivo para mañana
 eArchivo CrearAsistencia_manana(string& NombreArchivo,Asistencia*& AsistenciaMan,int &Ninscripciones)
 {
@@ -172,8 +172,9 @@ eArchivo CrearAsistencia_manana(string& NombreArchivo,Asistencia*& AsistenciaMan
     archivo_man.close();
     return ExitoArchivo;
 }
+
 //Funcion que genera datos random:
-/*Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
+Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
 {
     int num_cliente=rand()%(sizeof(ListaClientes));
     Asistencia aux;
@@ -191,7 +192,6 @@ eArchivo CrearAsistencia_manana(string& NombreArchivo,Asistencia*& AsistenciaMan
     }
     return aux;
 }
-*/
 //Funcion generica que imprime los datos de los clientes inscriptos en esa id de clase
 void ImprimirDatos(Asistencia* AsistenciaMan, int id_clase, int Ninscripciones)
 {

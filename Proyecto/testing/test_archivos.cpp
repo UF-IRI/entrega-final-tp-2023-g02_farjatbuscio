@@ -64,7 +64,7 @@ TEST_CASE("leer archivo de inscripcion", "[fancy]")
 
     archivoInscripcion.close();
     delete[] AsistenciaDia;
-}/*
+}
 TEST_CASE("Funcion Random", "[fancy]")
 {
     //le paso algunos datos cargados de lista cliente y clases y me debe retornar algun valor random
@@ -85,4 +85,15 @@ TEST_CASE("Funcion Random", "[fancy]")
     aux=RandCliente(ListaClientes,ListaClase);
     REQUIRE(aux.idCliente==12);
 }
-*/
+TEST_CASE("Funcion imprimir", "[fancy]")
+{
+    int N=3;
+    int id_clase=3;
+    Asistencia* AsistenciaMan=new Asistencia [N];
+    AsistenciaMan[0].idCliente=1;
+    AsistenciaMan[0].CursosInscriptos->idCurso=3;
+    AsistenciaMan[1].idCliente=2;
+    AsistenciaMan[1].CursosInscriptos->idCurso=3;
+    ImprimirDatos(AsistenciaMan,id_clase, N);
+    REQUIRE(N==3);
+}

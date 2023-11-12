@@ -27,3 +27,4 @@ Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase);
 
 //Funcion generica que imprima en pantalla:
 void ImprimirDatos(Asistencia* AsistenciaMan, int id_clase, int Ninscripciones);
+

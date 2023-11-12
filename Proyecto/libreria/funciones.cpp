@@ -1,5 +1,6 @@
 #include "funciones.h"
 //DESARROLLO FUNCIONES
+
 //funcion agrandar Clases (resize)
 void agrandartamClases(Clases*& vector, int& N)
 {
@@ -87,18 +88,17 @@ void moveralfinal(Inscripcion*& cursosInscriptos, int CantInscriptos, int pos)
 }
 //Chequea que el cliente del archivo Asitencia_dia que voy a leer, no esté ya anotado en Asistencia_dia
 //Si retorno Error -> NO lo cargo directamente NADA
-//Si retorno Exito -> procedo a mirar si las siguientes condiciones se cumplen*/
+//Si retorno Exito -> procedo a mirar si las siguientes condiciones se cumplen
 int dobleid_cliente(Asistencia aux_asistencia, Asistencia*& Asistencia_dia, int N)
 {
     if(N<=0)
     {
         return 1;
     }
-    /*recorro los clientes (del archivo) que ya tengo cargados en mi struct dinamica
-    (Asistencia_dia)*/
+    //recorro los clientes (del archivo) que ya tengo cargados en mi struct dinamica (Asistencia_dia)
     for(int i=0; i<N; i++)
     {
-        /*Reviso si el cliente q quiero cargar, ya existe en Asistencia_dia*/
+        //Reviso si el cliente q quiero cargar, ya existe en Asistencia_dia
         if(aux_asistencia.idCliente==Asistencia_dia[i].idCliente)
         {
             //Si exite, retorno Error y no lo vuelvo a cargar
@@ -220,3 +220,48 @@ void doblehorario(Asistencia*& aux_asistencia, Clases ListaClases, int NcantClas
     return;
 }
 
+
+int funcion_cupo(Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases,int Nclases, int id_clase, CupoClases* &ListaCupo, int Ncupos)
+{
+    int cont=0;
+    string auxNombreClase;
+    //si mi cantidad de inscriptos es ==0 entonces hay cupos para cualquier tipo de clase:
+    if(Ninscriptos==0)
+    {
+        return 1; //retorno 1 si hay cupos y -1 si no hay
+    }
+    //primero cuento cuantos inscriptos hay con este id de clase pasado:
+    for(int i=0;i<Ninscriptos;i++)
+    {
+        for(int k=0;k<AsistenciaMan[i].cantInscriptos;k++)
+        {
+            if(AsistenciaMan[i].CursosInscriptos[k].idCurso==id_clase)
+            {
+                cont++;
+            }
+        }
+    }
+    //me guardo en un auxiliar el nombre de la clase que coincide con ese ID
+    for(int j=0;j<Nclases;j++)
+    {
+        if(ListaClases[i].idClase==id_clase)
+        {
+            auxNombreClase=ListaClases[i].NombreClase;
+        }
+    }
+    //Ahora lo busco en la lista de cupos, y me fijo si mi contador es menor que esa cantidad
+    for(int i=0;i<Ncupos;i++)
+    {
+        if(ListaCupo[i].NombreClase==auxNombreClase)
+        {
+            if(cont<ListaCupo[i].Ncupo)
+            {
+                return 1;
+            }
+            else if(cont>ListaCupo[i].Ncupo)
+            {
+                return -1;
+            }
+        }
+    }
+}
