@@ -244,9 +244,9 @@ int funcion_cupo(Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases
     //me guardo en un auxiliar el nombre de la clase que coincide con ese ID
     for(int j=0;j<Nclases;j++)
     {
-        if(ListaClases[i].idClase==id_clase)
+        if(ListaClases[j].idClase==id_clase)
         {
-            auxNombreClase=ListaClases[i].NombreClase;
+            auxNombreClase=ListaClases[j].NombreClase;
         }
     }
     //Ahora lo busco en la lista de cupos, y me fijo si mi contador es menor que esa cantidad
