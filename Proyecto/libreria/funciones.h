@@ -72,7 +72,7 @@ int fechas(time_t fecha1, time_t fecha2);
 //Retorna el horario de la clase que le pases el id_curso
 float horario_clase (int aux_idClase, Clases*& ListaClases, int NcantClases);
 //Chequea que no se repita el mismo horario por cliente
-void doblehorario(Asistencia& aux_asistencia, Clases*& ListaClases, int NcantClases)
+void doblehorario(Asistencia& aux_asistencia, Clases*& ListaClases, int NcantClases);
 //Chequeo que el id_cliente exista en la lista de clientes del gym
 int id_clienteExistente(Cliente*& ListaClientes, int Nclientes, int id_cliente);
 //Chequeo que el cliente tenga la couta al dia

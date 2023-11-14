@@ -140,7 +140,6 @@ eArchivo LeerAsistencia_hoy(ifstream& archivo_dia, Asistencia*& AsistenciaDia,in
             //DONDE LIBERO MEMORIA?
         }
     }
-    delete[] aux_inscripcion;
 
     return ExitoArchivo;
 }
