@@ -26,7 +26,7 @@ typedef struct {
 //estructura de clases:
 typedef struct {
     int idClase;
-    str NombreClase;
+    string NombreClase;
     float Horario;
 } Clases;
 
