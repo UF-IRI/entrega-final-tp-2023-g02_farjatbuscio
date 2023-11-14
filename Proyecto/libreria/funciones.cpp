@@ -146,7 +146,8 @@ int fechas(time_t fecha1, time_t fecha2)
     }
     else return -1; //retorna -1 si las fechas estan incompletas o null
 }
-/*float horario_clase (int aux_idClase, Clases ListaClases, int NcantClases)
+
+float horario_clase (int aux_idClase, Clases*& ListaClases, int NcantClases)
 {
     float horario=0.0;
     for(int i=0; i<NcantClases; i++)
@@ -157,9 +158,9 @@ int fechas(time_t fecha1, time_t fecha2)
         }
     }
     return horario;
-}*/
+}
 
-void doblehorario(Asistencia*& aux_asistencia, Clases ListaClases, int NcantClases)
+void doblehorario(Asistencia*& aux_asistencia, Clases*& ListaClases, int NcantClases)
 {
     int N = aux_asistencia->cantInscriptos;
     int aux_id1; //aca guardo el id
@@ -219,7 +220,8 @@ void doblehorario(Asistencia*& aux_asistencia, Clases ListaClases, int NcantClas
     }
     return;
 }
-/*int id_clienteExistente(Cliente* ListaClientes, int Nclientes, int* id_cliente) //le paso el idclienteaux?
+
+int id_clienteExistente(Cliente*& ListaClientes, int Nclientes, int id_cliente)
 {
     int i;
     for(i=0; i<Nclientes; i++)
@@ -228,9 +230,9 @@ void doblehorario(Asistencia*& aux_asistencia, Clases ListaClases, int NcantClas
             return 1; //exito
     }
     return -1; //error ---> no encontró el idcliente
-}*/
+}
 
-/*int cuotapaga(Cliente* ListaClientes, int Nclientes, int* id_cliente) //le pongo * cuando? si lo quiero recorrer? le pongo *& si lo quiero cambiar? y sin nada?
+int cuotapaga(Cliente*& ListaClientes, int Nclientes, int id_cliente)
 {
     int i;
     for(i=0;i<Nclientes;i++)
@@ -238,30 +240,73 @@ void doblehorario(Asistencia*& aux_asistencia, Clases ListaClases, int NcantClas
         if(ListaClientes[i].idCliente == id_cliente)
         {
             if(ListaClientes[i].estado >= 0)
-                return 1; //exito ---> cuota al dia
-            else if(ListaClientes[i].estado < 0)
-                return -1; //error ---> debe cuotas
-        }
-    }
-}*/
-/*int dobleid_cursoLISTA(Asistencia*& aux_asistencia, Asistencia*& AsistenciaMan,int Ninscriptos)
-{
-    //edobleid_curso chequea que aux_asistencia no se quiera inscribir o tenga 2 veces el mismo id_curso
-    //dobleid_cursoLISTA chequea que: si aux_asistencia ya existe en la lista de AsistenciaMan, que no se este queriendo inscribir a una clase que ya esta
-    int N =aux_asistencia->cantInscriptos;
-    for(int i=0;i<Ninscriptos;i++)
-    {
-        if(aux_asistencia->idCliente==AsistenciaMan[i].idCliente)
-        {
-            for(int j=o; j<N; j++)
             {
-                if( TERMINAR
+                return 1; //exito ---> cuota al dia
+            }
+            else
+            {
+                return -1; //error ---> debe cuotas
             }
         }
     }
-}*/
+}
+void dobleid_cursoListaMan(Asistencia*& AsistenciaMan, int Ninscriptos, Asistencia*& aux_asistencia)
+{
+    for(int i=0; i<Ninscriptos; i++) //busco el cliente en la lista de manana
+    {
+        if(AsistenciaMan[i].idCliente==aux_asistencia->idCliente) //cuando lo encuentro
+        {
+            for(int j=0; j<AsistenciaMan[i].cantInscriptos; j++) //recorro las clases a las que ya esta inscripto
+            {
+                for(int k=0; k<aux_asistencia->cantInscriptos; k++) //recorro las clases que se quiere inscribir cliente
+                {
+                    if(aux_asistencia->CursosInscriptos[k].idCurso == AsistenciaMan[i].CursosInscriptos[j].idCurso)
+                    {
+                        //si la clase a la que se quiere inscribir es igual a alguna de las clases que ya se inscribio
+                        //la elimino
+                        moveralfinal(aux_asistencia->CursosInscriptos, aux_asistencia->cantInscriptos, k);
+                        achicartamInscrip(aux_asistencia->CursosInscriptos,aux_asistencia->cantInscriptos);
+                        aux_asistencia->cantInscriptos=(aux_asistencia->cantInscriptos)-1;
+                        k=k-1;
+                    }
+                }
+            }
+        }
+    }
+}
+void doblehorario_ListaMan(Asistencia*& aux_asistencia, Clases*& ListaClases, int NcantClases, Asistencia*& AsistenciaMan, int Ninscriptos)
+{
+    int idcurso_inscrip;
+    int idcurso_noinscrip;
+    float horario_inscrip;
+    float horario_noinscrip;
+    for(int i=0; i<Ninscriptos; i++) //busco el cliente en la lista de manana
+    {
+        if(AsistenciaMan[i].idCliente==aux_asistencia->idCliente) //cuando lo encuentro
+        {
+            for(int j=0; j<AsistenciaMan[i].cantInscriptos; j++) //recorro las clases a las que ya esta inscripto
+            {
+                for(int k=0; k<aux_asistencia->cantInscriptos; k++) //recorro las clases que se quiere inscribir cliente
+                {
+                    idcurso_inscrip = AsistenciaMan[i].CursosInscriptos[j].idCurso;
+                    idcurso_noinscrip = aux_asistencia->CursosInscriptos[k].idCurso;
+                    horario_inscrip = horario_clase(idcurso_inscrip, ListaClases, NcantClases);
+                    horario_noinscrip = horario_clase(idcurso_noinscrip, ListaClases, NcantClases);
+                    if(horario_inscrip == horario_noinscrip)
+                    {
+                        moveralfinal(aux_asistencia->CursosInscriptos, aux_asistencia->cantInscriptos, k);
+                        achicartamInscrip(aux_asistencia->CursosInscriptos,aux_asistencia->cantInscriptos);
+                        aux_asistencia->cantInscriptos=(aux_asistencia->cantInscriptos)-1;
+                        k=k-1;
+                    }
+                }
+            }
+        }
+    }
+}
 
-int funcion_cupo(Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases,int Nclases, int id_clase, CupoClases* &ListaCupo, int Ncupos)
+//CAMBIAR
+/*int funcion_cupo(Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases,int Nclases, int id_clase, CupoClases*& ListaCupo, int Ncupos)
 {
     int cont=0;
     string auxNombreClase;
@@ -304,4 +349,83 @@ int funcion_cupo(Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases
             }
         }
     }
+}*/
+
+eInscripManFinal inscripMan(Asistencia*& aux_asistencia, Asistencia*& AsistenciaMan, int Ninscriptos, Clases*& ListaClases,int Nclases, Cliente*& ListaClientes, int Nclientes, CupoClases*& ListaCupo, int Ncupos)
+{
+    //funcion que hace todos los chequeos para la inscripcion de un cliente p manana
+    //le paso el cliente q se quiere inscribir, la lista de asistMan, la lista de clases, la lista de clientes y la lista de cupos
+
+    //primero) me fijo si el cliente existe en la lista de clientes.
+    int ret1;
+    int id_cliente = aux_asistencia->idCliente;
+    ret1 = id_clienteExistente(ListaClientes, Nclientes, id_cliente);
+
+    if(ret1 == 1)
+    {
+      //el cliente existe en la lista de clientes del gym
+      //segundo) me fijo que el cliente tenga la couta al dia
+        int ret2;
+        ret2 = cuotapaga(ListaClientes,Nclientes,id_cliente);
+        if(ret2 == 1)
+        {
+            //el cliente tiene la cuota al dia
+            //tercero) me fijo si el cliente ya existe en la lista de asistenciaMan
+            for(int i=0; i<Ninscriptos; i++)
+            {
+               if(AsistenciaMan[i].idCliente == id_cliente && AsistenciaMan[i].cantInscriptos>0)
+                {
+                    //cuarto) borro clases a las que no podria inscribirse
+                    //el cliente ya existe en la lista de clientes, por ende ya se inscribio a algo p manana
+                    //me fijo si se esta queriendo inscribir 2 veces en la misma clase, le borro una
+                    dobleid_curso(aux_asistencia);
+                    //me fijo si se quiere inscribir en una clase que ya esta inscripto, se la borro
+                    dobleid_cursoListaMan(AsistenciaMan, Ninscriptos, aux_asistencia);
+                    //me fijo si se quiere inscribir a dos clases al mismo horario, le borro la ultima
+                    doblehorario(aux_asistencia, ListaClases, Nclases);
+                    //me fijo si se quiere inscribir en una clase al horario de una clase que ya este inscripto, se la borro
+                    doblehorario_ListaMan(aux_asistencia, ListaClases, Nclases, AsistenciaMan, Ninscriptos);
+
+                    //quinto) por ultimo me fijo que haya cupo en cada clase
+                    //llamo funcion cupo
+                    //puedo inscribir a aux_
+                    if(aux_asistencia->cantInscriptos>0)
+                    {
+                        return ExitoInscrip;//retorno exito, aux_asistencia se puede inscribir en AsistenciaMan con todas las modificaciones que le hicimos
+                        //podriamos aca imprimir en pantalla los datos que quedaron de aux_asistencia, para mostrarle al cliente
+                        //a que clases si se pudo inscribir y a cuales no, explicandole el motivo
+                    }
+                    else if(aux_asistencia->cantInscriptos <= 0)
+                    {
+                        return ErrNingunaClase; //retorno error porque no pudo inscribirse a ninguna clase ya que todas tenian errores
+                    }
+                }
+            }
+            //el cliente no existe en la lista de clientes, por ende todavia no se inscribio a nada p manana
+            //entonces solo chequeo:
+            //me fijo si se esta queriendo inscribir 2 veces en la misma clase, le borro una
+            dobleid_curso(aux_asistencia);
+            //me fijo si se quiere inscribir a dos clases al mismo horario, le borro la ultima
+            doblehorario(aux_asistencia, ListaClases, Nclases);
+            if(aux_asistencia->cantInscriptos>0)
+            {
+                return ExitoInscrip;//retorno exito, aux_asistencia se puede inscribir en AsistenciaMan con todas las modificaciones que le hicimos
+                //podriamos aca imprimir en pantalla los datos que quedaron de aux_asistencia, para mostrarle al cliente
+                //a que clases si se pudo inscribir y a cuales no, explicandole el motivo
+            }
+            else if(aux_asistencia->cantInscriptos <= 0)
+            {
+                return ErrNingunaClase; //retorno error porque no pudo inscribirse a ninguna clase ya que todas tenian errores
+            }
+        }
+        else if(ret2 == -1)
+        {
+            return ErrCouta; //el cliente debe cuotas al gimnasio
+        }
+    }
+    else if(ret1 == -1)
+    {
+        return ErrCliente; //el cliente no se encontro en la lista de clientes del gym
+    }
+    return ErrRandom; //hubo algun error durante la inscripcion y no se lo podria inscribir
 }
