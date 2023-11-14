@@ -89,7 +89,7 @@ void moveralfinal(Inscripcion*& cursosInscriptos, int CantInscriptos, int pos)
 //Chequea que el cliente del archivo Asitencia_dia que voy a leer, no esté ya anotado en Asistencia_dia
 //Si retorno Error -> NO lo cargo directamente NADA
 //Si retorno Exito -> procedo a mirar si las siguientes condiciones se cumplen
-int dobleid_cliente(Asistencia aux_asistencia, Asistencia*& Asistencia_dia, int N)
+int dobleid_cliente(Asistencia& aux_asistencia, Asistencia*& Asistencia_dia, int N)
 {
     if(N<=0)
     {
@@ -110,18 +110,18 @@ int dobleid_cliente(Asistencia aux_asistencia, Asistencia*& Asistencia_dia, int 
 //Chequea que el cliente que voy a inscribir no este anotado dos veces en la misma clase
 //si esta anotado dos veces, elimino una
 //sino no cambio nada
-void dobleid_curso(Asistencia*& aux_asistencia)
+void dobleid_curso(Asistencia& aux_asistencia)
 {
-    int N=aux_asistencia->cantInscriptos;
+    int N=aux_asistencia.cantInscriptos;
     for(int i=0; i<N; i++)
     {
         //verifico si hay dos id_cursos iguales
-        if(aux_asistencia->CursosInscriptos[i].idCurso==aux_asistencia->CursosInscriptos[i+1].idCurso)
+        if(aux_asistencia.CursosInscriptos[i].idCurso==aux_asistencia.CursosInscriptos[i+1].idCurso)
         {
             //elimino uno
-            moveralfinal(aux_asistencia->CursosInscriptos, aux_asistencia->cantInscriptos, i+1);
-            achicartamInscrip(aux_asistencia->CursosInscriptos, aux_asistencia->cantInscriptos);
-            aux_asistencia->cantInscriptos=(aux_asistencia->cantInscriptos-1);
+            moveralfinal(aux_asistencia.CursosInscriptos, aux_asistencia.cantInscriptos, i+1);
+            achicartamInscrip(aux_asistencia.CursosInscriptos, aux_asistencia.cantInscriptos);
+            aux_asistencia.cantInscriptos=(aux_asistencia.cantInscriptos)-1;
             N=N-1;
             i=i-1;
         }
@@ -160,9 +160,9 @@ float horario_clase (int aux_idClase, Clases*& ListaClases, int NcantClases)
     return horario;
 }
 
-void doblehorario(Asistencia*& aux_asistencia, Clases*& ListaClases, int NcantClases)
+void doblehorario(Asistencia& aux_asistencia, Clases*& ListaClases, int NcantClases)
 {
-    int N = aux_asistencia->cantInscriptos;
+    int N = aux_asistencia.cantInscriptos;
     int aux_id1; //aca guardo el id
     int aux_id2;
 
@@ -172,22 +172,22 @@ void doblehorario(Asistencia*& aux_asistencia, Clases*& ListaClases, int NcantCl
     time_t aux_fecha1;//guardo el horario en el q reservaron la clase
     time_t aux_fecha2;
     int ret=0;
-    if(aux_asistencia->cantInscriptos<=1)
+    if(aux_asistencia.cantInscriptos<=1)
     {
         return;
     }
     for(int i=0; i<N-1 ;i++)
     {
-        aux_id1 = aux_asistencia->CursosInscriptos[i].idCurso;
-        aux_id2 = aux_asistencia->CursosInscriptos[i+1].idCurso;
+        aux_id1 = aux_asistencia.CursosInscriptos[i].idCurso;
+        aux_id2 = aux_asistencia.CursosInscriptos[i+1].idCurso;
 
         aux_horario1 = horario_clase(aux_id1, ListaClases, NcantClases);
         aux_horario2 = horario_clase(aux_id2, ListaClases, NcantClases);
 
         if(aux_horario1 == aux_horario2)
         {
-            aux_fecha1 = aux_asistencia->CursosInscriptos[i].fechaInscripcion;
-            aux_fecha2 = aux_asistencia->CursosInscriptos[i+1].fechaInscripcion;
+            aux_fecha1 = aux_asistencia.CursosInscriptos[i].fechaInscripcion;
+            aux_fecha2 = aux_asistencia.CursosInscriptos[i+1].fechaInscripcion;
             //borro el que tenga time_t mas reciente
             ret = fechas(aux_fecha1,aux_fecha2);
             if(ret == 1)
@@ -250,7 +250,7 @@ int cuotapaga(Cliente*& ListaClientes, int Nclientes, int id_cliente)
         }
     }
 }
-void dobleid_cursoListaMan(Asistencia*& AsistenciaMan, int Ninscriptos, Asistencia*& aux_asistencia)
+void dobleid_cursoListaMan(Asistencia*& AsistenciaMan, int Ninscriptos, Asistencia& aux_asistencia)
 {
     for(int i=0; i<Ninscriptos; i++) //busco el cliente en la lista de manana
     {
@@ -274,7 +274,7 @@ void dobleid_cursoListaMan(Asistencia*& AsistenciaMan, int Ninscriptos, Asistenc
         }
     }
 }
-void doblehorario_ListaMan(Asistencia*& aux_asistencia, Clases*& ListaClases, int NcantClases, Asistencia*& AsistenciaMan, int Ninscriptos)
+void doblehorario_ListaMan(Asistencia& aux_asistencia, Clases*& ListaClases, int NcantClases, Asistencia*& AsistenciaMan, int Ninscriptos)
 {
     int idcurso_inscrip;
     int idcurso_noinscrip;
@@ -351,7 +351,7 @@ void doblehorario_ListaMan(Asistencia*& aux_asistencia, Clases*& ListaClases, in
     }
 }*/
 
-eInscripManFinal inscripMan(Asistencia*& aux_asistencia, Asistencia*& AsistenciaMan, int Ninscriptos, Clases*& ListaClases,int Nclases, Cliente*& ListaClientes, int Nclientes, CupoClases*& ListaCupo, int Ncupos)
+eInscripManFinal inscripMan(Asistencia& aux_asistencia, Asistencia*& AsistenciaMan, int Ninscriptos, Clases*& ListaClases,int Nclases, Cliente*& ListaClientes, int Nclientes, CupoClases*& ListaCupo, int Ncupos)
 {
     //funcion que hace todos los chequeos para la inscripcion de un cliente p manana
     //le paso el cliente q se quiere inscribir, la lista de asistMan, la lista de clases, la lista de clientes y la lista de cupos
@@ -388,7 +388,7 @@ eInscripManFinal inscripMan(Asistencia*& aux_asistencia, Asistencia*& Asistencia
 
                     //quinto) por ultimo me fijo que haya cupo en cada clase
                     //llamo funcion cupo
-                    //puedo inscribir a aux_
+                    //puedo inscribir a aux_asistencia
                     if(aux_asistencia->cantInscriptos>0)
                     {
                         return ExitoInscrip;//retorno exito, aux_asistencia se puede inscribir en AsistenciaMan con todas las modificaciones que le hicimos
