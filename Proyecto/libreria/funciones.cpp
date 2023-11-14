@@ -146,7 +146,7 @@ int fechas(time_t fecha1, time_t fecha2)
     }
     else return -1; //retorna -1 si las fechas estan incompletas o null
 }
-float horario_clase (int aux_idClase, Clases ListaClases, int NcantClases)
+/*float horario_clase (int aux_idClase, Clases ListaClases, int NcantClases)
 {
     float horario=0.0;
     for(int i=0; i<NcantClases; i++)
@@ -157,7 +157,7 @@ float horario_clase (int aux_idClase, Clases ListaClases, int NcantClases)
         }
     }
     return horario;
-}
+}*/
 
 void doblehorario(Asistencia*& aux_asistencia, Clases ListaClases, int NcantClases)
 {
@@ -219,7 +219,47 @@ void doblehorario(Asistencia*& aux_asistencia, Clases ListaClases, int NcantClas
     }
     return;
 }
+/*int id_clienteExistente(Cliente* ListaClientes, int Nclientes, int* id_cliente) //le paso el idclienteaux?
+{
+    int i;
+    for(i=0; i<Nclientes; i++)
+    {
+        if(ListaClientes[i].idCliente == id_cliente)
+            return 1; //exito
+    }
+    return -1; //error ---> no encontró el idcliente
+}*/
 
+/*int cuotapaga(Cliente* ListaClientes, int Nclientes, int* id_cliente) //le pongo * cuando? si lo quiero recorrer? le pongo *& si lo quiero cambiar? y sin nada?
+{
+    int i;
+    for(i=0;i<Nclientes;i++)
+    {
+        if(ListaClientes[i].idCliente == id_cliente)
+        {
+            if(ListaClientes[i].estado >= 0)
+                return 1; //exito ---> cuota al dia
+            else if(ListaClientes[i].estado < 0)
+                return -1; //error ---> debe cuotas
+        }
+    }
+}*/
+/*int dobleid_cursoLISTA(Asistencia*& aux_asistencia, Asistencia*& AsistenciaMan,int Ninscriptos)
+{
+    //edobleid_curso chequea que aux_asistencia no se quiera inscribir o tenga 2 veces el mismo id_curso
+    //dobleid_cursoLISTA chequea que: si aux_asistencia ya existe en la lista de AsistenciaMan, que no se este queriendo inscribir a una clase que ya esta
+    int N =aux_asistencia->cantInscriptos;
+    for(int i=0;i<Ninscriptos;i++)
+    {
+        if(aux_asistencia->idCliente==AsistenciaMan[i].idCliente)
+        {
+            for(int j=o; j<N; j++)
+            {
+                if( TERMINAR
+            }
+        }
+    }
+}*/
 
 int funcion_cupo(Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases,int Nclases, int id_clase, CupoClases* &ListaCupo, int Ncupos)
 {
