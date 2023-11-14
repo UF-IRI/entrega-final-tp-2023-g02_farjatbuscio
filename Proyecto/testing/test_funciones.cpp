@@ -130,7 +130,7 @@ TEST_CASE("funcion fechas", "fancy")
     ret2 = fechas(time1, timerepitente);
     REQUIRE(ret2 == 3);
 }
-/*TEST_CASE("horarioClase", "fancy")
+TEST_CASE("horarioClase", "fancy")
 {
     //retorna el horario de la clases de la cual le pases el id_curso
     float ret;
@@ -148,16 +148,32 @@ TEST_CASE("funcion fechas", "fancy")
 
     ret = horario_clase(aux_idclase, ListaClases);
     REQUIRE(ret == 5.5);
-}*/
+}
 TEST_CASE("NODobleHorario", "fancy")
 {
-    //deberia eliminar de aux_asistencia la ultima clase a la que se inscribió si dos horarios se superponen
+    //pili
 }
 TEST_CASE("id_clienteExistente", "fancy")
 {
-
+    //pili
 }
 TEST_CASE("cuotapaga", "fancy")
 {
-
+    //pili
+}
+TEST_CASE("dobleid_cursoListaMan", "fancy")
+{
+    //pili
+}
+TEST_CASE("doblehorario_ListaMan", "fancy")
+{
+    //pili
+}
+TEST_CASE("funcion_cupo", "fancy")
+{
+    //more
+}
+TEST_CASE("inscripMan", "fancy")
+{
+    //pili
 }
