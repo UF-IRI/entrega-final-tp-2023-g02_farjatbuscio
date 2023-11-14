@@ -82,7 +82,7 @@ void dobleid_cursoListaMan(Asistencia*& AsistenciaMan, int Ninscriptos, Asistenc
 //Chequeo que el cliente no se quiera inscribir en una clase al horario de una que ya este inscripto
 void doblehorario_ListaMan(Asistencia& aux_asistencia, Clases*& ListaClases, int NcantClases, Asistencia*& AsistenciaMan, int Ninscriptos);
 //Funcion que cheque el cupo de la clase con su ID //MORE
-int funcion_cupo(Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases,int Nclases, int id_clase, CupoClases*& ListaCupo, int Ncupos);
+void funcion_cupo(Asistencia& aux_asistencia, Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases,int Nclases, CupoClases*& ListaCupo, int Ncupos);
 //Funcion FINAL que chequea con tds las funciones de arriba si aux_asistencia se puede inscribir a AsistenciaMan
 eInscripManFinal inscripMan(Asistencia& aux_asistencia, Asistencia*& AsistenciaMan, int Ninscriptos, Clases*& ListaClases,int Nclases, Cliente*& ListaClientes, int Nclientes, CupoClases*& ListaCupo, int Ncupos);
 
