@@ -306,51 +306,66 @@ void doblehorario_ListaMan(Asistencia& aux_asistencia, Clases*& ListaClases, int
     }
 }
 
-//CAMBIAR
-/*int funcion_cupo(Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases,int Nclases, int id_clase, CupoClases*& ListaCupo, int Ncupos)
+void funcion_cupo(Asistencia& aux_asistencia, Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases,int Nclases, CupoClases*& ListaCupo, int Ncupos)
 {
     int cont=0;
     string auxNombreClase;
+    int auxIdCurso;
+    int aux2IdCurso;
     //si mi cantidad de inscriptos es ==0 entonces hay cupos para cualquier tipo de clase:
     if(Ninscriptos==0)
     {
-        return 1; //retorno 1 si hay cupos y -1 si no hay
+        return; //si nadie esta inscripto tdv, todos los cupos estan libres
     }
-    //primero cuento cuantos inscriptos hay con este id de clase pasado:
-    for(int i=0;i<Ninscriptos;i++)
+
+    for(int k=0; k<aux_asistencia.cantInscriptos; k++) //recorro las clases a las que el usuario se quiere inscribir
     {
-        for(int k=0;k<AsistenciaMan[i].cantInscriptos;k++)
+        auxIdCurso = aux_asistencia.CursosInscriptos[k].idCurso; //me guardo el id de la clase
+
+        for(int j=0; j<Nclases; j++) //recorro la lista de clases para guardarme el nombre de clase
         {
-            if(AsistenciaMan[i].CursosInscriptos[k].idCurso==id_clase)
+            if(ListaClases[j].idClase == auxIdCurso)
             {
-                cont++;
+                auxNombreClase = ListaClases[j].NombreClase; //me guarde el nombre de la clase
+            }
+        }
+        for(int i=0; i<Ninscriptos;i++)//recorro la lista de los ya inscriptos
+        {
+            for(int p=0; p<AsistenciaMan[i].cantInscriptos; p++)//recorro las clases del primer cliente
+            {
+                aux2IdCurso = AsistenciaMan[i].CursosInscriptos[p].idCurso;
+                for(int j=0; j<Nclases; j++) //recorro la lista de clases hasta encontrar la clase
+                {
+                    if(ListaClases[j].idClase == aux2IdCurso)
+                    {
+                        if( strcmp(auxNombreClase,ListaClases[j].NombreClase)==0)
+                        {
+                            cont++;
+                        }
+                    }
+                }
+            }
+        }
+        //Ahora lo busco en la lista de cupos, y me fijo si mi contador es menor que esa cantidad
+        for(int i=0; i<Ncupos; i++)
+        {
+            if(ListaCupo[i].NombreClase==auxNombreClase)
+            {
+                if(ListaCupo[i].Ncupo<cont)
+                {
+                    //no se puede inscribir a la clase
+                    //la mando al final
+                    moveralfinal(aux_asistencia.CursosInscriptos, aux_asistencia.cantInscriptos, k);
+                    //la borro
+                    achicartamInscrip(aux_asistencia.CursosInscriptos, aux_asistencia.cantInscriptos);
+                    aux_asistencia.cantInscriptos=(aux_asistencia.cantInscriptos)-1;
+                    k=k-1;
+                }
+                //si se puede inscribir a esta clase
             }
         }
     }
-    //me guardo en un auxiliar el nombre de la clase que coincide con ese ID
-    for(int j=0;j<Nclases;j++)
-    {
-        if(ListaClases[j].idClase==id_clase)
-        {
-            auxNombreClase=ListaClases[j].NombreClase;
-        }
-    }
-    //Ahora lo busco en la lista de cupos, y me fijo si mi contador es menor que esa cantidad
-    for(int i=0;i<Ncupos;i++)
-    {
-        if(ListaCupo[i].NombreClase==auxNombreClase)
-        {
-            if(cont<ListaCupo[i].Ncupo)
-            {
-                return 1;
-            }
-            else if(cont>ListaCupo[i].Ncupo)
-            {
-                return -1;
-            }
-        }
-    }
-}*/
+}
 
 eInscripManFinal inscripMan(Asistencia& aux_asistencia, Asistencia*& AsistenciaMan, int Ninscriptos, Clases*& ListaClases,int Nclases, Cliente*& ListaClientes, int Nclientes, CupoClases*& ListaCupo, int Ncupos)
 {
