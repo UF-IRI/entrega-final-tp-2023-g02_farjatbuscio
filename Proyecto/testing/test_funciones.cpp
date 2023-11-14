@@ -98,7 +98,7 @@ TEST_CASE("NODobleIdCurso", "[fancy]")
     Asistencia* aux_asistencia = new Asistencia[1];
     aux_asistencia->idCliente=1;
     aux_asistencia->cantInscriptos=4;
-    aux_asistencia->CursosInscriptos = new Inscripcion[N]; // Asignar memoria para CursosInscriptos
+    Inscripcion aux_asistencia->CursosInscriptos = new Inscripcion[N]; // Asignar memoria para CursosInscriptos
     aux_asistencia->CursosInscriptos[0].idCurso=2020;
     aux_asistencia->CursosInscriptos[0].fechaInscripcion=time(0);
     aux_asistencia->CursosInscriptos[1].idCurso=2020;
@@ -135,7 +135,8 @@ TEST_CASE("horarioClase", "fancy")
     //retorna el horario de la clases de la cual le pases el id_curso
     float ret;
     int aux_idclase=2;
-    Clases* ListaClases = new Clases [2];
+    int N=2;
+    Clases* ListaClases = new Clases [N];
     ListaClases[0].Horario=9.5;
     ListaClases[0].idClase=1;
     ListaClases[0].NombreClase="Yoga";
@@ -146,13 +147,50 @@ TEST_CASE("horarioClase", "fancy")
     ListaClases[2].idClase=3;
     ListaClases[2].NombreClase="Yoga";
 
-    ret = horario_clase(aux_idclase, ListaClases);
+    ret = horario_clase(aux_idclase, ListaClases,N);
     REQUIRE(ret == 5.5);
+    delete ListaClases;
 }
-TEST_CASE("NODobleHorario", "fancy")
+/*TEST_CASE("NODobleHorario", "fancy")
 {
-    //pili
-}
+    int NcantClases = 3;
+    Asistencia* aux_asistencia = new Asistencia[];
+    Inscripcion aux_asistencia->CursosInscriptos = new Inscripcion[NcantClases];
+    aux_asistencia->idCliente=1;
+    aux_asistencia->CursosInscriptos=NcantClases;
+    aux_asistencia->CursosInscriptos[0].idCurso=1;
+    aux_asistencia->CursosInscriptos[0].fechaInscripcion = time(0);
+    aux_asistencia->CursosInscriptos[1].idCurso=2;
+    aux_asistencia->CursosInscriptos[1].fechaInscripcion = time(0);
+    aux_asistencia->CursosInscriptos[2].idCurso=3;
+    aux_asistencia->CursosInscriptos[2].fechaInscripcion = (time(0))+1;
+    aux_asistencia->CursosInscriptos[3].idCurso=2;
+    aux_asistencia->CursosInscriptos[3].fechaInscripcion = (time(0))+1;
+
+    Clases* ListaClases = new Clases[5];
+    ListaClases[0].idClase=1;
+    ListaClases[0].Horario=7;
+    ListaClases[0].NombreClase= "Yoga";
+    ListaClases[1].idClase=2;
+    ListaClases[1].Horario=5;
+    ListaClases[1].NombreClase= "Yoga";
+    ListaClases[2].idClase=3;
+    ListaClases[2].Horario=7;
+    ListaClases[2].NombreClase= "Yoga";
+    ListaClases[3].idClase=4;
+    ListaClases[3].Horario=8;
+    ListaClases[3].NombreClase= "Yoga";
+    ListaClases[4].idClase=5;
+    ListaClases[4].Horario=9;
+    ListaClases[4].NombreClase= "Yoga";
+    ListaClases[5].idClase=6;
+    ListaClases[5].Horario=1;
+    ListaClases[5].NombreClase= "Yoga";
+
+TERMINAR!!
+
+    //Clases ListaClases
+}*/
 TEST_CASE("id_clienteExistente", "fancy")
 {
     //pili
