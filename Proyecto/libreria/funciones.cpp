@@ -338,7 +338,7 @@ void doblehorario_ListaMan(Asistencia& aux_asistencia, Clases*& ListaClases, int
                 {
                     if(ListaClases[j].idClase == aux2IdCurso)
                     {
-                        if( strcmp(auxNombreClase,ListaClases[j].NombreClase)==0)
+                        if((auxNombreClase.compare(ListaClases[j].NombreClase))==0)
                         {
                             cont++;
                         }
@@ -404,7 +404,7 @@ eInscripManFinal inscripMan(Asistencia& aux_asistencia, Asistencia*& AsistenciaM
                     doblehorario_ListaMan(aux_asistencia, ListaClases, Nclases, AsistenciaMan, Ninscriptos);
 
                     //quinto) por ultimo me fijo que haya cupo en cada clase
-                    //llamo funcion cupo
+                    funcion_cupo(aux_asistencia, AsistenciaMan, Ninscriptos, ListaClases, Nclases, ListaCupo, Ncupos);
                     //puedo inscribir a aux_asistencia
                     if(aux_asistencia.cantInscriptos>0)
                     {
@@ -424,6 +424,7 @@ eInscripManFinal inscripMan(Asistencia& aux_asistencia, Asistencia*& AsistenciaM
             dobleid_curso(aux_asistencia);
             //me fijo si se quiere inscribir a dos clases al mismo horario, le borro la ultima
             doblehorario(aux_asistencia, ListaClases, Nclases);
+            funcion_cupo(aux_asistencia, AsistenciaMan, Ninscriptos, ListaClases, Nclases, ListaCupo, Ncupos);
             if(aux_asistencia.cantInscriptos>0)
             {
                 return ExitoInscrip;//retorno exito, aux_asistencia se puede inscribir en AsistenciaMan con todas las modificaciones que le hicimos

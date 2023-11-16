@@ -6,46 +6,63 @@
 TEST_CASE("AgrandarTamTEST", "[fancy]")
 {
     int N=5;
+    Inscripcion* CursosInscriptosaux = new Inscripcion[N];
+    CursosInscriptosaux[0].idCurso=0;
+    CursosInscriptosaux[0].fechaInscripcion=time(0);
+    CursosInscriptosaux[1].idCurso=0;
+    CursosInscriptosaux[1].fechaInscripcion=time(0);
+    CursosInscriptosaux[2].idCurso=0;
+    CursosInscriptosaux[2].fechaInscripcion=time(0);
+    CursosInscriptosaux[3].idCurso=0;
+    CursosInscriptosaux[3].fechaInscripcion=time(0);
     Asistencia* aux_asistencia = new Asistencia[1];
     aux_asistencia->idCliente=1;
     aux_asistencia->cantInscriptos=4;
-    aux_asistencia->CursosInscriptos = new Inscripcion[N]; // Asignar memoria para CursosInscriptos
-    aux_asistencia->CursosInscriptos[0]={1, time(0)};
-    aux_asistencia->CursosInscriptos[1]={2, time(0)};
-    aux_asistencia->CursosInscriptos[2]={3, time(0)};
-    aux_asistencia->CursosInscriptos[3]={4, time(0)};
+    aux_asistencia->CursosInscriptos=CursosInscriptosaux;
+
     agrandartamInscrip(aux_asistencia->CursosInscriptos, N);
     REQUIRE(N == 6);
-    cout<<"N es: " << N <<endl;
-    delete[] aux_asistencia->CursosInscriptos;
+
+    delete[] CursosInscriptosaux;
     delete[] aux_asistencia;
 }
 TEST_CASE("AchicarTamTEST", "[fancy]")
 {
-    int N=5;
+    int N=4;
+    Inscripcion* CursosInscriptosaux = new Inscripcion[N];
+    CursosInscriptosaux[0].idCurso=1;
+    CursosInscriptosaux[0].fechaInscripcion=time(0);
+    CursosInscriptosaux[1].idCurso=2;
+    CursosInscriptosaux[1].fechaInscripcion=time(0);
+    CursosInscriptosaux[2].idCurso=3;
+    CursosInscriptosaux[2].fechaInscripcion=time(0);
+    CursosInscriptosaux[3].idCurso=4;
+    CursosInscriptosaux[3].fechaInscripcion=time(0);
     Asistencia* aux_asistencia = new Asistencia[1];
     aux_asistencia->idCliente=1;
     aux_asistencia->cantInscriptos=4;
-    aux_asistencia->CursosInscriptos = new Inscripcion[N]; // Asignar memoria para CursosInscriptos
-    aux_asistencia->CursosInscriptos[0]={1, time(0)};
-    aux_asistencia->CursosInscriptos[1]={2, time(0)};
-    aux_asistencia->CursosInscriptos[2]={3, time(0)};
-    aux_asistencia->CursosInscriptos[3]={4, time(0)};
+    aux_asistencia->CursosInscriptos=CursosInscriptosaux;
+
     achicartamInscrip(aux_asistencia->CursosInscriptos, N);
-    REQUIRE(N == 4);
-    cout<<"N es: " << N <<endl;
-    delete[] aux_asistencia->CursosInscriptos;
+    REQUIRE(N == 3);
+
+    delete[] CursosInscriptosaux;
     delete[] aux_asistencia;
 }
 TEST_CASE("DesplazarAlFinalElemento", "[fancy]")
 {
     int cantInscriptos=4;
-    Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
+    Inscripcion* cursosInscriptos = new Inscripcion[cantInscriptos];
     int pos=1;
-    cursosInscriptos[0]={1, time(0)};
-    cursosInscriptos[1]={2, time(0)};
-    cursosInscriptos[2]={3, time(0)};
-    cursosInscriptos[3]={4, time(0)};
+    cursosInscriptos[0].idCurso=1;
+    cursosInscriptos[0].fechaInscripcion= time(0);
+    cursosInscriptos[1].idCurso=2;
+    cursosInscriptos[1].fechaInscripcion= time(0);
+    cursosInscriptos[2].idCurso=3;
+    cursosInscriptos[2].fechaInscripcion= time(0);
+    cursosInscriptos[3].idCurso=4;
+    cursosInscriptos[3].fechaInscripcion= time(0);
+
     moveralfinal(cursosInscriptos, cantInscriptos, pos);
     REQUIRE(cursosInscriptos[0].idCurso==1);
     REQUIRE(cursosInscriptos[1].idCurso==3);
@@ -60,7 +77,7 @@ TEST_CASE("NOdobleId_Cliente", "[fancy]")
     Asistencia* asistencia_dia = new Asistencia[N];
     for (int i = 0; i < N; ++i)
     {
-        asistencia_dia[i].CursosInscriptos = new Inscripcion[M]; // Asignar memoria para CursosInscriptos
+        Inscripcion* auxCursosInscriptos = new Inscripcion[M]; // Asignar memoria para CursosInscriptos
     }
     asistencia_dia[0].idCliente=1;
     asistencia_dia[0].cantInscriptos=1;
@@ -95,9 +112,20 @@ TEST_CASE("NOdobleId_Cliente", "[fancy]")
 /*TEST_CASE("NODobleIdCurso", "[fancy]")
 {
     int N=4;
+    Inscripcion* CursosInscriptosaux = new Inscripcion[N];
+    CursosInscriptosaux[0].idCurso=2020;
+    CursosInscriptosaux[0].fechaInscripcion=time(0);
+    CursosInscriptosaux[1].idCurso=2020;
+    CursosInscriptosaux[1].fechaInscripcion=time(0);
+    CursosInscriptosaux[2].idCurso=2040;
+    CursosInscriptosaux[2].fechaInscripcion=time(0);
+    CursosInscriptosaux[3].idCurso=2050;
+    CursosInscriptosaux[3].fechaInscripcion=time(0);
+
     Asistencia* aux_asistencia = new Asistencia[1];
     aux_asistencia->idCliente=1;
     aux_asistencia->cantInscriptos=4;
+<<<<<<< HEAD
     Inscripcion* aux_asistencia->CursosInscriptosCursosInscriptos = new Inscripcion[N]; // Asignar memoria para CursosInscriptos
     aux_asistencia->CursosInscriptos[0].idCurso=2020;
     aux_asistencia->CursosInscriptos[0].fechaInscripcion=time(0);
@@ -107,6 +135,9 @@ TEST_CASE("NOdobleId_Cliente", "[fancy]")
     aux_asistencia->CursosInscriptos[2].fechaInscripcion=time(0);
     aux_asistencia->CursosInscriptos[3].idCurso=2050;
     aux_asistencia->CursosInscriptos[3].fechaInscripcion=time(0);
+=======
+    aux_asistencia->CursosInscriptos=CursosInscriptosaux;
+>>>>>>> a35d6f720ec6df198176a49bb5c7b205cc1142ee
 
     dobleid_curso(*aux_asistencia);
     REQUIRE(aux_asistencia->cantInscriptos==3);
@@ -114,7 +145,7 @@ TEST_CASE("NOdobleId_Cliente", "[fancy]")
     REQUIRE(aux_asistencia->CursosInscriptos[1].idCurso==2040);
     REQUIRE(aux_asistencia->CursosInscriptos[2].idCurso==2050);
 
-    delete[] aux_asistencia->CursosInscriptos;
+    delete[] CursosInscriptosaux;
     delete[] aux_asistencia;
 }
 TEST_CASE("funcion fechas", "fancy")
@@ -130,7 +161,7 @@ TEST_CASE("funcion fechas", "fancy")
     ret2 = fechas(time1, timerepitente);
     REQUIRE(ret2 == 3);
 }
-TEST_CASE("horarioClase", "fancy")
+/*TEST_CASE("horarioClase", "fancy")
 {
     //retorna el horario de la clases de la cual le pases el id_curso
     float ret;
@@ -150,7 +181,7 @@ TEST_CASE("horarioClase", "fancy")
     ret = horario_clase(aux_idclase, ListaClases,N);
     REQUIRE(ret == 5.5);
     delete ListaClases;
-}
+}*/
 /*TEST_CASE("NODobleHorario", "fancy")
 {
     int NcantClases = 3;

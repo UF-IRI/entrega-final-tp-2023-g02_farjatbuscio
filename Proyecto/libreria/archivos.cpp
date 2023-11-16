@@ -179,16 +179,22 @@ eArchivo CrearAsistencia_manana(string& NombreArchivo,Asistencia*& AsistenciaMan
     Asistencia aux;
     aux.idCliente=ListaClientes[num_cliente].idCliente;
 
+<<<<<<< HEAD
     aux.cantInscriptos = (rand()%5)+1;
     Inscripcion* aux.CursosInscriptos= new Inscripcion[aux.cantInscriptos];
     //no se si esta bien pedir la memoria? o como hago?
     //si esta bien pedirla, donde la libero?
+=======
+    aux.cantInscriptos= (rand()%5)+1;
+    aux.CursosInscriptos = new Inscripcion [aux.cantInscriptos];
+>>>>>>> a35d6f720ec6df198176a49bb5c7b205cc1142ee
     for(int i=0; i< aux.cantInscriptos; i++)
     {
         int num_clase=rand()%(sizeof(ListaClase));
         aux.CursosInscriptos[i].idCurso=ListaClase[num_clase].idClase;
         aux.CursosInscriptos[i].fechaInscripcion=time(0);
     }
+    //liberar memoria
     return aux;
 }
 //Funcion generica que imprime los datos de los clientes inscriptos en esa id de clase
