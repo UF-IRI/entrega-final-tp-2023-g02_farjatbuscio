@@ -15,7 +15,7 @@ TEST_CASE("AgrandarTamTEST", "[fancy]")
     CursosInscriptosaux[2].fechaInscripcion=time(0);
     CursosInscriptosaux[3].idCurso=0;
     CursosInscriptosaux[3].fechaInscripcion=time(0);
-    Asistencia* aux_asistencia = new Asistencia[1];
+    Asistencia* aux_asistencia = new Asistencia;
     aux_asistencia->idCliente=1;
     aux_asistencia->cantInscriptos=4;
     aux_asistencia->CursosInscriptos=CursosInscriptosaux;
@@ -70,179 +70,69 @@ TEST_CASE("DesplazarAlFinalElemento", "[fancy]")
     REQUIRE(cursosInscriptos[3].idCurso==2);
     delete[] cursosInscriptos;
 }
-TEST_CASE("NOdobleId_Cliente", "[fancy]")
+TEST_CASE("Test2dobleId_Cliente", "[fancy]")
 {
+    int ret;
+
+    Inscripcion* aux_inscripcion = new Inscripcion;
+    aux_inscripcion->idCurso=1;
+    aux_inscripcion->fechaInscripcion = time(0);
+
+    Asistencia* aux_asistencia = new Asistencia;
+    aux_asistencia->idCliente=1;
+    aux_asistencia->cantInscriptos=1;
+    aux_asistencia->CursosInscriptos = aux_inscripcion;
+
     int N=3;
-    int M=1;
     Asistencia* asistencia_dia = new Asistencia[N];
-    for (int i = 0; i < N; ++i)
-    {
-        Inscripcion* auxCursosInscriptos = new Inscripcion[M]; // Asignar memoria para CursosInscriptos
-    }
-    asistencia_dia[0].idCliente=1;
+    asistencia_dia[0].idCliente=2;
     asistencia_dia[0].cantInscriptos=1;
-    asistencia_dia[0].CursosInscriptos[0].idCurso=1;
-    asistencia_dia[0].CursosInscriptos[0].fechaInscripcion=time(0);
-    asistencia_dia[1].idCliente=2;
+    asistencia_dia[0].CursosInscriptos=aux_inscripcion;
+    asistencia_dia[1].idCliente=3;
     asistencia_dia[1].cantInscriptos=1;
-    asistencia_dia[1].CursosInscriptos[0].idCurso=2;
-    asistencia_dia[1].CursosInscriptos[0].fechaInscripcion=time(0);
-    asistencia_dia[2].idCliente=3;
+    asistencia_dia[1].CursosInscriptos=aux_inscripcion;
+    asistencia_dia[2].idCliente=1;
     asistencia_dia[2].cantInscriptos=1;
-    asistencia_dia[2].CursosInscriptos[0].idCurso=3;
-    asistencia_dia[2].CursosInscriptos[0].fechaInscripcion=time(0);
+    asistencia_dia[2].CursosInscriptos=aux_inscripcion;
+    asistencia_dia[3].idCliente=4;
+    asistencia_dia[3].cantInscriptos=1;
+    asistencia_dia[3].CursosInscriptos=aux_inscripcion;
 
-    Asistencia aux_asistencia;
-    aux_asistencia.idCliente=2;
-    aux_asistencia.cantInscriptos=1;
-    aux_asistencia.CursosInscriptos->idCurso=2;
-    aux_asistencia.CursosInscriptos->fechaInscripcion=time(0);
-
-    int ret=0;
-    ret=dobleid_cliente(aux_asistencia,asistencia_dia,N);
-
-    REQUIRE(ret==-1);
-    //libero memoria:
-    for (int i = 0; i < N; ++i)
-    {
-        delete[] asistencia_dia[i].CursosInscriptos; // Liberar memoria para cada CursosInscriptos
-    }
+    ret = dobleid_cliente(aux_asistencia, asistencia_dia, N);
+    REQUIRE(ret == -1);
+    delete[] aux_inscripcion;
     delete[] asistencia_dia;
 }
-/*TEST_CASE("NODobleIdCurso", "[fancy]")
+TEST_CASE("Test1dobleId_Cliente", "[fancy]")
 {
-    int N=4;
-    Inscripcion* CursosInscriptosaux = new Inscripcion[N];
-    CursosInscriptosaux[0].idCurso=2020;
-    CursosInscriptosaux[0].fechaInscripcion=time(0);
-    CursosInscriptosaux[1].idCurso=2020;
-    CursosInscriptosaux[1].fechaInscripcion=time(0);
-    CursosInscriptosaux[2].idCurso=2040;
-    CursosInscriptosaux[2].fechaInscripcion=time(0);
-    CursosInscriptosaux[3].idCurso=2050;
-    CursosInscriptosaux[3].fechaInscripcion=time(0);
+    int ret;
 
-    Asistencia* aux_asistencia = new Asistencia[1];
+    Inscripcion* aux_inscripcion = new Inscripcion;
+    aux_inscripcion->idCurso=1;
+    aux_inscripcion->fechaInscripcion = time(0);
+
+    Asistencia* aux_asistencia = new Asistencia;
     aux_asistencia->idCliente=1;
-    aux_asistencia->cantInscriptos=4;
-<<<<<<< HEAD
-    Inscripcion* aux_asistencia->CursosInscriptosCursosInscriptos = new Inscripcion[N]; // Asignar memoria para CursosInscriptos
-    aux_asistencia->CursosInscriptos[0].idCurso=2020;
-    aux_asistencia->CursosInscriptos[0].fechaInscripcion=time(0);
-    aux_asistencia->CursosInscriptos[1].idCurso=2020;
-    aux_asistencia->CursosInscriptos[1].fechaInscripcion=time(0);
-    aux_asistencia->CursosInscriptos[2].idCurso=2040;
-    aux_asistencia->CursosInscriptos[2].fechaInscripcion=time(0);
-    aux_asistencia->CursosInscriptos[3].idCurso=2050;
-    aux_asistencia->CursosInscriptos[3].fechaInscripcion=time(0);
-=======
-    aux_asistencia->CursosInscriptos=CursosInscriptosaux;
->>>>>>> a35d6f720ec6df198176a49bb5c7b205cc1142ee
+    aux_asistencia->cantInscriptos=1;
+    aux_asistencia->CursosInscriptos = aux_inscripcion;
 
-    dobleid_curso(*aux_asistencia);
-    REQUIRE(aux_asistencia->cantInscriptos==3);
-    REQUIRE(aux_asistencia->CursosInscriptos[0].idCurso==2020);
-    REQUIRE(aux_asistencia->CursosInscriptos[1].idCurso==2040);
-    REQUIRE(aux_asistencia->CursosInscriptos[2].idCurso==2050);
+    int N=3;
+    Asistencia* asistencia_dia = new Asistencia[N];
+    asistencia_dia[0].idCliente=2;
+    asistencia_dia[0].cantInscriptos=1;
+    asistencia_dia[0].CursosInscriptos=aux_inscripcion;
+    asistencia_dia[1].idCliente=3;
+    asistencia_dia[1].cantInscriptos=1;
+    asistencia_dia[1].CursosInscriptos=aux_inscripcion;
+    asistencia_dia[2].idCliente=5;
+    asistencia_dia[2].cantInscriptos=1;
+    asistencia_dia[2].CursosInscriptos=aux_inscripcion;
+    asistencia_dia[3].idCliente=4;
+    asistencia_dia[3].cantInscriptos=1;
+    asistencia_dia[3].CursosInscriptos=aux_inscripcion;
 
-    delete[] CursosInscriptosaux;
-    delete[] aux_asistencia;
-}
-TEST_CASE("funcion fechas", "fancy")
-{
-    //deberia retornar un int dependiendo de cual fecha sea primera
-    time_t time1 = time(0); //primera
-    time_t time2 = time(0)-1; //segunda
-    time_t timerepitente = time(0);
-    int ret1;
-    ret1 = fechas(time1, time2);
-    REQUIRE(ret1 == 1);
-    int ret2;
-    ret2 = fechas(time1, timerepitente);
-    REQUIRE(ret2 == 3);
-}
-/*TEST_CASE("horarioClase", "fancy")
-{
-    //retorna el horario de la clases de la cual le pases el id_curso
-    float ret;
-    int aux_idclase=2;
-    int N=2;
-    Clases* ListaClases = new Clases [N];
-    ListaClases[0].Horario=9.5;
-    ListaClases[0].idClase=1;
-    ListaClases[0].NombreClase="Yoga";
-    ListaClases[1].Horario=5.5;
-    ListaClases[1].idClase=2;
-    ListaClases[1].NombreClase="Yoga";
-    ListaClases[2].Horario=10.0;
-    ListaClases[2].idClase=3;
-    ListaClases[2].NombreClase="Yoga";
-
-    ret = horario_clase(aux_idclase, ListaClases,N);
-    REQUIRE(ret == 5.5);
-    delete ListaClases;
-}*/
-/*TEST_CASE("NODobleHorario", "fancy")
-{
-    int NcantClases = 3;
-    Asistencia* aux_asistencia = new Asistencia[];
-    Inscripcion aux_asistencia->CursosInscriptos = new Inscripcion[NcantClases];
-    aux_asistencia->idCliente=1;
-    aux_asistencia->CursosInscriptos=NcantClases;
-    aux_asistencia->CursosInscriptos[0].idCurso=1;
-    aux_asistencia->CursosInscriptos[0].fechaInscripcion = time(0);
-    aux_asistencia->CursosInscriptos[1].idCurso=2;
-    aux_asistencia->CursosInscriptos[1].fechaInscripcion = time(0);
-    aux_asistencia->CursosInscriptos[2].idCurso=3;
-    aux_asistencia->CursosInscriptos[2].fechaInscripcion = (time(0))+1;
-    aux_asistencia->CursosInscriptos[3].idCurso=2;
-    aux_asistencia->CursosInscriptos[3].fechaInscripcion = (time(0))+1;
-
-    Clases* ListaClases = new Clases[5];
-    ListaClases[0].idClase=1;
-    ListaClases[0].Horario=7;
-    ListaClases[0].NombreClase= "Yoga";
-    ListaClases[1].idClase=2;
-    ListaClases[1].Horario=5;
-    ListaClases[1].NombreClase= "Yoga";
-    ListaClases[2].idClase=3;
-    ListaClases[2].Horario=7;
-    ListaClases[2].NombreClase= "Yoga";
-    ListaClases[3].idClase=4;
-    ListaClases[3].Horario=8;
-    ListaClases[3].NombreClase= "Yoga";
-    ListaClases[4].idClase=5;
-    ListaClases[4].Horario=9;
-    ListaClases[4].NombreClase= "Yoga";
-    ListaClases[5].idClase=6;
-    ListaClases[5].Horario=1;
-    ListaClases[5].NombreClase= "Yoga";
-
-TERMINAR!!
-
-    //Clases ListaClases
-}*/
-TEST_CASE("id_clienteExistente", "fancy")
-{
-    //pili
-}
-TEST_CASE("cuotapaga", "fancy")
-{
-    //pili
-}
-TEST_CASE("dobleid_cursoListaMan", "fancy")
-{
-    //pili
-}
-TEST_CASE("doblehorario_ListaMan", "fancy")
-{
-    //pili
-}
-TEST_CASE("funcion_cupo", "fancy")
-{
-    //more
-}
-TEST_CASE("inscripMan", "fancy")
-{
-    //pili
+    ret = dobleid_cliente(aux_asistencia, asistencia_dia, N);
+    REQUIRE(ret == 1);
+    delete[] aux_inscripcion;
+    delete[] asistencia_dia;
 }

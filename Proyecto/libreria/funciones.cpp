@@ -89,7 +89,7 @@ void moveralfinal(Inscripcion*& cursosInscriptos, int CantInscriptos, int pos)
 //Chequea que el cliente del archivo Asitencia_dia que voy a leer, no esté ya anotado en Asistencia_dia
 //Si retorno Error -> NO lo cargo directamente NADA
 //Si retorno Exito -> procedo a mirar si las siguientes condiciones se cumplen
-int dobleid_cliente(Asistencia& aux_asistencia, Asistencia*& Asistencia_dia, int N)
+int dobleid_cliente(Asistencia*& aux_asistencia, Asistencia*& Asistencia_dia, int N)
 {
     if(N<=0)
     {
