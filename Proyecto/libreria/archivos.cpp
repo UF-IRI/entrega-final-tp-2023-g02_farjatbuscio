@@ -1,11 +1,11 @@
 #include "archivos.h"
 
-//funcion que lee el archivo de clases y retorna -1 si no se pudo leer y 1 si se pudo leer,
+//funcion que lee el archivo de clases y retorna -1 si no se pudo leer y 1 si se pudo leer
 //y la lista de clases quedaria cargada:
 eArchivo LeerClases(ifstream& archivoClases, Clases* &ListaClases,int& Nclases)
 {
     //si el archivo es distinto a open entonces retorno error
-   if(!archivoClases.is_open())
+    if(!archivoClases.is_open())
     {
         return ErrArchivo;
     }
@@ -25,10 +25,11 @@ eArchivo LeerClases(ifstream& archivoClases, Clases* &ListaClases,int& Nclases)
     getline(archivoClases,encabezado);
 
     //mientras el archivo esté abierto
-    while(archivoClases)
+    while(!archivoClases.eof() && getline(archivoClases,auxiliarlinea))
     {
-        ss.clear();
-        getline(archivoClases,auxiliarlinea);//levanto toda la linea
+        //llamo a la funcion resize: para agrandar el tamaño
+        agrandartamClases(ListaClases,Nclases);
+        ss.clear();//levanto toda la linea
         ss<<auxiliarlinea; //copio todo lo que tiene auxiliar en ss
         //delimitacion:
         getline(ss,auxIdClase,delimiter);//guardo hasta la coma
@@ -39,8 +40,6 @@ eArchivo LeerClases(ifstream& archivoClases, Clases* &ListaClases,int& Nclases)
         getline(ss,auxHorario,delimiter);
         //stof: el horario debo castearlo a float
         ListaClases[Nclases-1].Horario=stof(auxHorario);
-        //llamo a la funcion resize: para agrandar el tamaño
-        agrandartamClases(ListaClases,Nclases);
     }
     return ExitoArchivo;
 }
@@ -72,9 +71,11 @@ eArchivo LeerClientes(ifstream& archivoClientes, Cliente* &ListaClientes,int &Nc
     getline(archivoClientes,encabezado);
 
     //mientras el archivo esté abierto
-    while(archivoClientes)
+    while(!archivoClientes.eof() && getline(archivoClientes,auxiliarlinea))
     {
-        getline(archivoClientes,auxiliarlinea);//levanto toda la linea
+        //levanto toda la linea
+        //llamo a la funcion resize: para agrandar el tamaño
+        agrandartamCliente(ListaClientes,Nclientes);
         ss<<auxiliarlinea; //copio todo lo que tiene auxiliar en ss
         //delimitacion:
         getline(ss,auxidCliente,delimiter);//guardo hasta la coma
@@ -94,8 +95,6 @@ eArchivo LeerClientes(ifstream& archivoClientes, Cliente* &ListaClientes,int &Nc
         getline(ss,auxestado,delimiter);
         //casteo a int
         ListaClientes[Nclientes-1].estado=stoi(auxestado);
-        //llamo a la funcion resize: para agrandar el tamaño
-        agrandartamCliente(ListaClientes,Nclientes);
     }
     return ExitoArchivo;
 }
