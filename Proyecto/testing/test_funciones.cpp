@@ -28,26 +28,30 @@ TEST_CASE("AgrandarTamTEST", "[fancy]")
 }
 TEST_CASE("AchicarTamTEST", "[fancy]")
 {
-    int N=4;
-    Inscripcion* CursosInscriptosaux = new Inscripcion[N];
-    CursosInscriptosaux[0].idCurso=1;
-    CursosInscriptosaux[0].fechaInscripcion=time(0);
-    CursosInscriptosaux[1].idCurso=2;
-    CursosInscriptosaux[1].fechaInscripcion=time(0);
-    CursosInscriptosaux[2].idCurso=3;
-    CursosInscriptosaux[2].fechaInscripcion=time(0);
-    CursosInscriptosaux[3].idCurso=4;
-    CursosInscriptosaux[3].fechaInscripcion=time(0);
-    Asistencia* aux_asistencia = new Asistencia[1];
+    int N=5;
+    Inscripcion* aux_inscripcion = new Inscripcion[N];
+    aux_inscripcion[0].idCurso=1;
+    aux_inscripcion[0].fechaInscripcion = time(0);
+    aux_inscripcion[1].idCurso=2;
+    aux_inscripcion[1].fechaInscripcion = time(0);
+    aux_inscripcion[2].idCurso=2;
+    aux_inscripcion[2].fechaInscripcion = time(0);
+    aux_inscripcion[3].idCurso=2;
+    aux_inscripcion[3].fechaInscripcion = time(0);
+    aux_inscripcion[4].idCurso=3;
+    aux_inscripcion[4].fechaInscripcion = time(0);
+
+    Asistencia* aux_asistencia = new Asistencia;
     aux_asistencia->idCliente=1;
-    aux_asistencia->cantInscriptos=4;
-    aux_asistencia->CursosInscriptos=CursosInscriptosaux;
+    aux_asistencia->cantInscriptos=N;
+    aux_asistencia->CursosInscriptos = aux_inscripcion;
 
     achicartamInscrip(aux_asistencia->CursosInscriptos, N);
-    REQUIRE(N == 3);
+    aux_asistencia->CursosInscriptos=(aux_asistencia->CursosInscriptos)-1;
+    REQUIRE(N == 4);
 
-    delete[] CursosInscriptosaux;
-    delete[] aux_asistencia;
+    delete[] aux_inscripcion;
+    delete aux_asistencia;
 }
 TEST_CASE("DesplazarAlFinalElemento", "[fancy]")
 {
@@ -136,3 +140,29 @@ TEST_CASE("Test1dobleId_Cliente", "[fancy]")
     delete[] aux_inscripcion;
     delete[] asistencia_dia;
 }
+/*TEST_CASE("TestDobleIdCurso", "[fancy]") //ME DA FATAL
+{
+    int A=5;
+    Inscripcion* aux_inscripcion = new Inscripcion[A];
+    aux_inscripcion[0].idCurso=1;
+    aux_inscripcion[0].fechaInscripcion = time(0);
+    aux_inscripcion[1].idCurso=2;
+    aux_inscripcion[1].fechaInscripcion = time(0);
+    aux_inscripcion[2].idCurso=2;
+    aux_inscripcion[2].fechaInscripcion = time(0);
+    aux_inscripcion[3].idCurso=2;
+    aux_inscripcion[3].fechaInscripcion = time(0);
+    aux_inscripcion[4].idCurso=3;
+    aux_inscripcion[4].fechaInscripcion = time(0);
+
+    Asistencia* aux_asistencia = new Asistencia;
+    aux_asistencia->idCliente=1;
+    aux_asistencia->cantInscriptos=A;
+    aux_asistencia->CursosInscriptos = aux_inscripcion;
+
+    dobleid_curso(aux_asistencia);
+    REQUIRE(aux_asistencia->cantInscriptos == 3);
+
+    delete[] aux_inscripcion;
+    delete aux_asistencia;
+}*/

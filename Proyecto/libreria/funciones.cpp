@@ -58,13 +58,15 @@ void achicartamInscrip(Inscripcion*& vector, int& N)
 {
     N=N-1; //disminuyo en uno mi contador de tamaño
     Inscripcion* aux= new Inscripcion[(N)]; //un aux con el nuevo tamaño
-    for(int i=0; i<N-1;i++)
+    for(int i=0; i<N;i++)
     {
         aux[i]=vector[i]; //copio las cosas en el auxiliar
     }
     //libero memoria dinamica:
     delete[] vector;
     vector=aux; //le asigno la nueva memoria
+    //cuando uso esta funcion, despues debo hacer:
+    //aux_asistencia.cantinscriptos=(aux_asistencia.cantinscriptos)-1
 }
 //desplazar un elemento al final y mover los elementos restantes una posición hacia arriba
 //para desp eliminarla con el resize
@@ -110,18 +112,19 @@ int dobleid_cliente(Asistencia*& aux_asistencia, Asistencia*& Asistencia_dia, in
 //Chequea que el cliente que voy a inscribir no este anotado dos veces en la misma clase
 //si esta anotado dos veces, elimino una
 //sino no cambio nada
-void dobleid_curso(Asistencia& aux_asistencia)
+void dobleid_curso(Asistencia*& aux_asistencia)
 {
-    int N=aux_asistencia.cantInscriptos;
+    int N=aux_asistencia->cantInscriptos;
+
     for(int i=0; i<N; i++)
     {
         //verifico si hay dos id_cursos iguales
-        if(aux_asistencia.CursosInscriptos[i].idCurso==aux_asistencia.CursosInscriptos[i+1].idCurso)
+        if(aux_asistencia->CursosInscriptos[i].idCurso==aux_asistencia->CursosInscriptos[i+1].idCurso)
         {
             //elimino uno
-            moveralfinal(aux_asistencia.CursosInscriptos, aux_asistencia.cantInscriptos, i+1);
-            achicartamInscrip(aux_asistencia.CursosInscriptos, aux_asistencia.cantInscriptos);
-            aux_asistencia.cantInscriptos=(aux_asistencia.cantInscriptos)-1;
+            moveralfinal(aux_asistencia->CursosInscriptos, aux_asistencia->cantInscriptos, i+1);
+            achicartamInscrip(aux_asistencia->CursosInscriptos, aux_asistencia->cantInscriptos);
+            //aux_asistencia->cantInscriptos=(aux_asistencia->cantInscriptos)-1;
             N=N-1;
             i=i-1;
         }
