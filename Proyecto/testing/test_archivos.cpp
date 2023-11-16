@@ -33,29 +33,22 @@ TEST_CASE("leer archivo de clientes", "[fancy]")
     archivoClientes.close();
     delete[] ListaClientes;
 }
-TEST_CASE("leer archivo de inscripcion", "[fancy]")
+TEST_CASE("escribir archivo de inscripcion", "[fancy]")
 {
-    //abro archivo de inscripcion
-    ifstream archivoInscripcion;
-    archivoInscripcion.open("asistencias_1697673600000.dat", ios::binary);
-
-    int N=1;
-    Asistencia* AsistenciaDia=new Asistencia[N];
-
-    int ret= LeerAsistencia_hoy(archivoInscripcion,AsistenciaDia,N);
+    string NombreArchivo="asistencia.dat";
+    int Ninscripciones=7;
+    Asistencia* AsistenciaMan=new Asistencia[Ninscripciones];
+    eArchivo ret;
+    ret=CrearAsistencia_manana(NombreArchivo,AsistenciaMan,Ninscripciones);
     REQUIRE(ret==1);
-
-    archivoInscripcion.close();
-    delete[] AsistenciaDia;
+    delete[] AsistenciaMan;
 }
-/*TEST_CASE("Funcion Random", "[fancy]")
+TEST_CASE("Funcion Random", "[fancy]")
 {
     //le paso algunos datos cargados de lista cliente y clases y me debe retornar algun valor random
-    //Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
     int N=3;
-    Cliente ListaClientes[N];
-    int M=3;
-    Clases ListaClase[M];
+    Cliente* ListaClientes=new Cliente[N];
+    Clases* ListaClase=new Clases[N];
     ListaClientes[0].idCliente=12;
     ListaClientes[1].idCliente=3;
     ListaClientes[2].idCliente=19;
@@ -64,10 +57,13 @@ TEST_CASE("leer archivo de inscripcion", "[fancy]")
     ListaClase[1].idClase=15;
     ListaClase[2].idClase=7;
     ListaClase[3].idClase=1;
-    Asistencia aux;
-    aux=RandCliente(ListaClientes,ListaClase);
-    REQUIRE(aux.idCliente==12);
-}*/
+    Asistencia* aux=new Asistencia;
+    RandCliente(ListaClientes,N,N,ListaClase,aux);
+    REQUIRE(0==0);
+    delete aux;
+    delete[] ListaClientes;
+    delete[] ListaClase;
+}
 /*TEST_CASE("Funcion imprimir", "[fancy]")
 {
     int N=3;

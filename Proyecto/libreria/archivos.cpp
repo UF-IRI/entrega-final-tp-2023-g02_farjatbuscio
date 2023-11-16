@@ -170,31 +170,23 @@ eArchivo CrearAsistencia_manana(string& NombreArchivo,Asistencia*& AsistenciaMan
     archivo_man.close();
     return ExitoArchivo;
 }
-
-//Funcion que genera datos random:
-/*Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
+void RandCliente(Cliente*& ListaClientes,int& Nclases,int& Nclientes, Clases*& ListaClase, Asistencia*& aux)
 {
-    int num_cliente=rand()%(sizeof(ListaClientes));
-    Asistencia aux;
-    aux.idCliente=ListaClientes[num_cliente].idCliente;
-
-<<<<<<< HEAD
-    aux.cantInscriptos = (rand()%5)+1;
-    Inscripcion* aux.CursosInscriptos= new Inscripcion[aux.cantInscriptos];
-    //no se si esta bien pedir la memoria? o como hago?
-    //si esta bien pedirla, donde la libero?
-=======
-    aux.cantInscriptos= (rand()%5)+1;
-    aux.CursosInscriptos = new Inscripcion [aux.cantInscriptos];
->>>>>>> a35d6f720ec6df198176a49bb5c7b205cc1142ee
-    for(int i=0; i< aux.cantInscriptos; i++)
+    int numcantInscriptos= (rand()%5)+1;
+    Inscripcion* auxcursosInscriptos = new Inscripcion [numcantInscriptos];
+    int num_clase;
+    for(int i=0; i< numcantInscriptos; i++)
     {
-        int num_clase=rand()%(sizeof(ListaClase));
-        aux.CursosInscriptos[i].idCurso=ListaClase[num_clase].idClase;
-        aux.CursosInscriptos[i].fechaInscripcion=time(0);
+        num_clase=(rand()%Nclases);
+        auxcursosInscriptos[i].idCurso=ListaClase[num_clase].idClase;
+        auxcursosInscriptos[i].fechaInscripcion=time(0);
     }
-    //liberar memoria
-    return aux;
+    int num_cliente=(rand()%Nclientes);
+    aux->idCliente=ListaClientes[num_cliente].idCliente;
+    aux->cantInscriptos=numcantInscriptos;
+    aux->CursosInscriptos=auxcursosInscriptos;
+
+    //en el main liberar la memoria de aux (esta segunda) y de auxcursosInscriptos (esta primero)
 }
 //Funcion generica que imprime los datos de los clientes inscriptos en esa id de clase
 void ImprimirDatos(Asistencia* AsistenciaMan, int id_clase, int Ninscripciones)
@@ -226,4 +218,4 @@ void ImprimirDatos(Asistencia* AsistenciaMan, int id_clase, int Ninscripciones)
     {
         cout<<"Cantidad de inscriptos a su clase:"<<cont<<endl;
     }
-}*/
+}

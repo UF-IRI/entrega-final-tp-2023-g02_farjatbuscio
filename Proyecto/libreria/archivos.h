@@ -22,7 +22,7 @@ eArchivo CrearAsistencia_manana(string* Nombre_Archivo,Asistencia*& AsistenciaMa
 
 
 //Funcion que me genere datos de clientes random:
-Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase);
+void RandCliente(Cliente*& ListaClientes,int& Nclases,int& Nclientes, Clases*& ListaClase, Asistencia*& aux);
 #endif // ARCHIVOS_H
 
 //Funcion generica que imprima en pantalla:
