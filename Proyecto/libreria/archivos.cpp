@@ -173,14 +173,14 @@ eArchivo CrearAsistencia_manana(string& NombreArchivo,Asistencia*& AsistenciaMan
 }
 
 //Funcion que genera datos random:
-Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
+/*Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
 {
     int num_cliente=rand()%(sizeof(ListaClientes));
     Asistencia aux;
     aux.idCliente=ListaClientes[num_cliente].idCliente;
 
-    aux.cantInscriptos= (rand()%5)+1;
-    Inscripcion*  aux.CursosInscriptos= new Inscripcion [aux.cantInscriptos];
+    aux.cantInscriptos = (rand()%5)+1;
+    Inscripcion* aux.CursosInscriptos= new Inscripcion[aux.cantInscriptos];
     //no se si esta bien pedir la memoria? o como hago?
     //si esta bien pedirla, donde la libero?
     for(int i=0; i< aux.cantInscriptos; i++)
@@ -221,4 +221,4 @@ void ImprimirDatos(Asistencia* AsistenciaMan, int id_clase, int Ninscripciones)
     {
         cout<<"Cantidad de inscriptos a su clase:"<<cont<<endl;
     }
-}
+}*/

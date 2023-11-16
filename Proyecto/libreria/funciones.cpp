@@ -306,7 +306,7 @@ void doblehorario_ListaMan(Asistencia& aux_asistencia, Clases*& ListaClases, int
     }
 }
 
-void funcion_cupo(Asistencia& aux_asistencia, Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases,int Nclases, CupoClases*& ListaCupo, int Ncupos)
+/*void funcion_cupo(Asistencia& aux_asistencia, Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases,int Nclases, CupoClases*& ListaCupo, int Ncupos)
 {
     int cont=0;
     string auxNombreClase;
@@ -445,4 +445,4 @@ eInscripManFinal inscripMan(Asistencia& aux_asistencia, Asistencia*& AsistenciaM
         return ErrCliente; //el cliente no se encontro en la lista de clientes del gym
     }
     return ErrRandom; //hubo algun error durante la inscripcion y no se lo podria inscribir
-}
+}*/
