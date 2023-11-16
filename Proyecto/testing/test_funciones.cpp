@@ -49,30 +49,35 @@ TEST_CASE("AchicarTamTEST", "[fancy]")
     delete[] CursosInscriptosaux;
     delete[] aux_asistencia;
 }
-/*TEST_CASE("DesplazarAlFinalElemento", "[fancy]")
+TEST_CASE("DesplazarAlFinalElemento", "[fancy]")
 {
     int cantInscriptos=4;
-    Inscripcion *cursosInscriptos = new Inscripcion[cantInscriptos];
+    Inscripcion* cursosInscriptos = new Inscripcion[cantInscriptos];
     int pos=1;
-    cursosInscriptos[0]={1, time(0)};
-    cursosInscriptos[1]={2, time(0)};
-    cursosInscriptos[2]={3, time(0)};
-    cursosInscriptos[3]={4, time(0)};
+    cursosInscriptos[0].idCurso=1;
+    cursosInscriptos[0].fechaInscripcion= time(0);
+    cursosInscriptos[1].idCurso=2;
+    cursosInscriptos[1].fechaInscripcion= time(0);
+    cursosInscriptos[2].idCurso=3;
+    cursosInscriptos[2].fechaInscripcion= time(0);
+    cursosInscriptos[3].idCurso=4;
+    cursosInscriptos[3].fechaInscripcion= time(0);
+
     moveralfinal(cursosInscriptos, cantInscriptos, pos);
     REQUIRE(cursosInscriptos[0].idCurso==1);
     REQUIRE(cursosInscriptos[1].idCurso==3);
     REQUIRE(cursosInscriptos[2].idCurso==4);
     REQUIRE(cursosInscriptos[3].idCurso==2);
     delete[] cursosInscriptos;
-}*/
-/*TEST_CASE("NOdobleId_Cliente", "[fancy]")
+}
+TEST_CASE("NOdobleId_Cliente", "[fancy]")
 {
     int N=3;
     int M=1;
     Asistencia* asistencia_dia = new Asistencia[N];
     for (int i = 0; i < N; ++i)
     {
-        asistencia_dia[i].CursosInscriptos = new Inscripcion[M]; // Asignar memoria para CursosInscriptos
+        Inscripcion* auxCursosInscriptos = new Inscripcion[M]; // Asignar memoria para CursosInscriptos
     }
     asistencia_dia[0].idCliente=1;
     asistencia_dia[0].cantInscriptos=1;
@@ -103,11 +108,11 @@ TEST_CASE("AchicarTamTEST", "[fancy]")
         delete[] asistencia_dia[i].CursosInscriptos; // Liberar memoria para cada CursosInscriptos
     }
     delete[] asistencia_dia;
-}*/
-TEST_CASE("NODobleIdCurso", "[fancy]")
+}
+/*TEST_CASE("NODobleIdCurso", "[fancy]")
 {
     int N=4;
-    Inscripcion CursosInscriptosaux = new Inscripcion[N];
+    Inscripcion* CursosInscriptosaux = new Inscripcion[N];
     CursosInscriptosaux[0].idCurso=2020;
     CursosInscriptosaux[0].fechaInscripcion=time(0);
     CursosInscriptosaux[1].idCurso=2020;

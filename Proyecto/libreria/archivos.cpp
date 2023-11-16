@@ -180,15 +180,14 @@ Asistencia RandCliente(Cliente* ListaClientes, Clases* ListaClase)
     aux.idCliente=ListaClientes[num_cliente].idCliente;
 
     aux.cantInscriptos= (rand()%5)+1;
-    Inscripcion*  aux.CursosInscriptos= new Inscripcion [aux.cantInscriptos];
-    //no se si esta bien pedir la memoria? o como hago?
-    //si esta bien pedirla, donde la libero?
+    aux.CursosInscriptos = new Inscripcion [aux.cantInscriptos];
     for(int i=0; i< aux.cantInscriptos; i++)
     {
         int num_clase=rand()%(sizeof(ListaClase));
         aux.CursosInscriptos[i].idCurso=ListaClase[num_clase].idClase;
         aux.CursosInscriptos[i].fechaInscripcion=time(0);
     }
+    //liberar memoria
     return aux;
 }
 //Funcion generica que imprime los datos de los clientes inscriptos en esa id de clase
