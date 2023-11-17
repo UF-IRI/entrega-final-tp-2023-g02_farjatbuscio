@@ -5,8 +5,7 @@
 using namespace std;
 
 int main() {
-    /*
-    //CHEQUEO CLIENTES PARA HOY:
+  //CHEQUEO CLIENTES PARA HOY:
     /*ifstream archivo_dia;
     archivo_dia.open("asistencias_1697673600000.dat", ios::binary);
     int N=0;
@@ -24,14 +23,7 @@ int main() {
     //imprimir datos de una clase random:
     int numBin=(rand()%N);
     int id_clase1=AsistenciaDia[numBin].CursosInscriptos[0].idCurso;
-<<<<<<< Updated upstream
-    ImprimirDatos(AsistenciaDia,id_clase1,N);
 */
-=======
-    ImprimirDatos(AsistenciaDia,id_clase1,N);*/
-
->>>>>>> Stashed changes
-
     //INSCRIPCION DE NUEVOS CLIENTES:
     //abro archivos CLASE
     ifstream archivoClase;
@@ -163,11 +155,6 @@ int main() {
     {
         cout<<"El archivo de clientes nuevos se creo correctamente"<<endl;
     }
-
-    //imprimir datos de una clase random:
-    int numRand=(rand()%Ninscriptos);
-    int id_clase=AsistenciaMan[numRand].CursosInscriptos[0].idCurso;
-    ImprimirDatos(AsistenciaMan,id_clase,Ninscriptos);
 
     //CIERRO ARCHIVOS
     archivoClase.close();
