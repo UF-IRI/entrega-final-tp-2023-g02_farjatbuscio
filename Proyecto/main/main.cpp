@@ -17,17 +17,17 @@ int main() {
     retorClase=LeerClases(archivoClase,ListaClases,NClases);//llamo a la funcion de leer archivo de clases
     if(retorClase==-1)
     {
-        cout<<"Error al abrir el archivo de clases"<<;
+        cout<<"Error al abrir el archivo de clases"<<endl;
     }
     if(retorClase==1)
     {
-        cout<<"El archivo de clases se abrió correctamente"<<;
+        cout<<"El archivo de clases se abrió correctamente"<<endl;
     }
     //abro archivo de CLIENTES
     ifstream archivoClientes;
     archivoClientes.open("iriClientesGYM.csv");
     int Nclientes=0;//cantidad de clientes
-    eArchivo retClientes;
+    eArchivo retClientes;//creo variable tipo enum
     Cliente* ListaClientes=new Cliente[Nclientes];//pido memoria para lista de clientes
     retClientes=LeerClientes(archivoClientes,ListaClientes,Nclientes);
     if(retClientes==-1)
@@ -49,9 +49,9 @@ int main() {
     //RANDOM CLIENTES:
     //asigno un random de cantidad de clientes nuevos
     int CantNuevos=(rand()%20)+1;
-    cout<<"Se intentaran agregar"<<CantNuevos<<"clientes en el dia de hoy, siempre y cuando cumplan con las condiciones"<<endl;
+    cout<<"Se intentaran agregar: "<<CantNuevos<<" clientes en el dia de hoy, siempre y cuando cumplan con las condiciones"<<endl;
 
-    eInscripManFinal retInsc;
+    eInscripManFinal retInsc;//creo variable tipo enum
     int Ninscriptos=0;
     Asistencia* AsistenciaMan=new Asistencia[Ninscriptos];
     for(int i=0;i<CantNuevos;i++)
@@ -63,21 +63,20 @@ int main() {
         //ErrCliente = -1,  ErrCouta = -2, ErrRandom = -3, ErrNingunaClase = -4, ExitoInscrip = 1}
         if(retInsc==-1)
         {
-            cout<<"El cliente con id"<<auxRandom->idCliente<<"no se puede inscribir por no encontrarse en la lista de clases"<<endl;
+            cout<<"El cliente con id: "<<auxRandom->idCliente<<" no se pudo inscribir ya que no se encontro en la lista del gimnasio, comunicarse con el gimnasio para mayor informacion."<<endl;
 
         }
         if(retInsc==-2)
         {
-            cout<<"El cliente con id"<<auxRandom->idCliente<<"no se puede inscribir por no abonar su cuota"<<endl;
+            cout<<"El cliente con id: "<<auxRandom->idCliente<<" no se pudo inscribir ya que no abono su cuota, comunicarse con el gimnasio para mayor informacion."<<endl;
         }
         if(retInsc==-3)
         {
-            cout<<"El cliente con id"<<auxRandom->idCliente<<"no se puede inscribir por un error en el proceso"<<endl;
+            cout<<"El cliente con id: "<<auxRandom->idCliente<<" no se pudo inscribir ya que hubo un error en el proceso, comunicarse con el gimnasio para mayor informacion."<<endl;
         }
-        if(retInsc==-2)
+        if(retInsc==-4)
         {
-            //VER SI ESE ES EL ERROR??
-            cout<<"El cliente con id"<<auxRandom->idCliente<<"no se puede inscribir en esa clase por falta de cupo"<<endl;
+            cout<<"El cliente con id: "<<auxRandom->idCliente<<" no se pudo inscribir en ninguna clase ya que en todos los intentos surgieron distintos inconvenientes, comunicarse con el gimnasio para mayor informacion."<<endl;
         }
         if(retInsc==1)
         {
@@ -93,10 +92,25 @@ int main() {
             AsistenciaMan[Ninscriptos-1].idCliente=auxRandom->idCliente;
             AsistenciaMan[Ninscriptos-1].cantInscriptos=auxRandom->cantInscriptos;
             AsistenciaMan[Ninscriptos-1].CursosInscriptos=auxClaseExito;
-            cout<<"El cliente con id"<<auxRandom->idCliente<<"se puede inscribir a la clase indicada"<<endl;
+            cout<<"El cliente con id: "<<auxRandom->idCliente<<" se pudo inscribir a las siguientes clases: "<<endl;
+            for(int i=0; i<(AsistenciaMan[Ninscriptos-1].cantInscriptos);i++)
+            {
+                int auxid=AsistenciaMan[Ninscriptos-1].CursosInscriptos[i].idCurso;
+                string nombreclase;
+                float horarioclase;
+                for(int k=0; k<NClases; k++)
+                {
+                    if(auxid==ListaClases[k].idClase)
+                    {
+                        nombreclase=ListaClases[k].NombreClase;
+                        horarioclase=ListaClases[k].Horario;
+                    }
+                }
+                cout<<"Clase: "<<nombreclase<<" a las: "<<horarioclase<<endl;
+            }
             delete[] auxClaseExito;
         }
-        delete[] auxRandom; //ESTA BIEN?? LA CREO EN EL FOR?
+        delete[] auxRandom;
     }
 
     //Una vez cargados todos los clientes, creo el archivo de Inscripcion Mañana:
@@ -112,8 +126,9 @@ int main() {
         cout<<"El archivo de clientes nuevos se creo correctamente"<<endl;
     }
 
-    //imprimir datos de una clase:
-    int id_clase=AsistenciaMan[0].CursosInscriptos[0].idCurso;
+    //imprimir datos de una clase random:
+    int numRand=(rand()%Ninscriptos);
+    int id_clase=AsistenciaMan[numRand].CursosInscriptos[0].idCurso;
     ImprimirDatos(AsistenciaMan,id_clase,Ninscriptos);
 
     //CIERRO ARCHIVOS
