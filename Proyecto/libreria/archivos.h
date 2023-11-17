@@ -25,6 +25,4 @@ eArchivo CrearAsistencia_manana(string& Nombre_Archivo,Asistencia*& AsistenciaMa
 void RandCliente(Cliente*& ListaClientes,int& Nclases,int& Nclientes, Clases*& ListaClase, Asistencia*& aux);
 #endif // ARCHIVOS_H
 
-//Funcion generica que imprima en pantalla:
-void ImprimirDatos(Asistencia* AsistenciaMan, int id_clase, int Ninscripciones);
 

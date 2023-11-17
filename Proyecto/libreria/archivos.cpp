@@ -188,34 +188,3 @@ void RandCliente(Cliente*& ListaClientes,int& Nclases,int& Nclientes, Clases*& L
 
     //en el main liberar la memoria de aux (esta segunda) y de auxcursosInscriptos (esta primero)
 }
-//Funcion generica que imprime los datos de los clientes inscriptos en esa id de clase
-void ImprimirDatos(Asistencia* AsistenciaMan, int id_clase, int Ninscripciones)
-{
-    int cont=0;
-    if(Ninscripciones==0)
-    {
-        cout<<"En este momento, no hay clientes inscriptos en su clases"<<endl;
-    }
-    if(Ninscripciones>0)
-    {
-        //recorro los clientes
-        for(int i=0;i<Ninscripciones;i++)
-        {
-            //recorro los cursos inscriptos de los clientes
-            for(int k=0; k<AsistenciaMan[i].cantInscriptos; k++)
-            //si coincide el id de curso imprimo los datos:
-            if(AsistenciaMan[i].CursosInscriptos[k].idCurso==id_clase)
-            {
-                cout<<"Datos de las inscripciones correspondiente a la clase con ID:"<<id_clase<<endl;
-                cout<<"Id del cliente:"<<AsistenciaMan[i].idCliente<<endl;
-                //un acumulador que cuente los clientes inscriptos
-                cont++;
-            }
-        }
-    }
-    //si el acumulador es mayor que cero, imprimo la cantidad de clientes inscriptos a esa clase
-    if(cont>0)
-    {
-        cout<<"Cantidad de inscriptos a su clase:"<<cont<<endl;
-    }
-}

@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-
+    /*
     //CHEQUEO CLIENTES PARA HOY:
     ifstream archivo_dia;
     archivo_dia.open("asistencias_1697673600000.dat", ios::binary);
@@ -25,7 +25,7 @@ int main() {
     int numBin=(rand()%N);
     int id_clase1=AsistenciaDia[numBin].CursosInscriptos[0].idCurso;
     ImprimirDatos(AsistenciaDia,id_clase1,N);
-
+*/
 
     //INSCRIPCION DE NUEVOS CLIENTES:
     //abro archivos CLASE
@@ -167,12 +167,12 @@ int main() {
     //CIERRO ARCHIVOS
     archivoClase.close();
     archivoClientes.close();
-    archivo_dia.close();
+    //archivo_dia.close();
     //LIBERO MEMORIA PEDIDA
     delete[] ListaClases;
     delete[] ListaClientes;
     delete[] AsistenciaMan;
-    delete[] AsistenciaDia;
+    //delete[] AsistenciaDia;
     return 0;
 }
 
