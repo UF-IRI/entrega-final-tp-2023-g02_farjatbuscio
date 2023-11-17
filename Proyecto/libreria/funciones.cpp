@@ -68,8 +68,7 @@ void achicartamInscrip(Inscripcion*& vector, int& N)
     //cuando uso esta funcion, despues debo hacer:
     //aux_asistencia.cantinscriptos=(aux_asistencia.cantinscriptos)-1
 }
-//desplazar un elemento al final y mover los elementos restantes una posición hacia arriba
-//para desp eliminarla con el resize
+
 void moveralfinal(Inscripcion*& cursosInscriptos, int CantInscriptos, int pos)
 {
     if(pos>= CantInscriptos)
@@ -163,9 +162,9 @@ float horario_clase (int aux_idClase, Clases*& ListaClases, int NcantClases)
     return horario;
 }
 
-void doblehorario(Asistencia& aux_asistencia, Clases*& ListaClases, int NcantClases)
+void doblehorario(Asistencia*& aux_asistencia, Clases*& ListaClases, int NcantClases)
 {
-    int N = aux_asistencia.cantInscriptos;
+    int N = aux_asistencia->cantInscriptos;
     int aux_id1; //aca guardo el id
     int aux_id2;
 
@@ -175,54 +174,58 @@ void doblehorario(Asistencia& aux_asistencia, Clases*& ListaClases, int NcantCla
     time_t aux_fecha1;//guardo el horario en el q reservaron la clase
     time_t aux_fecha2;
     int ret=0;
-    if(aux_asistencia.cantInscriptos<=1)
+    if(aux_asistencia->cantInscriptos<=1)
     {
         return;
     }
     for(int i=0; i<N-1 ;i++)
     {
-        aux_id1 = aux_asistencia.CursosInscriptos[i].idCurso;
-        aux_id2 = aux_asistencia.CursosInscriptos[i+1].idCurso;
-
-        aux_horario1 = horario_clase(aux_id1, ListaClases, NcantClases);
-        aux_horario2 = horario_clase(aux_id2, ListaClases, NcantClases);
-
-        if(aux_horario1 == aux_horario2)
+        aux_id1 = aux_asistencia->CursosInscriptos[i].idCurso;
+        for(int k=0; k<N-1 ;k++)
         {
-            aux_fecha1 = aux_asistencia.CursosInscriptos[i].fechaInscripcion;
-            aux_fecha2 = aux_asistencia.CursosInscriptos[i+1].fechaInscripcion;
-            //borro el que tenga time_t mas reciente
-            ret = fechas(aux_fecha1,aux_fecha2);
-            if(ret == 1)
+            aux_id2 = aux_asistencia->CursosInscriptos[k].idCurso;
+            aux_horario1 = horario_clase(aux_id1, ListaClases, NcantClases);
+            aux_horario2 = horario_clase(aux_id2, ListaClases, NcantClases);
+
+            if((aux_horario1 == aux_horario2) && (i != k))
             {
-                //borro la clase de aux_id1
-                moveralfinal(aux_asistencia.CursosInscriptos, N, i);//aux_asistencia->CursosInscriptos lo paso con puntero para que lo recorra???
-                achicartamInscrip(aux_asistencia.CursosInscriptos, N); //como paso la N si quiero que el valor quede cambiado?
-                aux_asistencia.cantInscriptos=aux_asistencia.cantInscriptos-1;
+                aux_fecha1 = aux_asistencia->CursosInscriptos[i].fechaInscripcion;
+                aux_fecha2 = aux_asistencia->CursosInscriptos[k].fechaInscripcion;
+                //borro el que tenga time_t mas reciente
+                ret = fechas(aux_fecha1,aux_fecha2);
+                if(ret == 1)
+                {
+                    //borro la clase de aux_id1
+                    moveralfinal(aux_asistencia->CursosInscriptos, N, i);//aux_asistencia->CursosInscriptos lo paso con puntero para que lo recorra???
+                    achicartamInscrip(aux_asistencia->CursosInscriptos, N); //como paso la N si quiero que el valor quede cambiado?
+                    aux_asistencia->cantInscriptos=aux_asistencia->cantInscriptos-1;
+                }
+                else if(ret == 2)
+                {
+                    //borro la clase de aux_id2
+                    moveralfinal(aux_asistencia->CursosInscriptos, N, k);//aux_asistencia->CursosInscriptos lo paso con puntero para que lo recorra???
+                    achicartamInscrip(aux_asistencia->CursosInscriptos, N); //como paso la N si quiero que el valor quede cambiado?
+                    aux_asistencia->cantInscriptos=aux_asistencia->cantInscriptos-1;
+                }
+                else if(ret == 3)
+                {
+                    //borro cualquiera
+                    moveralfinal(aux_asistencia->CursosInscriptos, N, i);//aux_asistencia->CursosInscriptos lo paso con puntero para que lo recorra???
+                    achicartamInscrip(aux_asistencia->CursosInscriptos, N); //como paso la N si quiero que el valor quede cambiado?
+                    aux_asistencia->cantInscriptos=aux_asistencia->cantInscriptos-1;
+                }
+                else if (ret == -1)
+                {
+                    return;
+                }
+                N = aux_asistencia->cantInscriptos;
+                k=N-1;
             }
-            else if(ret == 2)
-            {
-                //borro la clase de aux_id2
-                moveralfinal(aux_asistencia.CursosInscriptos, N, i+1);//aux_asistencia->CursosInscriptos lo paso con puntero para que lo recorra???
-                achicartamInscrip(aux_asistencia.CursosInscriptos, N); //como paso la N si quiero que el valor quede cambiado?
-                aux_asistencia.cantInscriptos=aux_asistencia.cantInscriptos-1;
-            }
-            else if(ret == 3)
-            {
-                //borro cualquiera
-                moveralfinal(aux_asistencia.CursosInscriptos, N, i);//aux_asistencia->CursosInscriptos lo paso con puntero para que lo recorra???
-                achicartamInscrip(aux_asistencia.CursosInscriptos, N); //como paso la N si quiero que el valor quede cambiado?
-                aux_asistencia.cantInscriptos=aux_asistencia.cantInscriptos-1;
-            }
-            else if (ret == -1)
-            {
-                return;
-            }
-            N = aux_asistencia.cantInscriptos;
         }
     }
     return;
 }
+
 
 int id_clienteExistente(Cliente*& ListaClientes, int Nclientes, int id_cliente)
 {

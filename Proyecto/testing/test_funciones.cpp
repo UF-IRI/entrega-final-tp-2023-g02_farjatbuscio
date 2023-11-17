@@ -183,3 +183,49 @@ TEST_CASE("Funcion id_clienteExistente", "[fancy]")
     REQUIRE(ret2==-1);
     delete[] ListaClientes;
 }
+TEST_CASE("testfechas","fancy")
+{
+    time_t fechaprimera = time(0);
+    time_t fechasegunda = time(0)-10;
+    time_t fechaigual = time(0);
+
+    int ret1;
+    ret1 = fechas(fechaprimera, fechasegunda);
+    REQUIRE(ret1 == 1);
+
+    int ret2;
+    ret2 = fechas(fechasegunda, fechaprimera);
+    REQUIRE(ret2 == 2);
+
+    int ret3;
+    ret3 = fechas(fechaprimera, fechaigual);
+    REQUIRE(ret3 == 3);
+}
+
+TEST_CASE("testhorarioclase", "fancy")
+{
+    int auxidclase1 = 2;
+    int auxidclase2 = 3;
+
+    int NcantClases = 3;
+    Clases* listaclases = new Clases[NcantClases];
+    listaclases[0].idClase=1;
+    listaclases[0].Horario=10;
+    listaclases[0].NombreClase="Yoga";
+    listaclases[1].idClase=2;
+    listaclases[1].Horario=10;
+    listaclases[1].NombreClase="Yoga";
+    listaclases[2].idClase=3;
+    listaclases[2].Horario=6.5;
+    listaclases[2].NombreClase="Yoga";
+
+    float horario1;
+    horario1 = horario_clase(auxidclase1, listaclases, NcantClases);
+    REQUIRE(horario1 == 10);
+
+    float horario2;
+    horario2 = horario_clase(auxidclase2, listaclases, NcantClases);
+    REQUIRE(horario2 == 6.5);
+
+    delete [] listaclases;
+}

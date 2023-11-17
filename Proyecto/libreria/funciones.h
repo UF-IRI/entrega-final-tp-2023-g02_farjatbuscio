@@ -68,11 +68,11 @@ int dobleid_cliente(Asistencia*& aux_asistencia, Asistencia*& Asistencia_dia, in
 //Chequea que no se repita el mismo id_curso por cliente, no este anotado dos veces en la misma clase
 void dobleid_curso(Asistencia*& aux_asistencia); //EXITO???
 //le paso dos fechas y dependiendo cual es mas reciente, retorna un num distinto
-int fechas(time_t fecha1, time_t fecha2);
+int fechas(time_t fecha1, time_t fecha2);//EXITO!!
 //Retorna el horario de la clase que le pases el id_curso
-float horario_clase (int aux_idClase, Clases*& ListaClases, int NcantClases);
+float horario_clase (int aux_idClase, Clases*& ListaClases, int NcantClases);//EXITO!!!
 //Chequea que no se repita el mismo horario por cliente
-void doblehorario(Asistencia& aux_asistencia, Clases*& ListaClases, int NcantClases);
+void doblehorario(Asistencia*& aux_asistencia, Clases*& ListaClases, int NcantClases);//EXITO!!!
 //Chequeo que el id_cliente exista en la lista de clientes del gym
 int id_clienteExistente(Cliente*& ListaClientes, int Nclientes, int id_cliente);//EXITO
 //Chequeo que el cliente tenga la couta al dia
