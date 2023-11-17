@@ -106,43 +106,43 @@ eArchivo LeerAsistencia_hoy(ifstream& archivo_dia, Asistencia*& AsistenciaDia,in
         return ErrArchivo;
     }
     int ret;
-    Ninscripciones=0;
     //Creo aux para poder ir copiando:
-    Asistencia aux;
+    Asistencia* aux=new Asistencia;
     while(!archivo_dia.eof())
     {
-        archivo_dia.read((char*)&aux.idCliente,sizeof(int));
-        archivo_dia.read((char*)&aux.cantInscriptos, sizeof(int));
-        Inscripcion* aux_inscripcion=new Inscripcion[aux.cantInscriptos];
-        for(int i=0;i<aux.cantInscriptos;i++)
+        archivo_dia.read((char*)&aux->idCliente,sizeof(int));
+        archivo_dia.read((char*)&aux->cantInscriptos, sizeof(int));
+        Inscripcion* aux_inscripcion=new Inscripcion[aux->cantInscriptos];
+        for(int i=0;i<aux->cantInscriptos;i++)
         {
             archivo_dia.read((char*)aux_inscripcion,sizeof(Inscripcion));
         }
         ret=dobleid_cliente(aux,AsistenciaDia,Ninscripciones);
         if(ret==1)
         {
-            //llamar a la funcion 1 y 2
+            //llamo a la funcion doble id_curso y doble horario:
+
             //agrando el vector de asistencia dia y cargo aux a asistencia dia:
             agrandartamAsistencia(AsistenciaDia,Ninscripciones);
-            AsistenciaDia[Ninscripciones-1].idCliente=aux.idCliente;
-            AsistenciaDia[Ninscripciones-1].cantInscriptos=aux.cantInscriptos;
+            AsistenciaDia[Ninscripciones-1].idCliente=aux->idCliente;
+            AsistenciaDia[Ninscripciones-1].cantInscriptos=aux->cantInscriptos;
             //agrando el vector de inscripcion
-            for(int j=0; j<aux.cantInscriptos; j++)
+            for(int j=0; j<aux->cantInscriptos; j++)
             {
                 agrandartamInscrip(AsistenciaDia->CursosInscriptos,j);
             }
-            for(int k=0;k<aux.cantInscriptos;k++)
+            for(int k=0;k<aux->cantInscriptos;k++)
             {
                 AsistenciaDia[Ninscripciones-1].CursosInscriptos->idCurso=aux_inscripcion->idCurso;
                 AsistenciaDia[Ninscripciones-1].CursosInscriptos->fechaInscripcion=aux_inscripcion->fechaInscripcion;
             }
-            //DONDE LIBERO MEMORIA?
+            delete[] aux_inscripcion;
         }
     }
+    delete aux;
 
     return ExitoArchivo;
 }
-
 //Funcion que crea el archivo para mañana
 eArchivo CrearAsistencia_manana(string& NombreArchivo,Asistencia*& AsistenciaMan,int &Ninscripciones)
 {

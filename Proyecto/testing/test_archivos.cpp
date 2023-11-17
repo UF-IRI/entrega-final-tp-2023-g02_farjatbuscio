@@ -64,15 +64,16 @@ TEST_CASE("Funcion Random", "[fancy]")
     delete[] ListaClientes;
     delete[] ListaClase;
 }
-/*TEST_CASE("Funcion imprimir", "[fancy]")
+TEST_CASE("escribir archivo de inscripcion", "[fancy]")
 {
-    int N=3;
-    int id_clase=3;
-    Asistencia* AsistenciaMan=new Asistencia [N];
-    AsistenciaMan[0].idCliente=1;
-    AsistenciaMan[0].CursosInscriptos->idCurso=3;
-    AsistenciaMan[1].idCliente=2;
-    AsistenciaMan[1].CursosInscriptos->idCurso=3;
-    ImprimirDatos(AsistenciaMan,id_clase, N);
-    REQUIRE(N==3);
-}*/
+    ifstream archivo_dia;
+    archivo_dia.open("asistencias_1697673600000.dat", ios::binary);
+    int N=0;
+    eArchivo ret;
+    Asistencia* AsistenciaDia=new Asistencia[N];
+    ret=LeerAsistencia_hoy(archivo_dia,AsistenciaDia,N);
+    REQUIRE(ret==1);
+    archivo_dia.close();
+    delete[] AsistenciaDia;
+}
+
