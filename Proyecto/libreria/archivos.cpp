@@ -181,7 +181,7 @@ void RandCliente(Cliente*& ListaClientes,int& Nclases,int& Nclientes, Clases*& L
         auxcursosInscriptos[i].idCurso=ListaClase[num_clase].idClase;
         auxcursosInscriptos[i].fechaInscripcion=time(0);
     }
-    int num_cliente=(rand()%Nclientes);
+    int num_cliente=(rand()%Nclientes)+1;
     aux->idCliente=ListaClientes[num_cliente].idCliente;
     aux->cantInscriptos=numcantInscriptos;
     aux->CursosInscriptos=auxcursosInscriptos;

@@ -7,7 +7,7 @@ using namespace std;
 int main() {
     /*
     //CHEQUEO CLIENTES PARA HOY:
-    ifstream archivo_dia;
+    /*ifstream archivo_dia;
     archivo_dia.open("asistencias_1697673600000.dat", ios::binary);
     int N=0;
     eArchivo ret;
@@ -24,8 +24,13 @@ int main() {
     //imprimir datos de una clase random:
     int numBin=(rand()%N);
     int id_clase1=AsistenciaDia[numBin].CursosInscriptos[0].idCurso;
+<<<<<<< Updated upstream
     ImprimirDatos(AsistenciaDia,id_clase1,N);
 */
+=======
+    ImprimirDatos(AsistenciaDia,id_clase1,N);*/
+
+>>>>>>> Stashed changes
 
     //INSCRIPCION DE NUEVOS CLIENTES:
     //abro archivos CLASE
@@ -42,7 +47,7 @@ int main() {
     }
     if(retorClase==1)
     {
-        cout<<"El archivo de clases se abrió correctamente"<<endl;
+        cout<<"El archivo de clases se abrio correctamente"<<endl;
     }
     //abro archivo de CLIENTES
     ifstream archivoClientes;
@@ -57,7 +62,7 @@ int main() {
     }
     if(retClientes==1)
     {
-        cout<<"El archivo de clientes se abrió correctamente"<<endl;
+        cout<<"El archivo de clientes se abrio correctamente"<<endl;
     }
 
     //una vez abierto los archivos:
@@ -81,7 +86,7 @@ int main() {
     Cupo[6].Ncupo=30;
     //RANDOM CLIENTES:
     //asigno un random de cantidad de clientes nuevos
-    int CantNuevos=(rand()%20)+1;
+    int CantNuevos=(rand()%20)+5;
     cout<<"Se intentaran agregar: "<<CantNuevos<<" clientes en el dia de hoy, siempre y cuando cumplan con las condiciones"<<endl;
 
     eInscripManFinal retInsc;//creo variable tipo enum
@@ -125,7 +130,7 @@ int main() {
             AsistenciaMan[Ninscriptos-1].idCliente=auxRandom->idCliente;
             AsistenciaMan[Ninscriptos-1].cantInscriptos=auxRandom->cantInscriptos;
             AsistenciaMan[Ninscriptos-1].CursosInscriptos=auxClaseExito;
-            cout<<"El cliente con id: "<<auxRandom->idCliente<<" se pudo inscribir a las siguientes clases: "<<endl;
+            cout<<"El cliente con id: "<<AsistenciaMan[Ninscriptos-1].idCliente<<" se pudo inscribir a las siguientes clases: "<<endl;
             for(int i=0; i<(AsistenciaMan[Ninscriptos-1].cantInscriptos);i++)
             {
                 int auxid=AsistenciaMan[Ninscriptos-1].CursosInscriptos[i].idCurso;
