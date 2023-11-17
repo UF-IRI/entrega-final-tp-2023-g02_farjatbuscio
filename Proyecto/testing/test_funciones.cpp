@@ -166,3 +166,20 @@ TEST_CASE("Test1dobleId_Cliente", "[fancy]")
     delete[] aux_inscripcion;
     delete aux_asistencia;
 }*/
+TEST_CASE("Funcion id_clienteExistente", "[fancy]")
+{
+    int Nclientes=3;
+    Cliente* ListaClientes=new Cliente[Nclientes];
+    ListaClientes[0].idCliente=2;
+    ListaClientes[1].idCliente=3;
+    ListaClientes[2].idCliente=1;
+    int id_cliente1=2;
+    int ret1;
+    int id_cliente2=5;
+    int ret2;
+    ret1=id_clienteExistente(ListaClientes,Nclientes,id_cliente1);
+    ret2=id_clienteExistente(ListaClientes,Nclientes,id_cliente2);
+    REQUIRE(ret1==1);
+    REQUIRE(ret2==-1);
+    delete[] ListaClientes;
+}
