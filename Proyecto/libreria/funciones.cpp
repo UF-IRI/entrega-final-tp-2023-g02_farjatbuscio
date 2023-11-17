@@ -1,7 +1,6 @@
 #include "funciones.h"
 //DESARROLLO FUNCIONES
 
-//funcion agrandar Clases (resize)
 void agrandartamClases(Clases*& vector, int& N)
 {
     N=N+1; //aumento en uno mi contador de tamaño
@@ -14,7 +13,6 @@ void agrandartamClases(Clases*& vector, int& N)
     delete[] vector;
     vector=aux; //le asigno la nueva memoria
 }
-//funcion agrandar Cliente (resize)
 void agrandartamCliente(Cliente*& vector, int& N)
 {
     N=N+1; //aumento en uno mi contador de tamaño
@@ -27,7 +25,6 @@ void agrandartamCliente(Cliente*& vector, int& N)
     delete[] vector;
     vector=aux; //le asigno la nueva memoria
 }
-//funcion agrandar Asistencia (resize)
 void agrandartamAsistencia(Asistencia*& vector, int& N)
 {
     N=N+1; //aumento en uno mi contador de tamaño
@@ -40,7 +37,6 @@ void agrandartamAsistencia(Asistencia*& vector, int& N)
     delete[] vector;
     vector=aux; //le asigno la nueva memoria
 }
-//funcion agrandar Inscripcion (resize)
 void agrandartamInscrip(Inscripcion*& vector, int& N)
 {
     N=N+1; //aumento en uno mi contador de tamaño
@@ -53,7 +49,6 @@ void agrandartamInscrip(Inscripcion*& vector, int& N)
     delete[] vector;
     vector=aux; //le asigno la nueva memoria
 }
-//funcion achicar Inscripcion (resize)
 void achicartamInscrip(Inscripcion*& vector, int& N)
 {
     N=N-1; //disminuyo en uno mi contador de tamaño
@@ -87,9 +82,6 @@ void moveralfinal(Inscripcion*& cursosInscriptos, int CantInscriptos, int pos)
     cursosInscriptos[CantInscriptos-1].idCurso=ultimoIdCurso;
     cursosInscriptos[CantInscriptos-1].fechaInscripcion=ultimoFechaInscrip;
 }
-//Chequea que el cliente del archivo Asitencia_dia que voy a leer, no esté ya anotado en Asistencia_dia
-//Si retorno Error -> NO lo cargo directamente NADA
-//Si retorno Exito -> procedo a mirar si las siguientes condiciones se cumplen
 int dobleid_cliente(Asistencia*& aux_asistencia, Asistencia*& Asistencia_dia, int N)
 {
     if(N<=0)
@@ -100,7 +92,7 @@ int dobleid_cliente(Asistencia*& aux_asistencia, Asistencia*& Asistencia_dia, in
     for(int i=0; i<N; i++)
     {
         //Reviso si el cliente q quiero cargar, ya existe en Asistencia_dia
-        if(aux_asistencia.idCliente==Asistencia_dia[i].idCliente)
+        if(aux_asistencia->idCliente==Asistencia_dia[i].idCliente)
         {
             //Si exite, retorno Error y no lo vuelvo a cargar
             return -1;
@@ -108,9 +100,6 @@ int dobleid_cliente(Asistencia*& aux_asistencia, Asistencia*& Asistencia_dia, in
     }
     return 1;
 }
-//Chequea que el cliente que voy a inscribir no este anotado dos veces en la misma clase
-//si esta anotado dos veces, elimino una
-//sino no cambio nada
 void dobleid_curso(Asistencia*& aux_asistencia)
 {
     int N=aux_asistencia->cantInscriptos;
@@ -257,23 +246,23 @@ int cuotapaga(Cliente*& ListaClientes, int Nclientes, int id_cliente)
     }
     return -1;
 }
-void dobleid_cursoListaMan(Asistencia*& AsistenciaMan, int Ninscriptos, Asistencia& aux_asistencia)
+void dobleid_cursoListaMan(Asistencia*& AsistenciaMan, int Ninscriptos, Asistencia*& aux_asistencia)
 {
     for(int i=0; i<Ninscriptos; i++) //busco el cliente en la lista de manana
     {
-        if(AsistenciaMan[i].idCliente==aux_asistencia.idCliente) //cuando lo encuentro
+        if(AsistenciaMan[i].idCliente==aux_asistencia->idCliente) //cuando lo encuentro
         {
             for(int j=0; j<AsistenciaMan[i].cantInscriptos; j++) //recorro las clases a las que ya esta inscripto
             {
-                for(int k=0; k<aux_asistencia.cantInscriptos; k++) //recorro las clases que se quiere inscribir cliente
+                for(int k=0; k<aux_asistencia->cantInscriptos; k++) //recorro las clases que se quiere inscribir cliente
                 {
-                    if(aux_asistencia.CursosInscriptos[k].idCurso == AsistenciaMan[i].CursosInscriptos[j].idCurso)
+                    if(aux_asistencia->CursosInscriptos[k].idCurso == AsistenciaMan[i].CursosInscriptos[j].idCurso)
                     {
                         //si la clase a la que se quiere inscribir es igual a alguna de las clases que ya se inscribio
                         //la elimino
-                        moveralfinal(aux_asistencia.CursosInscriptos, aux_asistencia.cantInscriptos, k);
-                        achicartamInscrip(aux_asistencia.CursosInscriptos,aux_asistencia.cantInscriptos);
-                        aux_asistencia.cantInscriptos=(aux_asistencia.cantInscriptos)-1;
+                        moveralfinal(aux_asistencia->CursosInscriptos, aux_asistencia->cantInscriptos, k);
+                        achicartamInscrip(aux_asistencia->CursosInscriptos,aux_asistencia->cantInscriptos);
+                        aux_asistencia->cantInscriptos=(aux_asistencia->cantInscriptos)-1;
                         k=k-1;
                     }
                 }
@@ -281,7 +270,7 @@ void dobleid_cursoListaMan(Asistencia*& AsistenciaMan, int Ninscriptos, Asistenc
         }
     }
 }
-void doblehorario_ListaMan(Asistencia& aux_asistencia, Clases*& ListaClases, int NcantClases, Asistencia*& AsistenciaMan, int Ninscriptos)
+void doblehorario_ListaMan(Asistencia*& aux_asistencia, Clases*& ListaClases, int NcantClases, Asistencia*& AsistenciaMan, int Ninscriptos)
 {
     int idcurso_inscrip;
     int idcurso_noinscrip;
@@ -289,21 +278,21 @@ void doblehorario_ListaMan(Asistencia& aux_asistencia, Clases*& ListaClases, int
     float horario_noinscrip;
     for(int i=0; i<Ninscriptos; i++) //busco el cliente en la lista de manana
     {
-        if(AsistenciaMan[i].idCliente==aux_asistencia.idCliente) //cuando lo encuentro
+        if(AsistenciaMan[i].idCliente==aux_asistencia->idCliente) //cuando lo encuentro
         {
             for(int j=0; j<AsistenciaMan[i].cantInscriptos; j++) //recorro las clases a las que ya esta inscripto
             {
-                for(int k=0; k<aux_asistencia.cantInscriptos; k++) //recorro las clases que se quiere inscribir cliente
+                for(int k=0; k<aux_asistencia->cantInscriptos; k++) //recorro las clases que se quiere inscribir cliente
                 {
                     idcurso_inscrip = AsistenciaMan[i].CursosInscriptos[j].idCurso;
-                    idcurso_noinscrip = aux_asistencia.CursosInscriptos[k].idCurso;
+                    idcurso_noinscrip = aux_asistencia->CursosInscriptos[k].idCurso;
                     horario_inscrip = horario_clase(idcurso_inscrip, ListaClases, NcantClases);
                     horario_noinscrip = horario_clase(idcurso_noinscrip, ListaClases, NcantClases);
                     if(horario_inscrip == horario_noinscrip)
                     {
-                        moveralfinal(aux_asistencia.CursosInscriptos, aux_asistencia.cantInscriptos, k);
-                        achicartamInscrip(aux_asistencia.CursosInscriptos,aux_asistencia.cantInscriptos);
-                        aux_asistencia.cantInscriptos=(aux_asistencia.cantInscriptos)-1;
+                        moveralfinal(aux_asistencia->CursosInscriptos, aux_asistencia->cantInscriptos, k);
+                        achicartamInscrip(aux_asistencia->CursosInscriptos,aux_asistencia->cantInscriptos);
+                        aux_asistencia->cantInscriptos=(aux_asistencia->cantInscriptos)-1;
                         k=k-1;
                     }
                 }
@@ -312,7 +301,7 @@ void doblehorario_ListaMan(Asistencia& aux_asistencia, Clases*& ListaClases, int
     }
 }
 
-void funcion_cupo(Asistencia& aux_asistencia, Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases,int Nclases, CupoClases*& ListaCupo, int Ncupos)
+void funcion_cupo(Asistencia*& aux_asistencia, Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases,int Nclases, CupoClases*& ListaCupo, int Ncupos)
 {
     int cont=0;
     string auxNombreClase;
@@ -324,9 +313,9 @@ void funcion_cupo(Asistencia& aux_asistencia, Asistencia*& AsistenciaMan,int Nin
         return; //si nadie esta inscripto tdv, todos los cupos estan libres
     }
 
-    for(int k=0; k<aux_asistencia.cantInscriptos; k++) //recorro las clases a las que el usuario se quiere inscribir
+    for(int k=0; k<aux_asistencia->cantInscriptos; k++) //recorro las clases a las que el usuario se quiere inscribir
     {
-        auxIdCurso = aux_asistencia.CursosInscriptos[k].idCurso; //me guardo el id de la clase
+        auxIdCurso = aux_asistencia->CursosInscriptos[k].idCurso; //me guardo el id de la clase
 
         for(int j=0; j<Nclases; j++) //recorro la lista de clases para guardarme el nombre de clase
         {
@@ -361,10 +350,10 @@ void funcion_cupo(Asistencia& aux_asistencia, Asistencia*& AsistenciaMan,int Nin
                 {
                     //no se puede inscribir a la clase
                     //la mando al final
-                    moveralfinal(aux_asistencia.CursosInscriptos, aux_asistencia.cantInscriptos, k);
+                    moveralfinal(aux_asistencia->CursosInscriptos, aux_asistencia->cantInscriptos, k);
                     //la borro
-                    achicartamInscrip(aux_asistencia.CursosInscriptos, aux_asistencia.cantInscriptos);
-                    aux_asistencia.cantInscriptos=(aux_asistencia.cantInscriptos)-1;
+                    achicartamInscrip(aux_asistencia->CursosInscriptos, aux_asistencia->cantInscriptos);
+                    aux_asistencia->cantInscriptos=(aux_asistencia->cantInscriptos)-1;
                     k=k-1;
                 }
                 //si se puede inscribir a esta clase
@@ -373,7 +362,7 @@ void funcion_cupo(Asistencia& aux_asistencia, Asistencia*& AsistenciaMan,int Nin
     }
 }
 
-eInscripManFinal inscripMan(Asistencia& aux_asistencia, Asistencia*& AsistenciaMan, int Ninscriptos, Clases*& ListaClases,int Nclases, Cliente*& ListaClientes, int Nclientes, CupoClases*& ListaCupo, int Ncupos)
+eInscripManFinal inscripMan(Asistencia*& aux_asistencia, Asistencia*& AsistenciaMan, int Ninscriptos, Clases*& ListaClases,int Nclases, Cliente*& ListaClientes, int Nclientes, CupoClases*& ListaCupo, int Ncupos)
 {
     //funcion que hace todos los chequeos para la inscripcion de un cliente p manana
     //le paso el cliente q se quiere inscribir, la lista de asistMan, la lista de clases, la lista de clientes y la lista de cupos
@@ -381,7 +370,7 @@ eInscripManFinal inscripMan(Asistencia& aux_asistencia, Asistencia*& AsistenciaM
     //primero) me fijo si el cliente existe en la lista de clientes.
     int ret1;
     int id_cliente =0;
-    id_cliente= aux_asistencia.idCliente;
+    id_cliente= aux_asistencia->idCliente;
     ret1 = id_clienteExistente(ListaClientes, Nclientes, id_cliente);
 
     if(ret1 == 1)
@@ -414,13 +403,13 @@ eInscripManFinal inscripMan(Asistencia& aux_asistencia, Asistencia*& AsistenciaM
                         //quinto) por ultimo me fijo que haya cupo en cada clase
                         funcion_cupo(aux_asistencia, AsistenciaMan, Ninscriptos, ListaClases, Nclases, ListaCupo, Ncupos);
                         //puedo inscribir a aux_asistencia
-                        if(aux_asistencia.cantInscriptos>0)
+                        if(aux_asistencia->cantInscriptos>0)
                         {
                             return ExitoInscrip;//retorno exito, aux_asistencia se puede inscribir en AsistenciaMan con todas las modificaciones que le hicimos
                             //podriamos aca imprimir en pantalla los datos que quedaron de aux_asistencia, para mostrarle al cliente
                             //a que clases si se pudo inscribir y a cuales no, explicandole el motivo
                         }
-                        else if(aux_asistencia.cantInscriptos <= 0)
+                        else if(aux_asistencia->cantInscriptos <= 0)
                         {
                             return ErrNingunaClase; //retorno error porque no pudo inscribirse a ninguna clase ya que todas tenian errores
                         }
@@ -434,13 +423,13 @@ eInscripManFinal inscripMan(Asistencia& aux_asistencia, Asistencia*& AsistenciaM
             //me fijo si se quiere inscribir a dos clases al mismo horario, le borro la ultima
             doblehorario(aux_asistencia, ListaClases, Nclases);
             funcion_cupo(aux_asistencia, AsistenciaMan, Ninscriptos, ListaClases, Nclases, ListaCupo, Ncupos);
-            if(aux_asistencia.cantInscriptos>0)
+            if(aux_asistencia->cantInscriptos>0)
             {
                 return ExitoInscrip;//retorno exito, aux_asistencia se puede inscribir en AsistenciaMan con todas las modificaciones que le hicimos
                 //podriamos aca imprimir en pantalla los datos que quedaron de aux_asistencia, para mostrarle al cliente
                 //a que clases si se pudo inscribir y a cuales no, explicandole el motivo
             }
-            else if(aux_asistencia.cantInscriptos <= 0)
+            else if(aux_asistencia->cantInscriptos <= 0)
             {
                 return ErrNingunaClase; //retorno error porque no pudo inscribirse a ninguna clase ya que todas tenian errores
             }

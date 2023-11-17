@@ -34,7 +34,7 @@ int main() {
     {
         cout<<"Error al abrir el archivo de clientes"<<endl;
     }
-    if(retorClientes==1)
+    if(retClientes==1)
     {
         cout<<"El archivo de clientes se abrió correctamente"<<endl;
     }
@@ -44,8 +44,20 @@ int main() {
 
     int Ncupo=7;
     CupoClases* Cupo=new CupoClases[Ncupo];
-    Cupo={{"Spinning",45},{"Yoga",25},{"Pilates",15},{"Stretching",40},{"Zumba",50},{"Boxeo",30},{"Musculacion",30}};
-
+    Cupo[0].NombreClase="Spinning";
+    Cupo[0].Ncupo=45;
+    Cupo[1].NombreClase="Yoga";
+    Cupo[1].Ncupo=25;
+    Cupo[2].NombreClase="Pilates";
+    Cupo[2].Ncupo=15;
+    Cupo[3].NombreClase="Stretching";
+    Cupo[3].Ncupo=40;
+    Cupo[4].NombreClase="Zumba";
+    Cupo[4].Ncupo=50;
+    Cupo[5].NombreClase="Boxeo";
+    Cupo[5].Ncupo=30;
+    Cupo[6].NombreClase="Musculacion";
+    Cupo[6].Ncupo=30;
     //RANDOM CLIENTES:
     //asigno un random de cantidad de clientes nuevos
     int CantNuevos=(rand()%20)+1;
