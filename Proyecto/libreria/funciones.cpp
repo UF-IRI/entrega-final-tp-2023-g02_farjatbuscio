@@ -309,7 +309,7 @@ void doblehorario_ListaMan(Asistencia& aux_asistencia, Clases*& ListaClases, int
     }
 }
 
-/*void funcion_cupo(Asistencia& aux_asistencia, Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases,int Nclases, CupoClases*& ListaCupo, int Ncupos)
+void funcion_cupo(Asistencia& aux_asistencia, Asistencia*& AsistenciaMan,int Ninscriptos, Clases* ListaClases,int Nclases, CupoClases*& ListaCupo, int Ncupos)
 {
     int cont=0;
     string auxNombreClase;
@@ -350,7 +350,7 @@ void doblehorario_ListaMan(Asistencia& aux_asistencia, Clases*& ListaClases, int
             }
         }
         //Ahora lo busco en la lista de cupos, y me fijo si mi contador es menor que esa cantidad
-        for(int i=0; i<Ncupos; i++)
+        for(int i=0; i<Ncupos-1; i++)
         {
             if(ListaCupo[i].NombreClase==auxNombreClase)
             {
@@ -391,33 +391,36 @@ eInscripManFinal inscripMan(Asistencia& aux_asistencia, Asistencia*& AsistenciaM
         {
             //el cliente tiene la cuota al dia
             //tercero) me fijo si el cliente ya existe en la lista de asistenciaMan
-            for(int i=0; i<Ninscriptos; i++)
+            if(Ninscriptos!=0)
             {
-               if(AsistenciaMan[i].idCliente == id_cliente && AsistenciaMan[i].cantInscriptos>0)
+                for(int i=0; i<Ninscriptos; i++)
                 {
-                    //cuarto) borro clases a las que no podria inscribirse
-                    //el cliente ya existe en la lista de clientes, por ende ya se inscribio a algo p manana
-                    //me fijo si se esta queriendo inscribir 2 veces en la misma clase, le borro una
-                    dobleid_curso(aux_asistencia);
-                    //me fijo si se quiere inscribir en una clase que ya esta inscripto, se la borro
-                    dobleid_cursoListaMan(AsistenciaMan, Ninscriptos, aux_asistencia);
-                    //me fijo si se quiere inscribir a dos clases al mismo horario, le borro la ultima
-                    doblehorario(aux_asistencia, ListaClases, Nclases);
-                    //me fijo si se quiere inscribir en una clase al horario de una clase que ya este inscripto, se la borro
-                    doblehorario_ListaMan(aux_asistencia, ListaClases, Nclases, AsistenciaMan, Ninscriptos);
+                    if(AsistenciaMan[i].idCliente == id_cliente && AsistenciaMan[i].cantInscriptos>0)
+                    {
+                        //cuarto) borro clases a las que no podria inscribirse
+                        //el cliente ya existe en la lista de clientes, por ende ya se inscribio a algo p manana
+                        //me fijo si se esta queriendo inscribir 2 veces en la misma clase, le borro una
+                        dobleid_curso(aux_asistencia);
+                        //me fijo si se quiere inscribir en una clase que ya esta inscripto, se la borro
+                        dobleid_cursoListaMan(AsistenciaMan, Ninscriptos, aux_asistencia);
+                        //me fijo si se quiere inscribir a dos clases al mismo horario, le borro la ultima
+                        doblehorario(aux_asistencia, ListaClases, Nclases);
+                        //me fijo si se quiere inscribir en una clase al horario de una clase que ya este inscripto, se la borro
+                        doblehorario_ListaMan(aux_asistencia, ListaClases, Nclases, AsistenciaMan, Ninscriptos);
 
-                    //quinto) por ultimo me fijo que haya cupo en cada clase
-                    funcion_cupo(aux_asistencia, AsistenciaMan, Ninscriptos, ListaClases, Nclases, ListaCupo, Ncupos);
-                    //puedo inscribir a aux_asistencia
-                    if(aux_asistencia.cantInscriptos>0)
-                    {
-                        return ExitoInscrip;//retorno exito, aux_asistencia se puede inscribir en AsistenciaMan con todas las modificaciones que le hicimos
-                        //podriamos aca imprimir en pantalla los datos que quedaron de aux_asistencia, para mostrarle al cliente
-                        //a que clases si se pudo inscribir y a cuales no, explicandole el motivo
-                    }
-                    else if(aux_asistencia.cantInscriptos <= 0)
-                    {
-                        return ErrNingunaClase; //retorno error porque no pudo inscribirse a ninguna clase ya que todas tenian errores
+                        //quinto) por ultimo me fijo que haya cupo en cada clase
+                        funcion_cupo(aux_asistencia, AsistenciaMan, Ninscriptos, ListaClases, Nclases, ListaCupo, Ncupos);
+                        //puedo inscribir a aux_asistencia
+                        if(aux_asistencia.cantInscriptos>0)
+                        {
+                            return ExitoInscrip;//retorno exito, aux_asistencia se puede inscribir en AsistenciaMan con todas las modificaciones que le hicimos
+                            //podriamos aca imprimir en pantalla los datos que quedaron de aux_asistencia, para mostrarle al cliente
+                            //a que clases si se pudo inscribir y a cuales no, explicandole el motivo
+                        }
+                        else if(aux_asistencia.cantInscriptos <= 0)
+                        {
+                            return ErrNingunaClase; //retorno error porque no pudo inscribirse a ninguna clase ya que todas tenian errores
+                        }
                     }
                 }
             }
@@ -449,4 +452,4 @@ eInscripManFinal inscripMan(Asistencia& aux_asistencia, Asistencia*& AsistenciaM
         return ErrCliente; //el cliente no se encontro en la lista de clientes del gym
     }
     return ErrRandom; //hubo algun error durante la inscripcion y no se lo podria inscribir
-}*/
+}
