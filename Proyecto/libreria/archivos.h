@@ -18,7 +18,7 @@ eArchivo LeerClientes(ifstream& archivoClientes, Cliente*& ListaClientes,int &Nc
 eArchivo LeerAsistencia_hoy(ifstream& archivo_dia, Asistencia*& AsistenciaDia,int &Ninscripciones);
 
 //Funcion que crea el archivo para mañana
-eArchivo CrearAsistencia_manana(string* Nombre_Archivo,Asistencia*& AsistenciaMan,int &Ninscripciones);
+eArchivo CrearAsistencia_manana(string& Nombre_Archivo,Asistencia*& AsistenciaMan,int &Ninscripciones);
 
 
 //Funcion que me genere datos de clientes random:

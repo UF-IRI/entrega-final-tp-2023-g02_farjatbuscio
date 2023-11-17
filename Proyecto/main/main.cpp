@@ -6,6 +6,27 @@ using namespace std;
 
 int main() {
 
+    //CHEQUEO CLIENTES PARA HOY:
+    ifstream archivo_dia;
+    archivo_dia.open("asistencias_1697673600000.dat", ios::binary);
+    int N=0;
+    eArchivo ret;
+    Asistencia* AsistenciaDia=new Asistencia[N];
+    ret=LeerAsistencia_hoy(archivo_dia,AsistenciaDia,N);
+    if(ret==-1)
+    {
+        cout<<"Error al abrir el archivo de clases para hoy"<<endl;
+    }
+    if(ret==1)
+    {
+        cout<<"El archivo de clases para hoy se abrió correctamente"<<endl;
+    }
+    //imprimir datos de una clase random:
+    int numBin=(rand()%N);
+    int id_clase1=AsistenciaDia[numBin].CursosInscriptos[0].idCurso;
+    ImprimirDatos(AsistenciaDia,id_clase1,N);
+
+
     //INSCRIPCION DE NUEVOS CLIENTES:
     //abro archivos CLASE
     ifstream archivoClase;
@@ -146,10 +167,12 @@ int main() {
     //CIERRO ARCHIVOS
     archivoClase.close();
     archivoClientes.close();
+    archivo_dia.close();
     //LIBERO MEMORIA PEDIDA
     delete[] ListaClases;
     delete[] ListaClientes;
     delete[] AsistenciaMan;
+    delete[] AsistenciaDia;
     return 0;
 }
 
